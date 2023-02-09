@@ -1,5 +1,7 @@
 package be.kdg.tic_tac_toe.view.Home;
+
 import be.kdg.tic_tac_toe.model.Model;
+import javafx.application.Platform;
 
 
 public class Presenter {
@@ -15,9 +17,13 @@ public class Presenter {
         this.updateView();
     }
 
-    private void addEventHandlers(){
+    private void addEventHandlers() {
+        //quiting the program
+        this.view.getQuit().setOnAction(actionEvent -> {
+            Platform.exit();
+        });
     }
 
-    private void updateView(){
+    private void updateView() {
     }
 }
