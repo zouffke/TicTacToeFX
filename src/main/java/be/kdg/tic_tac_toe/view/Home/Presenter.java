@@ -1,4 +1,4 @@
-package be.kdg.tic_tac_toe.view.application;
+package be.kdg.tic_tac_toe.view.Home;
 import be.kdg.tic_tac_toe.model.Model;
 
 

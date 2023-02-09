@@ -1,7 +1,7 @@
 package be.kdg.tic_tac_toe;
-import be.kdg.tic_tac_toe.view.application.View;
+import be.kdg.tic_tac_toe.view.Home.View;
 import be.kdg.tic_tac_toe.model.Model;
-import be.kdg.tic_tac_toe.view.application.Presenter;
+import be.kdg.tic_tac_toe.view.Home.Presenter;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import java.io.IOException;
@@ -15,9 +15,10 @@ public class Application extends javafx.application.Application {
         new Presenter(view, new Model());
 
         stage.setScene(scene);
-        stage.setTitle("JavaFX Application");
-        stage.setWidth(300);
-        stage.setHeight(500);
+        stage.setTitle("Tic Tac Toe");
+        stage.setWidth(900);
+        stage.setHeight(700);
+        stage.setResizable(false);
         stage.show();
     }
 
