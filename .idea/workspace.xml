@@ -4,7 +4,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="3b657008-6c44-4c56-8a13-dfa9b7bcf1a1" name="Changes" comment="gitignore" />
+    <list default="true" id="3b657008-6c44-4c56-8a13-dfa9b7bcf1a1" name="Changes" comment="vars">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/be/kdg/tic_tac_toe/Application.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/be/kdg/tic_tac_toe/Application.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/be/kdg/tic_tac_toe/view/Home/Presenter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/be/kdg/tic_tac_toe/view/Home/PresenterH.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/be/kdg/tic_tac_toe/view/Home/View.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/be/kdg/tic_tac_toe/view/Home/ViewH.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/be/kdg/tic_tac_toe/view/menu/Presenter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/be/kdg/tic_tac_toe/view/menu/PresenterM.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/be/kdg/tic_tac_toe/view/menu/View.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/be/kdg/tic_tac_toe/view/menu/ViewM.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -13,7 +20,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="master" />
+        <entry key="$PROJECT_DIR$" value="home" />
       </map>
     </option>
   </component>
@@ -71,6 +78,7 @@
       <option name="presentableId" value="Default" />
       <updated>1675932120616</updated>
       <workItem from="1675932121684" duration="4738000" />
+      <workItem from="1675945342891" duration="931000" />
     </task>
     <task id="LOCAL-00001" summary="initial commit">
       <created>1675932813105</created>
@@ -93,7 +101,21 @@
       <option name="project" value="LOCAL" />
       <updated>1675940704710</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="merge">
+      <created>1675945492691</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1675945492691</updated>
+    </task>
+    <task id="LOCAL-00005" summary="vars">
+      <created>1675945638332</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1675945638332</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -103,6 +125,8 @@
     <MESSAGE value="initial commit" />
     <MESSAGE value="started Home Screen" />
     <MESSAGE value="gitignore" />
-    <option name="LAST_COMMIT_MESSAGE" value="gitignore" />
+    <MESSAGE value="merge" />
+    <MESSAGE value="vars" />
+    <option name="LAST_COMMIT_MESSAGE" value="vars" />
   </component>
 </project>
