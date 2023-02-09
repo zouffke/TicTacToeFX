@@ -4,7 +4,7 @@ import javafx.scene.control.Button;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.control.Label;
 
-public class ViewM extends BorderPane{
+public class MenuView extends BorderPane{
     private Label gamemode;
     private Button PvP;
     private Button PvE;

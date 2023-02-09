@@ -1,4 +1,4 @@
-package be.kdg.tic_tac_toe.view.Home;
+package be.kdg.tic_tac_toe.view.home;
 
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -6,14 +6,14 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
 
-public class ViewH extends VBox {
+public class HomeView extends VBox {
 
     private Label titel;
     private Button play;
     private Button highscore;
     private Button quit;
 
-    public ViewH() {
+    public HomeView() {
         initializeNodes();
         layoutNodes();
     }
