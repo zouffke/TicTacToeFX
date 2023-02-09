@@ -4,13 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="3b657008-6c44-4c56-8a13-dfa9b7bcf1a1" name="Changes" comment="temp,doesn't work">
+    <list default="true" id="3b657008-6c44-4c56-8a13-dfa9b7bcf1a1" name="Changes" comment="play button function">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/be/kdg/tic_tac_toe/Application.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/be/kdg/tic_tac_toe/Application.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/be/kdg/tic_tac_toe/view/Home/PresenterH.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/be/kdg/tic_tac_toe/view/home/HomePresenter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/be/kdg/tic_tac_toe/view/Home/ViewH.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/be/kdg/tic_tac_toe/view/home/HomeView.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/be/kdg/tic_tac_toe/view/menu/PresenterM.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/be/kdg/tic_tac_toe/view/menu/MenuPresenter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/be/kdg/tic_tac_toe/view/menu/ViewM.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/be/kdg/tic_tac_toe/view/menu/MenuView.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/be/kdg/tic_tac_toe/view/home/HomePresenter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/be/kdg/tic_tac_toe/view/home/HomePresenter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/be/kdg/tic_tac_toe/view/menu/MenuView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/be/kdg/tic_tac_toe/view/menu/MenuView.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -80,7 +77,7 @@
       <workItem from="1675932121684" duration="4738000" />
       <workItem from="1675945342891" duration="1086000" />
       <workItem from="1675951439221" duration="1128000" />
-      <workItem from="1675964175200" duration="308000" />
+      <workItem from="1675964175200" duration="1986000" />
     </task>
     <task id="LOCAL-00001" summary="initial commit">
       <created>1675932813105</created>
@@ -124,7 +121,14 @@
       <option name="project" value="LOCAL" />
       <updated>1675946427960</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="play button function">
+      <created>1675964635655</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1675964635655</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -137,6 +141,7 @@
     <MESSAGE value="merge" />
     <MESSAGE value="vars" />
     <MESSAGE value="temp,doesn't work" />
-    <option name="LAST_COMMIT_MESSAGE" value="temp,doesn't work" />
+    <MESSAGE value="play button function" />
+    <option name="LAST_COMMIT_MESSAGE" value="play button function" />
   </component>
 </project>

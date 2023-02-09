@@ -4,9 +4,6 @@ import be.kdg.tic_tac_toe.model.Model;
 import be.kdg.tic_tac_toe.view.menu.MenuPresenter;
 import be.kdg.tic_tac_toe.view.menu.MenuView;
 import javafx.application.Platform;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
-
 
 public class HomePresenter {
 
@@ -33,7 +30,6 @@ public class HomePresenter {
             new MenuPresenter(menuView, model);
 
             view.getScene().setRoot(menuView);
-            menuView.getScene().getWindow().sizeToScene();
         });
     }
 
