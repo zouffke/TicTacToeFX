@@ -4,20 +4,28 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="3b657008-6c44-4c56-8a13-dfa9b7bcf1a1" name="Changes" comment="play button function">
+    <list default="true" id="3b657008-6c44-4c56-8a13-dfa9b7bcf1a1" name="Changes" comment="working play function button">
+      <change afterPath="$PROJECT_DIR$/src/main/java/be/kdg/tic_tac_toe/view/game1/Game1Presenter.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/be/kdg/tic_tac_toe/view/game1/Game1View.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/be/kdg/tic_tac_toe/view/home/HomePresenter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/be/kdg/tic_tac_toe/view/home/HomePresenter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/be/kdg/tic_tac_toe/view/menu/MenuView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/be/kdg/tic_tac_toe/view/menu/MenuView.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/be/kdg/tic_tac_toe/Application.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/be/kdg/tic_tac_toe/Application.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="home" />
+        <entry key="$PROJECT_DIR$" value="main" />
       </map>
     </option>
   </component>
@@ -32,6 +40,9 @@
     </option>
   </component>
   <component name="ProjectId" id="2LUiZYzwJfxpgtfmDbV8hORoF1w" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="showLibraryContents" value="true" />
   </component>
@@ -77,7 +88,9 @@
       <workItem from="1675932121684" duration="4738000" />
       <workItem from="1675945342891" duration="1086000" />
       <workItem from="1675951439221" duration="1128000" />
-      <workItem from="1675964175200" duration="1986000" />
+      <workItem from="1675964175200" duration="3661000" />
+      <workItem from="1676105185740" duration="10000" />
+      <workItem from="1676456065501" duration="1062000" />
     </task>
     <task id="LOCAL-00001" summary="initial commit">
       <created>1675932813105</created>
@@ -128,7 +141,14 @@
       <option name="project" value="LOCAL" />
       <updated>1675964635655</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="working play function button">
+      <created>1675966196148</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1675966196148</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -142,6 +162,7 @@
     <MESSAGE value="vars" />
     <MESSAGE value="temp,doesn't work" />
     <MESSAGE value="play button function" />
-    <option name="LAST_COMMIT_MESSAGE" value="play button function" />
+    <MESSAGE value="working play function button" />
+    <option name="LAST_COMMIT_MESSAGE" value="working play function button" />
   </component>
 </project>
