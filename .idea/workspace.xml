@@ -4,11 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="3b657008-6c44-4c56-8a13-dfa9b7bcf1a1" name="Changes" comment="working play function button">
-      <change afterPath="$PROJECT_DIR$/src/main/java/be/kdg/tic_tac_toe/view/game1/Game1Presenter.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/be/kdg/tic_tac_toe/view/game1/Game1View.java" afterDir="false" />
+    <list default="true" id="3b657008-6c44-4c56-8a13-dfa9b7bcf1a1" name="Changes" comment="updates">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/be/kdg/tic_tac_toe/Application.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/be/kdg/tic_tac_toe/Application.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/be/kdg/tic_tac_toe/view/game/GamePresenter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/be/kdg/tic_tac_toe/view/game/GamePresenter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/be/kdg/tic_tac_toe/view/game/GameView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/be/kdg/tic_tac_toe/view/game/GameView.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -91,6 +90,10 @@
       <workItem from="1675964175200" duration="3661000" />
       <workItem from="1676105185740" duration="10000" />
       <workItem from="1676456065501" duration="1062000" />
+      <workItem from="1676470379935" duration="169000" />
+      <workItem from="1676535051998" duration="470000" />
+      <workItem from="1676539417311" duration="16000" />
+      <workItem from="1676541773655" duration="4366000" />
     </task>
     <task id="LOCAL-00001" summary="initial commit">
       <created>1675932813105</created>
@@ -148,7 +151,14 @@
       <option name="project" value="LOCAL" />
       <updated>1675966196148</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="updates">
+      <created>1676470540061</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1676470540061</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -163,6 +173,7 @@
     <MESSAGE value="temp,doesn't work" />
     <MESSAGE value="play button function" />
     <MESSAGE value="working play function button" />
-    <option name="LAST_COMMIT_MESSAGE" value="working play function button" />
+    <MESSAGE value="updates" />
+    <option name="LAST_COMMIT_MESSAGE" value="updates" />
   </component>
 </project>

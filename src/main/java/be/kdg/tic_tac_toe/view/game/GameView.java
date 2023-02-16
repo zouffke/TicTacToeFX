@@ -1,39 +1,51 @@
 package be.kdg.tic_tac_toe.view.game;
 
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.layout.GridPane;
+import javafx.geometry.Insets;
+import javafx.scene.Node;
+import javafx.scene.control.*;
+import javafx.scene.layout.*;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Circle;
 
-public class GameView extends GridPane {
+public class GameView extends BorderPane {
 
-    private Label titel;
-    private Button[][] fields;
+    private MenuItem exit;
+    private MenuItem rules;
+    private Node[][]
 
     public GameView(int size){
-        initializeNodes(size);
-        layoutNodes();
+        initializeNodes();
+        layoutNodes(size);
     }
 
-    private void initializeNodes(int size){
-        this.titel = new Label("Tic-Tac-Toe");
-
-        fields = new Button[size][size];
-
-        for (int i = 0; i < fields.length; i++) {
-            for (int j = 0; j < fields[i].length; j++) {
-                fields[i][j] = new Button();
-            }
-
-        }
+    private void initializeNodes(){
+        this.exit = new MenuItem("Exit");
+        this.rules = new MenuItem("Rules");
     }
 
-    private void layoutNodes(){
-        this.add(this.titel, 1, 0);
-        for (int i = 0; i < fields.length; i++) {
-            for (int j = 0; j < fields[i].length; j++) {
-                this.add(fields[i][j], i, j + 1);
-            }
-        }
-        this.setGridLinesVisible(true);
+    private void layoutNodes(int size){
+        //menus
+        Menu gameMenu = new Menu("Game", null, this.exit);
+        Menu aboutMenu = new Menu("About", null, this.rules);
+
+        MenuBar bar = new MenuBar(gameMenu, aboutMenu);
+
+        this.setTop(bar);
+
+        //game
+        GridPane grid = new GridPane();
+        grid.setBorder(new Border(new BorderStroke(Color.RED, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
+        Circle circle = new Circle(20);
+        grid.add(circle, 0, 0);
+        this.setCenter(grid);
+        BorderPane.setMargin(grid, new Insets(50));
+    }
+
+    public MenuItem getExit() {
+        return exit;
+    }
+
+    public MenuItem getRules() {
+        return rules;
     }
 }
