@@ -38,27 +38,27 @@ public class MenuView extends VBox {
         ToggleGroup group = new ToggleGroup();
         ToggleGroup group2 = new ToggleGroup();
 
-        RadioButton radioButton1 = new RadioButton("PvP");
-        radioButton1.setToggleGroup(group);
+        this.PvP = new RadioButton("PvP");
+        this.PvP.setToggleGroup(group);
 
-        RadioButton radioButton2 = new RadioButton("PvE");
-        radioButton2.setToggleGroup(group);
+        this.PvE = new RadioButton("PvE");
+        this.PvE.setToggleGroup(group);
 
-        RadioButton radioButton3 = new RadioButton("Ultra Nightmare ");
-        radioButton3.setToggleGroup(group);
+        this.ultraNightmare = new RadioButton("Ultra Nightmare ");
+        this.ultraNightmare.setToggleGroup(group);
 
-        radioButtonBox1.getChildren().addAll(radioButton1, radioButton2, radioButton3);
+        radioButtonBox1.getChildren().addAll(this.PvP, this.PvE, this.ultraNightmare);
 
         this.gamemode = new Label("Gamemode");
-        RadioButton radioButton4 = new RadioButton("3X3");
-        radioButton4.setToggleGroup(group2);
+        this.drie = new RadioButton("3X3");
+        this.drie.setToggleGroup(group2);
 
-        RadioButton radioButton5 = new RadioButton("5X5");
-        radioButton5.setToggleGroup(group2);
+        this.vijf = new RadioButton("5X5");
+        this.vijf.setToggleGroup(group2);
 
-        RadioButton radioButton6 = new RadioButton("7X7 ");
-        radioButton6.setToggleGroup(group2);
-        radioButtonBox2.getChildren().addAll(radioButton4, radioButton5, radioButton6);
+        this.zeven = new RadioButton("7X7 ");
+        this.zeven.setToggleGroup(group2);
+        radioButtonBox2.getChildren().addAll(this.drie, this.vijf, this.zeven);
         this.bordSize = new Label("bordSize");
         this.play = new Button("play");
         this.terug = new Button("terug");
