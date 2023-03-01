@@ -12,10 +12,8 @@ public class Application extends javafx.application.Application {
     @Override
     public void start(Stage stage) throws IOException {
 
-
         HomeView view = new HomeView();
         Scene scene = new Scene(view);
-
         new HomePresenter(view, new Model());
 
         stage.setScene(scene);
