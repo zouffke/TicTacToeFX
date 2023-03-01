@@ -1,14 +1,9 @@
 package be.kdg.tic_tac_toe.view.game;
 
-import be.kdg.tic_tac_toe.model.FigureType;
 import be.kdg.tic_tac_toe.view.models.Figure;
-import be.kdg.tic_tac_toe.view.models.Figure_O;
-import be.kdg.tic_tac_toe.view.models.Figure_X;
 import javafx.geometry.Insets;
-import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.layout.*;
-import javafx.scene.paint.Color;
 
 public class GameView extends BorderPane {
 
@@ -39,18 +34,23 @@ public class GameView extends BorderPane {
 
         //game
         GridPane grid = new GridPane();
-        for (int i = 0; i < figures.length; i++){
-            for (int j = 0; j < figures[i].length; j++){
-                figures[i][j] = new Figure(i, j);
+
+        for (int i = 0; i < figures.length; i++) {
+            for (int j = 0; j < figures[i].length; j++) {
+                figures[i][j] = new Figure(i, j, null);
                 grid.add(figures[i][j], i, j);
             }
         }
 
-        figures[0][0].setFigureType(FigureType.CROSS);
+        //figures[0][0].setFigureType(FigureType.CROSS);
+        //figures[0][1].setFigureType(FigureType.CIRCLE);
 
-        grid.setBorder(new Border(new BorderStroke(Color.RED, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
+        grid.setGridLinesVisible(true);
+
+        //grid.setBorder(new Border(new BorderStroke(Color.RED, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
 
         BorderPane.setMargin(grid, new Insets(50));
+        this.setCenter(grid);
     }
 
     public MenuItem getExit() {

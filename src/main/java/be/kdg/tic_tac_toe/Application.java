@@ -20,8 +20,9 @@ public class Application extends javafx.application.Application {
 
         stage.setScene(scene);
         stage.setTitle("Tic Tac Toe");
-        stage.setWidth(900);
-        stage.setHeight(700);
+        stage.sizeToScene();
+        //stage.setWidth(900);
+        //stage.setHeight(700);
         stage.setResizable(false);
         stage.show();
     }

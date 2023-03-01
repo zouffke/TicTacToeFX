@@ -24,7 +24,6 @@ public class GamePresenter {
         this.view.getExit().setOnAction(actionEvent -> {
             exitPopup();
         });
-
     }
 
     private void updateView() {
