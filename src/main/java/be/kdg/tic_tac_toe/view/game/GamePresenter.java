@@ -1,9 +1,13 @@
 package be.kdg.tic_tac_toe.view.game;
 
+import be.kdg.tic_tac_toe.model.FigureType;
 import be.kdg.tic_tac_toe.model.Model;
+import be.kdg.tic_tac_toe.view.models.Figure;
 import javafx.application.Platform;
+import javafx.event.EventHandler;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
+import javafx.scene.input.MouseEvent;
 
 import java.util.Optional;
 
@@ -21,13 +25,23 @@ public class GamePresenter {
     }
 
     private void addEventHandlers() {
+        //quit menu
         this.view.getExit().setOnAction(actionEvent -> {
             exitPopup();
         });
+
+        //game actions
+        for (Figure[] rows : this.view.getFigures()) {
+            for (Figure figure : rows) {
+                figure.setOnMouseClicked(event -> {
+                    figure.setFigureType(FigureType.CROSS);
+                    updateView();
+                });
+            }
+        }
     }
 
     private void updateView() {
-
     }
 
     private void exitPopup() {

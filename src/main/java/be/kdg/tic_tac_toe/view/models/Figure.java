@@ -22,9 +22,12 @@ public class Figure extends Canvas {
         this.gridSize = 100;
         this.figureType = figureType;
         this.gc = this.getGraphicsContext2D();
-        gc.setStroke(Color.BLACK);
-        gc.setLineWidth(3);
+        gc.setLineWidth(5);
         draw();
+    }
+
+    public Figure(int row, int column){
+        this(row, column, null);
     }
 
     private void draw() {
@@ -38,10 +41,6 @@ public class Figure extends Canvas {
         }
     }
 
-    private void createSquare() {
-        gc.strokeLine(gridSize, gridSize, 0, 0);
-    }
-
     private void createCircle() {
         gc.setFill(Color.TRANSPARENT);
         gc.setStroke(Color.BLUE);
@@ -49,8 +48,9 @@ public class Figure extends Canvas {
     }
 
     private void createCross() {
-        gc.strokeLine(0, 0, this.gridSize, this.gridSize);
-        gc.strokeLine(0, this.gridSize, this.gridSize, 0);
+        gc.setStroke(Color.RED);
+        gc.strokeLine(10, 10, this.gridSize - 10, this.gridSize - 10);
+        gc.strokeLine(10, this.gridSize - 10, this.gridSize - 10, 10);
     }
 
     public void setFigureType(FigureType figureType) {
@@ -60,5 +60,13 @@ public class Figure extends Canvas {
 
     public FigureType getFigureType() {
         return figureType;
+    }
+
+    public int getRow() {
+        return row;
+    }
+
+    public int getColumn() {
+        return column;
     }
 }

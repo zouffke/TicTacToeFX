@@ -1,5 +1,6 @@
 package be.kdg.tic_tac_toe.view.game;
 
+import be.kdg.tic_tac_toe.model.FigureType;
 import be.kdg.tic_tac_toe.view.models.Figure;
 import javafx.geometry.Insets;
 import javafx.scene.control.*;
@@ -37,13 +38,17 @@ public class GameView extends BorderPane {
 
         for (int i = 0; i < figures.length; i++) {
             for (int j = 0; j < figures[i].length; j++) {
-                figures[i][j] = new Figure(i, j, null);
+                figures[i][j] = new Figure(i, j);
                 grid.add(figures[i][j], i, j);
             }
         }
 
-        //figures[0][0].setFigureType(FigureType.CROSS);
-        //figures[0][1].setFigureType(FigureType.CIRCLE);
+        for (Figure[] figure : figures) {
+
+        }
+
+        figures[0][0].setFigureType(FigureType.CROSS);
+        figures[0][1].setFigureType(FigureType.CIRCLE);
 
         grid.setGridLinesVisible(true);
 
@@ -60,4 +65,10 @@ public class GameView extends BorderPane {
     public MenuItem getRules() {
         return rules;
     }
+
+    public Figure[][] getFigures() {
+        return figures;
+    }
+
+
 }
