@@ -30,7 +30,6 @@ public class HomePresenter {
             new MenuPresenter(menuView, model);
 
             view.getScene().setRoot(menuView);
-
         });
     }
 

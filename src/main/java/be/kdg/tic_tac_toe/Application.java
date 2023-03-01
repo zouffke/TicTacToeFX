@@ -11,8 +11,9 @@ public class Application extends javafx.application.Application {
     public void start(Stage stage) throws IOException {
 
         HomeView view = new HomeView();
-        Scene scene = new Scene(view);
         new HomePresenter(view, new Model());
+
+        Scene scene = new Scene(view);
 
         stage.setScene(scene);
         stage.setTitle("Tic Tac Toe");
