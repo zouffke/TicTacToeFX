@@ -17,9 +17,9 @@ public class MenuView extends VBox {
     private RadioButton PvE;
     private RadioButton ultraNightmare;
     private Label bordSize;
-    private Button drie;
-    private Button vijf;
-    private Button zeven;
+    private RadioButton drie;
+    private RadioButton vijf;
+    private RadioButton zeven;
     private Button play;
     private Button terug;
 
@@ -96,15 +96,15 @@ public class MenuView extends VBox {
         return bordSize;
     }
 
-    Button getDrie() {
+    RadioButton getDrie() {
         return drie;
     }
 
-    Button getVijf() {
+    RadioButton getVijf() {
         return vijf;
     }
 
-    Button getZeven() {
+    RadioButton getZeven() {
         return zeven;
     }
 
