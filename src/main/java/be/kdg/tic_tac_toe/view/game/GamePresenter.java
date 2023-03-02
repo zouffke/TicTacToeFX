@@ -1,6 +1,7 @@
 package be.kdg.tic_tac_toe.view.game;
 
 import be.kdg.tic_tac_toe.model.FigureType;
+import be.kdg.tic_tac_toe.model.Game;
 import be.kdg.tic_tac_toe.model.Model;
 import be.kdg.tic_tac_toe.view.menu.MenuPresenter;
 import be.kdg.tic_tac_toe.view.menu.MenuView;
@@ -17,9 +18,9 @@ public class GamePresenter {
     private final GameView view;
 
     //TODO add the game logics to the model folder and assign the head logic to the presenter
-    private final Model model;
+    private final Game model;
 
-    public GamePresenter(GameView view, Model model) {
+    public GamePresenter(GameView view, Game model) {
         this.view = view;
         this.model = model;
 

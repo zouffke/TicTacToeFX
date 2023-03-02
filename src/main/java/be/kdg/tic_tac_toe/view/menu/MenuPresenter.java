@@ -1,5 +1,6 @@
 package be.kdg.tic_tac_toe.view.menu;
 
+import be.kdg.tic_tac_toe.model.Game;
 import be.kdg.tic_tac_toe.model.Model;
 import be.kdg.tic_tac_toe.view.game.GamePresenter;
 import be.kdg.tic_tac_toe.view.game.GameView;
@@ -29,14 +30,18 @@ public class MenuPresenter {
         //play
         this.view.getPlay().setOnAction(actionEvent -> {
             int size;
+            int playerOption;
             boolean music = false;
 
             if (this.view.getPvP().isSelected()){
                 //TODO model
+                playerOption = 1;
             } else if (this.view.getPvE().isSelected()) {
                 //TODO model
+                playerOption = 2;
             } else if (this.view.getUltraNightmare().isSelected()){
                 //TODO Model
+                playerOption = 3;
                 music = true;
             } else {
                 warningPopup("Please select a gamemode before you start the game");
@@ -58,7 +63,8 @@ public class MenuPresenter {
             }
 
             GameView gameView = new GameView(size, music);
-            new GamePresenter(gameView, this.model);
+            Game gameModel = new Game(size, playerOption);
+            new GamePresenter(gameView, gameModel);
 
             this.view.getScene().setRoot(gameView);
             gameView.getScene().getWindow().sizeToScene();
