@@ -1,11 +1,9 @@
 package be.kdg.tic_tac_toe.view.models;
 
 import be.kdg.tic_tac_toe.model.FigureType;
-import javafx.scene.Node;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
-import javafx.scene.shape.Circle;
 
 public class Figure extends Canvas {
 
@@ -58,15 +56,11 @@ public class Figure extends Canvas {
         draw();
     }
 
-    public FigureType getFigureType() {
-        return figureType;
-    }
-
     public int getRow() {
-        return row;
+        return this.row;
     }
 
     public int getColumn() {
-        return column;
+        return this.column;
     }
 }

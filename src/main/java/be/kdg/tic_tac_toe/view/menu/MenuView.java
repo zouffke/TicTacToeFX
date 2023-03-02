@@ -2,14 +2,11 @@ package be.kdg.tic_tac_toe.view.menu;
 
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.ToggleGroup;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
-import javafx.stage.Stage;
 
 public class MenuView extends VBox {
     private Label gamemode;
@@ -76,44 +73,36 @@ public class MenuView extends VBox {
 
     }
 
-    Label getGamemode() {
-        return gamemode;
-    }
-
     RadioButton getPvP() {
-        return PvP;
+        return this.PvP;
     }
 
     RadioButton getPvE() {
-        return PvE;
+        return this.PvE;
     }
 
     RadioButton getUltraNightmare() {
-        return ultraNightmare;
-    }
-
-    Label getBordSize() {
-        return bordSize;
+        return this.ultraNightmare;
     }
 
     RadioButton getDrie() {
-        return drie;
+        return this.drie;
     }
 
     RadioButton getVijf() {
-        return vijf;
+        return this.vijf;
     }
 
     RadioButton getZeven() {
-        return zeven;
+        return this.zeven;
     }
 
     Button getPlay() {
-        return play;
+        return this.play;
     }
 
     Button getTerug() {
-        return terug;
+        return this.terug;
     }
 }
 

@@ -8,7 +8,11 @@ import javafx.scene.layout.*;
 
 public class GameView extends BorderPane {
 
+    //game
     private MenuItem exit;
+    private MenuItem back;
+
+    //about
     private MenuItem rules;
     private Figure[][] figures;
 
@@ -19,6 +23,7 @@ public class GameView extends BorderPane {
 
     private void initializeNodes(int boardSize) {
         this.exit = new MenuItem("Exit");
+        this.back = new MenuItem("Return");
         this.rules = new MenuItem("Rules");
         this.figures = new Figure[boardSize][boardSize];
 
@@ -26,7 +31,7 @@ public class GameView extends BorderPane {
 
     private void layoutNodes() {
         //menus
-        Menu gameMenu = new Menu("Game", null, this.exit);
+        Menu gameMenu = new Menu("Game", null, this.back, this.exit);
         Menu aboutMenu = new Menu("About", null, this.rules);
 
         MenuBar bar = new MenuBar(gameMenu, aboutMenu);
@@ -43,10 +48,6 @@ public class GameView extends BorderPane {
             }
         }
 
-        for (Figure[] figure : figures) {
-
-        }
-
         figures[0][0].setFigureType(FigureType.CROSS);
         figures[0][1].setFigureType(FigureType.CIRCLE);
 
@@ -59,15 +60,19 @@ public class GameView extends BorderPane {
     }
 
     public MenuItem getExit() {
-        return exit;
+        return this.exit;
     }
 
     public MenuItem getRules() {
-        return rules;
+        return this.rules;
+    }
+
+    public MenuItem getBack(){
+        return this.back;
     }
 
     public Figure[][] getFigures() {
-        return figures;
+        return this.figures;
     }
 
 

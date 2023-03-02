@@ -5,6 +5,7 @@ import be.kdg.tic_tac_toe.view.game.GamePresenter;
 import be.kdg.tic_tac_toe.view.game.GameView;
 import be.kdg.tic_tac_toe.view.home.HomePresenter;
 import be.kdg.tic_tac_toe.view.home.HomeView;
+import javafx.scene.control.Alert;
 
 public class MenuPresenter {
     private final MenuView view;
@@ -24,9 +25,37 @@ public class MenuPresenter {
 
             this.view.getScene().setRoot(homeView);
     });
+
         //play
         this.view.getPlay().setOnAction(actionEvent -> {
-            GameView gameView = new GameView(3);
+            int size;
+
+            if (this.view.getPvP().isSelected()){
+                //TODO model
+            } else if (this.view.getPvE().isSelected()) {
+                //TODO model
+            } else if (this.view.getUltraNightmare().isSelected()){
+                //TODO Model
+            } else {
+                warningPopup("Please select a gamemode before you start the game");
+                return;
+            }
+
+            if (this.view.getDrie().isSelected()){
+                //TODO give size to model
+                size = 3;
+            } else if (this.view.getVijf().isSelected()){
+                //TODO give size to model
+                size = 5;
+            } else if (this.view.getZeven().isSelected()){
+                //TODO give size to model
+                size = 7;
+            } else {
+                warningPopup("Please select a board size before you start the game");
+                return;
+            }
+
+            GameView gameView = new GameView(size);
             new GamePresenter(gameView, this.model);
 
             this.view.getScene().setRoot(gameView);
@@ -35,5 +64,12 @@ public class MenuPresenter {
     }
 
     private void updateView(){
+    }
+
+    private void warningPopup(String message){
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Warning");
+        alert.setContentText(message);
+        alert.showAndWait();
     }
 }

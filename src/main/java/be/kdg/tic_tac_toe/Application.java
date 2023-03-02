@@ -1,4 +1,5 @@
 package be.kdg.tic_tac_toe;
+
 import be.kdg.tic_tac_toe.model.Model;
 import be.kdg.tic_tac_toe.view.home.HomePresenter;
 import be.kdg.tic_tac_toe.view.home.HomeView;
