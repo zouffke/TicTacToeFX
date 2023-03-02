@@ -1,6 +1,6 @@
 package be.kdg.tic_tac_toe.view.models;
 
-import be.kdg.tic_tac_toe.model.FigureType;
+import be.kdg.tic_tac_toe.model.Sort;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
@@ -10,15 +10,16 @@ public class Figure extends Canvas {
     private final int row;
     private final int column;
     private final int gridSize;
-    private FigureType figureType;
+    private Sort sort;
     private final GraphicsContext gc;
 
-    public Figure(int row, int column, FigureType figureType) {
+    public Figure(int row, int column, Sort sort) {
         super(100, 100);
         this.column = column;
         this.row = row;
         this.gridSize = 100;
-        this.figureType = figureType;
+
+        this.sort = sort;
         this.gc = this.getGraphicsContext2D();
         gc.setLineWidth(5);
         draw();
@@ -29,12 +30,12 @@ public class Figure extends Canvas {
     }
 
     private void draw() {
-        if (figureType == null) {
+        if (sort == null) {
             return;
         }
-        if (figureType.equals(FigureType.CIRCLE)) {
+        if (sort.equals(Sort.O)) {
             createCircle();
-        } else if (figureType.equals(FigureType.CROSS)) {
+        } else if (sort.equals(Sort.X)) {
             createCross();
         }
     }
@@ -51,8 +52,8 @@ public class Figure extends Canvas {
         gc.strokeLine(10, this.gridSize - 10, this.gridSize - 10, 10);
     }
 
-    public void setFigureType(FigureType figureType) {
-        this.figureType = figureType;
+    public void setSort(Sort sort) {
+        this.sort = sort;
         draw();
     }
 

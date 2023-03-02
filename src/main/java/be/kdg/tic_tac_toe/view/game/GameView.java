@@ -1,6 +1,5 @@
 package be.kdg.tic_tac_toe.view.game;
 
-import be.kdg.tic_tac_toe.model.FigureType;
 import be.kdg.tic_tac_toe.view.models.Figure;
 import javafx.geometry.Insets;
 import javafx.scene.control.Menu;
@@ -12,6 +11,7 @@ import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.util.Duration;
 
+import java.io.File;
 import java.nio.file.Paths;
 
 public class GameView extends BorderPane {
@@ -27,7 +27,18 @@ public class GameView extends BorderPane {
 
     public GameView(int boardSize, boolean music) {
         initializeNodes(boardSize);
-        Media media = new Media(Paths.get("src/main/java/be/kdg/tic_tac_toe/source/At_Dooms_Gate.mp3").toUri().toString());
+
+        Media media = new Media(Paths.get("src" + File.separator
+                + "main" + File.separator
+                + "java" + File.separator
+                + "be" + File.separator
+                + "kdg" + File.separator
+                + "tic_tac_toe" + File.separator
+                + "source" + File.separator
+                + "At_Dooms_Gate.mp3")
+                .toUri()
+                .toString());
+
         player = new MediaPlayer(media);
 
         if (music){
@@ -65,9 +76,6 @@ public class GameView extends BorderPane {
                 grid.add(figures[i][j], i, j);
             }
         }
-
-        figures[0][0].setFigureType(FigureType.CROSS);
-        figures[0][1].setFigureType(FigureType.CIRCLE);
 
         grid.setGridLinesVisible(true);
 

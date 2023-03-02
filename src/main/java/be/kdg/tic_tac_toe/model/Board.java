@@ -2,8 +2,8 @@ package be.kdg.tic_tac_toe.model;
 
 public class Board {
 
-    private static int width = 3;
-    private static int length = 3;
+    private static int width;
+    private static int length;
     private final Piece[][] pieces;
 
 
@@ -18,31 +18,12 @@ public class Board {
         this.pieces = new Piece[Board.width][Board.length];
     }
 
-    public boolean place(Coordinaat cords, Sort currentSort, boolean human) {
-        int x = cords.getX();
-        int y = cords.getY();
+    public boolean validMove(int y, int x) {
+        return this.pieces[y][x] == null;
+    }
 
-        //out of bounds check
-        if (x < 1 || x > getWidth() || y < 1 || y > getLength()) {
-            if (human) {
-                System.out.println("Dit veld bestaat niet");
-            }
-            return false;
-        } else {
-            x--;
-            y--;
-        }
-
-        //occupation check
-        if (this.pieces[y][x] != null) {
-            if (human) {
-                System.out.println("Dit vak is al bezet");
-            }
-            return false;
-        }
-        // if the chosen field is empty
+    public void place(Sort currentSort, int y, int x) {
         this.pieces[y][x] = new Piece(currentSort, y, x);
-        return true;
     }
 
     public boolean win(Sort sort) {

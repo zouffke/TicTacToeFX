@@ -49,13 +49,10 @@ public class MenuPresenter {
             }
 
             if (this.view.getDrie().isSelected()){
-                //TODO give size to model
                 size = 3;
             } else if (this.view.getVijf().isSelected()){
-                //TODO give size to model
                 size = 5;
             } else if (this.view.getZeven().isSelected()){
-                //TODO give size to model
                 size = 7;
             } else {
                 warningPopup("Please select a board size before you start the game");

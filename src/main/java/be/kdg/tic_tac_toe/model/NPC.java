@@ -14,11 +14,7 @@ public class NPC extends Player {
     }
 
     public void playNPC(Board board, Sort currentSort) {
-
-        Coordinaat move = bestMove(board, currentSort);
-        System.out.printf("%s speelde %s-%s\n", getNAME(), move.getY(), move.getX());
-        board.place(move, currentSort, false);
-        board.drawBoard();
+        this.bestMove(board, currentSort);
     }
 
     private boolean movesAble(Board board) {
@@ -60,19 +56,19 @@ public class NPC extends Player {
                         //place a temporary piece on the copy board
                         board.setPiece(y, x, ownSort);
 
-                            //calculate the value of this move
-                            int value = minimax(board, depth + 1, false, ownSort, alpha, beta);
+                        //calculate the value of this move
+                        int value = minimax(board, depth + 1, false, ownSort, alpha, beta);
 
-                            //determine the best move
-                            best = Math.max(best, value);
-                            alpha = Math.max(alpha, best);
+                        //determine the best move
+                        best = Math.max(best, value);
+                        alpha = Math.max(alpha, best);
 
-                            //set the piece on the board back to null
-                            board.setPieceNull(y, x);
+                        //set the piece on the board back to null
+                        board.setPieceNull(y, x);
 
-                            if (beta <= alpha) {
-                                break;
-                            }
+                        if (beta <= alpha) {
+                            break;
+                        }
                     }
                 }
             }
@@ -87,18 +83,18 @@ public class NPC extends Player {
                         //place a temporary piece on the copy board
                         board.setPiece(y, x, opponent);
 
-                            //calculate the value of this move
-                            int value = minimax(board, depth + 1, true, ownSort, alpha, beta);
+                        //calculate the value of this move
+                        int value = minimax(board, depth + 1, true, ownSort, alpha, beta);
 
-                            best = Math.min(best, value);
-                            beta = Math.min(beta, best);
+                        best = Math.min(best, value);
+                        beta = Math.min(beta, best);
 
-                            //set the piece on the board back to null
-                            board.setPieceNull(y, x);
+                        //set the piece on the board back to null
+                        board.setPieceNull(y, x);
 
-                            if (beta <= alpha) {
-                                break;
-                            }
+                        if (beta <= alpha) {
+                            break;
+                        }
                     }
                 }
             }
@@ -106,7 +102,7 @@ public class NPC extends Player {
         }
     }
 
-    private Coordinaat bestMove(Board board, Sort ownSort) {
+    private void bestMove(Board board, Sort ownSort) {
         Piece[][] pieces = board.getPieces();
 
         boolean max;
@@ -128,18 +124,14 @@ public class NPC extends Player {
                     board.setPieceNull(y, x);
 
                     if (moveVal > bestVal) {
-                        row = x + 1;
-                        column = y + 1;
+                        row = x;
+                        column = y;
                         bestVal = moveVal;
                     }
                 }
             }
         }
         System.out.println("\nBest move is " + bestVal);
-        return cords(column, row);
-    }
-
-    private Coordinaat cords(int y, int x) {
-        return new Coordinaat(y, x);
+        board.place(ownSort, column, row);
     }
 }
