@@ -12,6 +12,8 @@ public class Game {
     private Player currentPlayer;
     private Sort currentSort;
     private int count;
+    private final int playerChoice;
+    private final int boardChoice;
 
     public Game(int boardChoice, int playerChoice) {
         this.gameOver = false;
@@ -19,6 +21,8 @@ public class Game {
         this.contribution = setPlayers(playerChoice);
         this.contribution.setSorts();
         this.validMove = false;
+        this.playerChoice = playerChoice;
+        this.boardChoice = boardChoice;
 
         System.out.printf("\n%s speelt met %s\n", contribution.getName(1), contribution.getSort(1));
         System.out.printf("en\n%s speelt met %s\n", contribution.getName(2), contribution.getSort(2));
@@ -103,16 +107,12 @@ public class Game {
         this.updateParameters();
     }
 
-    public static boolean winCheck(Board board, Player currentPlayer, Sort currentSort) {
+    public boolean winCheck() {
+       return this.board.win(this.currentSort);
+    }
 
-        if (board.win(currentSort)) {
-            System.out.printf("%s heeft gewonnen\n", currentPlayer.getNAME());
-            return true;
-        } else if (board.draw()) {
-            System.out.println("It's a Draw!\n");
-            return true;
-        }
-        return false;
+    public boolean drawCheck(){
+        return this.board.draw();
     }
 
     public Board getBoard() {
@@ -122,4 +122,13 @@ public class Game {
     public Player getCurrentPlayer() {
         return this.currentPlayer;
     }
+
+    public int getPlayerChoice() {
+        return this.playerChoice;
+    }
+
+    public int getBoardChoice() {
+        return this.boardChoice;
+    }
+
 }

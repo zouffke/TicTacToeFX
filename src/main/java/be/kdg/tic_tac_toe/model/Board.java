@@ -29,7 +29,7 @@ public class Board {
     public boolean win(Sort sort) {
         //define the trigger
         int trigger;
-        if (getWidth() == 3) {
+        if (getSize() == 3) {
             trigger = 3;
         } else {
             trigger = 4;
@@ -105,73 +105,13 @@ public class Board {
         return true;
     }
 
-    public static int getWidth() {
+    public static int getSize() {
         return Board.width;
     }
 
-    public static int getLength() {
-        return Board.length;
-    }
 
     public Piece[][] getPieces() {
         return this.pieces;
-    }
-
-    public void drawBoard() {
-        int count = 0;
-        StringBuilder stringBuilder = new StringBuilder();
-        if (getLength() == 3) {
-            stringBuilder.append("_".repeat(15)).append("\n").append("|").append(" ".repeat(13)).append("|\n");
-        } else if (getLength() == 5) {
-            stringBuilder.append("_".repeat(23)).append("\n").append("|").append(" ".repeat(21)).append("|\n");
-        } else {
-            stringBuilder.append("_".repeat(31)).append("\n").append("|").append(" ".repeat(29)).append("|\n");
-        }
-        for (int y = 0; y < this.pieces.length; y++) {
-            if (this.pieces[y][count++] == null) {
-                stringBuilder.append("| ");
-            } else {
-                stringBuilder.append("| ");
-            }
-            for (int x = 0; x < this.pieces.length; x++) {
-                if (this.pieces[y][x] == null) {
-                    stringBuilder.append(y + 1).append("-").append(x + 1);
-                } else {
-                    stringBuilder.append(" ").append(this.pieces[y][x]);
-                }
-                if (x == getWidth() - 1) {
-                    if (pieces[y][x] == null) {
-                        stringBuilder.append(" |\n");
-                    } else {
-                        stringBuilder.append("  |\n");
-                    }
-                } else {
-                    if (pieces[y][x] == null) {
-                        stringBuilder.append("|");
-                    } else {
-                        stringBuilder.append(" |");
-                    }
-                }
-            }
-            if (y == getLength() - 1) {
-                if (getLength() == 3) {
-                    stringBuilder.append("|").append("_".repeat(13)).append("|\n");
-                } else if (getLength() == 5) {
-                    stringBuilder.append("|").append("_".repeat(21)).append("|\n");
-                } else {
-                    stringBuilder.append("|").append("_".repeat(29)).append("|\n");
-                }
-            } else {
-                if (getLength() == 3) {
-                    stringBuilder.append("| ").append("~".repeat(11)).append(" |\n");
-                } else if (getLength() == 5) {
-                    stringBuilder.append("| ").append("~".repeat(19)).append(" |\n");
-                } else {
-                    stringBuilder.append("| ").append("~".repeat(27)).append(" |\n");
-                }
-            }
-        }
-        System.out.print(stringBuilder);
     }
 
     public void setPiece(int y, int x, Sort sort) {

@@ -24,9 +24,13 @@ public class GameView extends BorderPane {
     private MenuItem rules;
     private Figure[][] figures;
     private final MediaPlayer player;
+    private final boolean music;
+    private final int boardSize;
 
     public GameView(int boardSize, boolean music) {
         initializeNodes(boardSize);
+        this.music = music;
+        this.boardSize = boardSize;
 
         Media media = new Media(Paths.get("src" + File.separator
                 + "main" + File.separator
@@ -105,5 +109,11 @@ public class GameView extends BorderPane {
         return this.player;
     }
 
+    public boolean getMusic() {
+        return this.music;
+    }
 
+    public int getBoardSize() {
+        return this.boardSize;
+    }
 }
