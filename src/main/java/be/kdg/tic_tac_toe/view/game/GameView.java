@@ -3,8 +3,16 @@ package be.kdg.tic_tac_toe.view.game;
 import be.kdg.tic_tac_toe.model.FigureType;
 import be.kdg.tic_tac_toe.view.models.Figure;
 import javafx.geometry.Insets;
-import javafx.scene.control.*;
-import javafx.scene.layout.*;
+import javafx.scene.control.Menu;
+import javafx.scene.control.MenuBar;
+import javafx.scene.control.MenuItem;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.GridPane;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
+import javafx.util.Duration;
+
+import java.nio.file.Paths;
 
 public class GameView extends BorderPane {
 
@@ -15,9 +23,19 @@ public class GameView extends BorderPane {
     //about
     private MenuItem rules;
     private Figure[][] figures;
+    private final MediaPlayer player;
 
-    public GameView(int boardSize) {
+    public GameView(int boardSize, boolean music) {
         initializeNodes(boardSize);
+        Media media = new Media(Paths.get("src/main/java/be/kdg/tic_tac_toe/source/At_Dooms_Gate.mp3").toUri().toString());
+        player = new MediaPlayer(media);
+
+        if (music){
+            player.setAutoPlay(true);
+            player.setOnEndOfMedia(() -> player.seek(Duration.ZERO));
+            player.play();
+        }
+
         layoutNodes();
     }
 
@@ -73,6 +91,10 @@ public class GameView extends BorderPane {
 
     public Figure[][] getFigures() {
         return this.figures;
+    }
+
+    public MediaPlayer getPlayer(){
+        return this.player;
     }
 
 

@@ -9,6 +9,7 @@ import javafx.application.Platform;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 
+
 import java.util.Optional;
 
 public class GamePresenter {
@@ -59,13 +60,13 @@ public class GamePresenter {
         }
     }
 
-    private void returnPopup(){
+    private void returnPopup() {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setTitle("Return?");
         alert.setContentText("Are you sure you want to return to the menu?");
         Optional<ButtonType> result = alert.showAndWait();
-        if (result.isPresent()){
-            if (result.get() == ButtonType.OK){
+        if (result.isPresent()) {
+            if (result.get() == ButtonType.OK) {
                 MenuView menuView = new MenuView();
                 Model model = new Model();
                 new MenuPresenter(menuView, model);
@@ -73,6 +74,9 @@ public class GamePresenter {
                 this.view.getScene().setRoot(menuView);
                 menuView.getScene().getWindow().setHeight(700);
                 menuView.getScene().getWindow().setWidth(900);
+                if (this.view.getPlayer().isAutoPlay()) {
+                    this.view.getPlayer().stop();
+                }
             }
         }
     }

@@ -29,6 +29,7 @@ public class MenuPresenter {
         //play
         this.view.getPlay().setOnAction(actionEvent -> {
             int size;
+            boolean music = false;
 
             if (this.view.getPvP().isSelected()){
                 //TODO model
@@ -36,6 +37,7 @@ public class MenuPresenter {
                 //TODO model
             } else if (this.view.getUltraNightmare().isSelected()){
                 //TODO Model
+                music = true;
             } else {
                 warningPopup("Please select a gamemode before you start the game");
                 return;
@@ -55,7 +57,7 @@ public class MenuPresenter {
                 return;
             }
 
-            GameView gameView = new GameView(size);
+            GameView gameView = new GameView(size, music);
             new GamePresenter(gameView, this.model);
 
             this.view.getScene().setRoot(gameView);
