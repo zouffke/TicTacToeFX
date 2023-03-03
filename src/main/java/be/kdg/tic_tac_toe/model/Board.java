@@ -1,5 +1,7 @@
 package be.kdg.tic_tac_toe.model;
 
+import java.util.Arrays;
+
 public class Board {
 
     private static int width;
@@ -28,12 +30,7 @@ public class Board {
 
     public boolean win(Sort sort) {
         //define the trigger
-        int trigger;
-        if (getSize() == 3) {
-            trigger = 3;
-        } else {
-            trigger = 4;
-        }
+        int trigger = (getSize() == 3) ? 3: 4;
 
         for (int y = 0; y < this.pieces.length; y++) {
             for (int x = 0; x < this.pieces[y].length; x++) {
