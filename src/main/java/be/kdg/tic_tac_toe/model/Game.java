@@ -56,7 +56,7 @@ public class Game {
         }
     }
 
-    private void updateParameters() {
+    public void updateParameters() {
         if (this.count++ == 1) {
             this.currentPlayer = this.contribution.getSort(1).equals("X") ? this.contribution.getPlayer(1) : this.contribution.getPlayer(2);
             this.currentSort = Sort.X;
@@ -77,7 +77,6 @@ public class Game {
             ex.printStackTrace();
         } finally {
             npc.playNPC(this.board, this.currentSort);
-            this.updateParameters();
         }
     }
 
@@ -93,9 +92,8 @@ public class Game {
 
     public boolean winCheck() {
         boolean win = this.board.win(this.currentSort);
-        if (currentPlayer instanceof Human) {
-            this.updateParameters();
-        }
+        //this.updateParameters();
+
         return win;
     }
 

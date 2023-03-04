@@ -104,6 +104,7 @@ public class GamePresenter {
             gameOver = true;
             gameEndPopup("Draw", "It's a draw!\nDo you want to play again?");
         }
+        this.model.updateParameters();
     }
 
     private void exitPopup() {
