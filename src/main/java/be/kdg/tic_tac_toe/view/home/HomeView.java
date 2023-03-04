@@ -8,20 +8,22 @@ import javafx.scene.layout.VBox;
 
 public class HomeView extends VBox {
 
+    //create vars
     private Label titel;
     private Button play;
     private Button highscore;
     private Button quit;
 
+    //constructor die initalizeNodes en layoutNodes aanroept zodat ze gebruikt kunne worden
     public HomeView() {
         initializeNodes();
         layoutNodes();
     }
 
     private void initializeNodes() {
+        //een naam maken voor het label titel genaamd tic tac toe
         this.titel = new Label("Tic Tac Toe");
-        this.titel.setStyle("-fx-focus-color: transparent;");
-
+        //de volgende buttons initializeren en ze een naam geven
         this.play = new Button("Play");
 
         this.highscore = new Button("Highscore");
@@ -30,27 +32,28 @@ public class HomeView extends VBox {
     }
 
     private void layoutNodes() {
+        // toevoegen van al de buttons en labels
         this.getChildren().addAll(this.titel, this.play, this.highscore, this.quit);
+        //positie van de buttons en labels zetten naar canter
         this.setAlignment(Pos.TOP_CENTER);
-
+//overal 50 pixels ruimte rond de buttons en de labels
         VBox.setMargin(this.play, new Insets(50));
         VBox.setMargin(this.highscore, new Insets(50));
         VBox.setMargin(this.quit, new Insets(50));
     }
 
-    Label getTitel() {
-        return titel;
-    }
-
     Button getPlay() {
+        //playfunctie setten
         return play;
     }
 
     Button getHighscore() {
+        //button van highscore setten
         return highscore;
     }
 
     Button getQuit() {
+        // de quit button setten
         return quit;
     }
 }

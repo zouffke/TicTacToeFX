@@ -6,10 +6,10 @@ import be.kdg.tic_tac_toe.view.menu.MenuView;
 import javafx.application.Platform;
 
 public class HomePresenter {
-
+//attributen aanmaken
     private final HomeView view;
     private final Model model;
-
+//constructor waarin vieuw en model worden aangeroepen en waar addEventHandlers en updateView worden aangeroepen
     public HomePresenter(HomeView view, Model model) {
         this.view = view;
         this.model = model;
@@ -20,9 +20,7 @@ public class HomePresenter {
 
     private void addEventHandlers() {
         //quiting the program
-        this.view.getQuit().setOnAction(actionEvent -> {
-            Platform.exit();
-        });
+        this.view.getQuit().setOnAction(actionEvent -> Platform.exit());
 
         //going to menu screen
         this.view.getPlay().setOnAction(actionEvent -> {

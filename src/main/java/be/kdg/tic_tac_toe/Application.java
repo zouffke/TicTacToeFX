@@ -11,16 +11,22 @@ public class Application extends javafx.application.Application {
     @Override
     public void start(Stage stage) throws IOException {
 
+        //create HomeView and Homepresenter
         HomeView view = new HomeView();
         new HomePresenter(view, new Model());
 
+        //Create the scene
         Scene scene = new Scene(view);
-
+        //scene maken
         stage.setScene(scene);
+        //titel van de scene bepalen
         stage.setTitle("Tic Tac Toe");
+        //de afmetingen van de scene bepalen
         stage.setWidth(900);
         stage.setHeight(700);
+        //hierdoor kan je het scherm niet meer resizen
         stage.setResizable(false);
+        //zorgen dat je de scene kan zien
         stage.show();
     }
 

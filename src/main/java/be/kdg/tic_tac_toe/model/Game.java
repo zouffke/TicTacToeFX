@@ -1,6 +1,5 @@
 package be.kdg.tic_tac_toe.model;
 
-import java.util.Scanner;
 import java.util.concurrent.TimeUnit;
 
 public class Game {
@@ -8,7 +7,6 @@ public class Game {
     private Contribution contribution;
     private final Board board;
     private boolean validMove;
-    private boolean gameOver;
     private Player currentPlayer;
     private Sort currentSort;
     private int count;
@@ -16,44 +14,32 @@ public class Game {
     private final int boardChoice;
 
     public Game(int boardChoice, int playerChoice) {
-        this.gameOver = false;
         this.count = 1;
-        this.contribution = setPlayers(playerChoice);
-        this.contribution.setSorts();
         this.validMove = false;
         this.playerChoice = playerChoice;
         this.boardChoice = boardChoice;
 
-        System.out.printf("\n%s speelt met %s\n", contribution.getName(1), contribution.getSort(1));
-        System.out.printf("en\n%s speelt met %s\n", contribution.getName(2), contribution.getSort(2));
-
         this.board = setBoard(boardChoice);
-        this.updateParameters();
     }
 
-    private Contribution setPlayers(int choice) {
+    public void setPlayers(int choice, String name1, String name2) {
         if (choice == 1) {
-            String name1;
-            String name2;
-
-            //TODO give the option to change player name
-            name1 = "Temp 1";
-            name2 = "Temp 2";
-
-            return new Contribution(name1, name2);
+            this.contribution = new Contribution(name1, name2);
 
         } else if (choice == 2) {
             //TODO change the second option to an easier NPC
-            String name;
-            name = "Temp 1";
+            this.contribution = new Contribution(name1);
 
-            return new Contribution(name);
         } else {
-            String name;
-            name = "Temp 1";
-
-            return new Contribution(name);
+            this.contribution = new Contribution(name1);
         }
+
+        this.contribution.setSorts();
+
+        System.out.printf("\n%s speelt met %s\n", contribution.getName(1), contribution.getSort(1));
+        System.out.printf("en\n%s speelt met %s\n", contribution.getName(2), contribution.getSort(2));
+
+        this.updateParameters();
     }
 
     public Board setBoard(int option) {
@@ -91,9 +77,8 @@ public class Game {
             ex.printStackTrace();
         } finally {
             npc.playNPC(this.board, this.currentSort);
+            this.updateParameters();
         }
-
-        this.updateParameters();
     }
 
     public void place(int x, int y) throws BoardException {
@@ -104,14 +89,17 @@ public class Game {
         } else {
             throw new BoardException("This is an invalid move");
         }
-        this.updateParameters();
     }
 
     public boolean winCheck() {
-       return this.board.win(this.currentSort);
+        boolean win = this.board.win(this.currentSort);
+        if (currentPlayer instanceof Human) {
+            this.updateParameters();
+        }
+        return win;
     }
 
-    public boolean drawCheck(){
+    public boolean drawCheck() {
         return this.board.draw();
     }
 

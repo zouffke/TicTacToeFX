@@ -6,7 +6,12 @@ import be.kdg.tic_tac_toe.view.game.GamePresenter;
 import be.kdg.tic_tac_toe.view.game.GameView;
 import be.kdg.tic_tac_toe.view.home.HomePresenter;
 import be.kdg.tic_tac_toe.view.home.HomeView;
+import be.kdg.tic_tac_toe.view.players.PlayerPresenter;
+import be.kdg.tic_tac_toe.view.players.PlayerView;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 
 public class MenuPresenter {
     private final MenuView view;
@@ -34,13 +39,10 @@ public class MenuPresenter {
             boolean music = false;
 
             if (this.view.getPvP().isSelected()){
-                //TODO model
                 playerOption = 1;
             } else if (this.view.getPvE().isSelected()) {
-                //TODO model
                 playerOption = 2;
             } else if (this.view.getUltraNightmare().isSelected()){
-                //TODO Model
                 playerOption = 3;
                 music = true;
             } else {
@@ -59,12 +61,27 @@ public class MenuPresenter {
                 return;
             }
 
-            GameView gameView = new GameView(size, music);
             Game gameModel = new Game(size, playerOption);
-            new GamePresenter(gameView, gameModel);
 
-            this.view.getScene().setRoot(gameView);
-            gameView.getScene().getWindow().sizeToScene();
+            PlayerView playerView = new PlayerView(playerOption);
+            Stage playerStage = new Stage();
+            PlayerPresenter playerPresenter = new PlayerPresenter(playerView, gameModel, playerStage);
+            playerStage.initOwner(this.view.getScene().getWindow());
+            playerStage.initModality(Modality.APPLICATION_MODAL);
+            playerStage.setScene(new Scene(playerView));
+            playerStage.setHeight(200);
+            playerStage.setWidth(290);
+            playerStage.setX(this.view.getScene().getWindow().getX() + (this.view.getScene().getWindow().getWidth() / 2 - playerStage.getWidth() / 2));
+            playerStage.setY(this.view.getScene().getWindow().getY() + (this.view.getScene().getWindow().getHeight() / 2 - playerStage.getHeight() / 2));
+            playerStage.showAndWait();
+
+            if (playerPresenter.isNamesFilled()) {
+                GameView gameView = new GameView(size, music);
+                new GamePresenter(gameView, gameModel);
+
+                this.view.getScene().setRoot(gameView);
+                gameView.getScene().getWindow().sizeToScene();
+            }
         });
     }
 
