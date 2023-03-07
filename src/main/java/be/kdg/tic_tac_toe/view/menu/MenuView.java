@@ -9,6 +9,7 @@ import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.VBox;
 
 public class MenuView extends VBox {
+    // create vars
     private Label gamemode;
     private RadioButton PvP;
     private RadioButton PvE;
@@ -19,7 +20,7 @@ public class MenuView extends VBox {
     private RadioButton zeven;
     private Button play;
     private Button terug;
-
+    // Vbox is een manier om buttons(nodes) enzo juist te plaasten
     private VBox radioButtonBox1;
     private VBox radioButtonBox2;
 
@@ -30,11 +31,13 @@ public class MenuView extends VBox {
 
 
     private void initializeNodes() {
+        //groepen en buttonboxen initializeren
         radioButtonBox1 = new VBox();
         radioButtonBox2 = new VBox();
         ToggleGroup group = new ToggleGroup();
         ToggleGroup group2 = new ToggleGroup();
 
+        // radiobuttons initializeren en een naam geven
         this.PvP = new RadioButton("PvP");
         this.PvP.setToggleGroup(group);
 

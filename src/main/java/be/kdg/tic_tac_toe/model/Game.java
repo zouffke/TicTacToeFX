@@ -22,7 +22,10 @@ public class Game {
         this.board = setBoard(boardChoice);
     }
 
-    public void setPlayers(int choice, String name1, String name2) {
+    public void setPlayers(int choice, String name1, String name2) throws GameException {
+        if (name1.isBlank() || name2.isBlank()){
+            throw new GameException("Please write your name in the given field(s) to continue");
+        }
         if (choice == 1) {
             this.contribution = new Contribution(name1, name2);
 
@@ -38,8 +41,6 @@ public class Game {
 
         System.out.printf("\n%s speelt met %s\n", contribution.getName(1), contribution.getSort(1));
         System.out.printf("en\n%s speelt met %s\n", contribution.getName(2), contribution.getSort(2));
-
-        this.updateParameters();
     }
 
     public Board setBoard(int option) {
@@ -80,21 +81,18 @@ public class Game {
         }
     }
 
-    public void place(int x, int y) throws BoardException {
+    public void place(int x, int y) throws GameException {
         validMove = board.validMove(y, x);
 
         if (validMove) {
             this.board.place(this.currentSort, y, x);
         } else {
-            throw new BoardException("This is an invalid move");
+            throw new GameException("This is an invalid move");
         }
     }
 
     public boolean winCheck() {
-        boolean win = this.board.win(this.currentSort);
-        //this.updateParameters();
-
-        return win;
+        return this.board.win(this.currentSort);
     }
 
     public boolean drawCheck() {
@@ -115,6 +113,14 @@ public class Game {
 
     public int getBoardChoice() {
         return this.boardChoice;
+    }
+
+    public String getPlayer1(){
+        return this.contribution.getName(1);
+    }
+
+    public String getPlayer2(){
+        return this.contribution.getName(2);
     }
 
 }

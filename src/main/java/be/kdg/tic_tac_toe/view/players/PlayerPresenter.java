@@ -1,6 +1,7 @@
 package be.kdg.tic_tac_toe.view.players;
 
 import be.kdg.tic_tac_toe.model.Game;
+import be.kdg.tic_tac_toe.model.GameException;
 import javafx.scene.control.Alert;
 import javafx.stage.Stage;
 
@@ -27,9 +28,9 @@ public class PlayerPresenter {
             try {
                 this.model.setPlayers(this.view.getChoice(), this.view.getName1().getText(), this.view.getName2().getText());
                 this.namesFilled = true;
-            } catch (IndexOutOfBoundsException e){
+            } catch (GameException e){
                 Alert warning = new Alert(Alert.AlertType.WARNING);
-                warning.setContentText("Please write your name in the given field to continue");
+                warning.setContentText(e.getMessage());
                 warning.showAndWait();
             }
             if (namesFilled) {

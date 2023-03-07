@@ -45,11 +45,10 @@ public class GamePresenter {
                     if (!gameOver) {
                         if (humanTurn) {
                             try {
-                                model.place(figure.getColumn(), figure.getRow());
+                                this.model.place(figure.getColumn(), figure.getRow());
+                                this.humanTurn = false;
                                 updateView();
-                                setGameOver();
-                                humanTurn = false;
-                            } catch (BoardException e) {
+                            } catch (GameException e) {
                                 Alert alert = new Alert(Alert.AlertType.ERROR);
                                 alert.setContentText(e.getMessage());
                                 alert.showAndWait();
@@ -75,24 +74,25 @@ public class GamePresenter {
         }
 
         if (!gameOver) {
-            //wait for the screen to render before calling the NPC function
-            Task<Void> task = new Task<>() {
-                @Override
-                public Void call() {
-                    callNPC();
-                    humanTurn = true;
-                    return null;
-                }
-            };
-            new Thread(task).start();
+            if (!humanTurn) {
+                //wait for the screen to render before calling the NPC function
+                Task<Void> task = new Task<>() {
+                    @Override
+                    public Void call() {
+                        callNPC();
+                        return null;
+                    }
+                };
+                new Thread(task).start();
+            }
         }
+        setGameOver();
     }
 
     private void callNPC() {
         if (this.model.getCurrentPlayer() instanceof NPC) {
             this.model.npcMove();
             updateView();
-            setGameOver();
         }
     }
 
@@ -103,8 +103,13 @@ public class GamePresenter {
         } else if (this.model.drawCheck()) {
             gameOver = true;
             gameEndPopup("Draw", "It's a draw!\nDo you want to play again?");
+        } else {
+            this.model.updateParameters();
         }
-        this.model.updateParameters();
+
+        if (this.model.getCurrentPlayer() instanceof Human) {
+            this.humanTurn = true;
+        }
     }
 
     private void exitPopup() {
@@ -130,11 +135,17 @@ public class GamePresenter {
         Optional<ButtonType> result = alert.showAndWait();
         if (result.isPresent()) {
             if (result.get() == yes) {
-                GameView newGameView = new GameView(this.view.getBoardSize(), this.view.getMusic());
-                Game newGameModel = new Game(this.model.getBoardChoice(), this.model.getPlayerChoice());
-                new GamePresenter(newGameView, newGameModel);
-
-                this.view.getScene().setRoot(newGameView);
+                try {
+                    GameView newGameView = new GameView(this.view.getBoardSize(), this.view.getMusic());
+                    Game newGameModel = new Game(this.model.getBoardChoice(), this.model.getPlayerChoice());
+                    newGameModel.setPlayers(this.model.getPlayerChoice(), this.model.getPlayer1(), this.model.getPlayer2());
+                    new GamePresenter(newGameView, newGameModel);
+                    this.view.getScene().setRoot(newGameView);
+                } catch (GameException e) {
+                    Alert error = new Alert(Alert.AlertType.ERROR);
+                    error.setContentText("Sorry, it seems like something went wrong.\nPlease try again later");
+                    error.show();
+                }
             } else {
                 gotoMenu();
             }
