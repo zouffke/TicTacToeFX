@@ -34,6 +34,9 @@ public class GamePresenter {
         this.board = model.getBoard();
         this.gameOver = false;
 
+        this.view.getName1().setText(this.model.getPlayer1());
+        this.view.getName2().setText(this.model.getPlayer2());
+
         this.addEventHandlers();
         this.updateView();
     }

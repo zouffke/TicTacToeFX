@@ -24,14 +24,13 @@ public class NPC extends Player {
         return board.draw();
     }
 
-    private int evaluation(Sort ownSort, Board board) {
+    private int evaluation(Board board, Sort ownSort, Sort opponent) {
         if (board.win(ownSort)) {
             return 10;
-        } else if (board.win(Sort.oppositSort(ownSort))) {
+        } else if (board.win(opponent)) {
             return -10;
-        } else {
-            return 0;
         }
+        return 0;
     }
 
     //determine the best value to play
@@ -39,9 +38,8 @@ public class NPC extends Player {
         Piece[][] pieces = board.getPieces();
 
         //get the score of the current board
-        int score = evaluation(ownSort, board);
-
         Sort opponent = Sort.oppositSort(ownSort);
+        int score = evaluation(board, ownSort, opponent);
 
 
         if (score == 10) {
