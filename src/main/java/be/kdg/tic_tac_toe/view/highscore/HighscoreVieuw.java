@@ -56,6 +56,10 @@ public class HighscoreVieuw extends VBox {
 
     }
 
+    Button getTerug(){
+        return this.terug;
+    }
+
 
 }
 
