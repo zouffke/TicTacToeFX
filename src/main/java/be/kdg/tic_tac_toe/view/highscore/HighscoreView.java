@@ -2,16 +2,15 @@ package be.kdg.tic_tac_toe.view.highscore;
 
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
 
-import java.io.BufferedReader;
-
-public class HighscoreVieuw {
+public class HighscoreView extends Parent {
 
 
-    public class HighscoreView extends VBox {
+    public class HighscoreVieuw extends VBox {
 
         //create vars
         private Label titel;
@@ -23,7 +22,7 @@ public class HighscoreVieuw {
         private Button terug;
 
         //constructor die initalizeNodes en layoutNodes aanroept zodat ze gebruikt kunne worden
-        public HighscoreView() {
+        public HighscoreVieuw() {
             initializeNodes();
             layoutNodes();
         }
