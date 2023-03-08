@@ -50,7 +50,6 @@ public class GameView extends BorderPane {
             player.setOnEndOfMedia(() -> player.seek(Duration.ZERO));
             player.play();
         }
-
         layoutNodes();
     }
 

@@ -2,7 +2,7 @@ package be.kdg.tic_tac_toe.view.home;
 
 import be.kdg.tic_tac_toe.model.Model;
 import be.kdg.tic_tac_toe.view.highscore.HighscorePresenter;
-import be.kdg.tic_tac_toe.view.highscore.HighscoreView;
+import be.kdg.tic_tac_toe.view.highscore.HighscoreVieuw;
 import be.kdg.tic_tac_toe.view.menu.MenuPresenter;
 import be.kdg.tic_tac_toe.view.menu.MenuView;
 import javafx.application.Platform;
@@ -39,10 +39,10 @@ public class HomePresenter {
         });
 
         this.view.getHighscore().setOnAction(action -> {
-                    HighscoreView highscoreView = new HighscoreView();
-                    new HighscorePresenter(highscoreView, model);
-                    view.getScene().setRoot(highscoreView);
-                });
+            HighscoreVieuw highscoreView = new HighscoreVieuw();
+            new HighscorePresenter(highscoreView, model);
+            view.getScene().setRoot(highscoreView);
+        });
 
     }
 

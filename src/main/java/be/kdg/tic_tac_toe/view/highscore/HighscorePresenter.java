@@ -3,11 +3,11 @@ package be.kdg.tic_tac_toe.view.highscore;
 import be.kdg.tic_tac_toe.model.Model;
 
 public class HighscorePresenter {
-    private final HighscoreView view;
+    private final HighscoreVieuw view;
 
     private final Model model;
 
-    public HighscorePresenter(HighscoreView view, Model model) {
+    public HighscorePresenter(HighscoreVieuw view, Model model) {
         this.view = view;
         this.model = model;
 
