@@ -3,7 +3,6 @@ package be.kdg.tic_tac_toe.view.highscore;
 import be.kdg.tic_tac_toe.model.Model;
 import be.kdg.tic_tac_toe.view.home.HomePresenter;
 import be.kdg.tic_tac_toe.view.home.HomeView;
-import javafx.event.EventHandler;
 
 public class HighscorePresenter {
     private final HighscoreVieuw view;
