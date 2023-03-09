@@ -1,14 +1,21 @@
 package be.kdg.tic_tac_toe.view.game;
 
 import be.kdg.tic_tac_toe.model.*;
+import be.kdg.tic_tac_toe.view.about.AboutPresenter;
+import be.kdg.tic_tac_toe.view.about.AboutView;
 import be.kdg.tic_tac_toe.view.menu.MenuPresenter;
 import be.kdg.tic_tac_toe.view.menu.MenuView;
 import be.kdg.tic_tac_toe.view.models.Figure;
 import javafx.application.Platform;
 import javafx.concurrent.Task;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonBar;
 import javafx.scene.control.ButtonType;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 
 
 import java.util.Optional;
@@ -61,6 +68,20 @@ public class GamePresenter {
                 });
             }
         }
+        view.getRules().setOnAction(event -> {
+            AboutView aboutView = new AboutView();
+            Model model1 = new Model();
+            new AboutPresenter( aboutView, model1);
+            Stage aboutStage = new Stage();
+            aboutStage.initOwner(view.getScene().getWindow());
+            aboutStage.initModality(Modality.APPLICATION_MODAL);
+            aboutStage.setScene(new Scene(aboutView));
+            aboutStage.sizeToScene();
+            aboutStage.setResizable(false);
+            aboutStage.setX(view.getScene().getWindow().getX() + 100);
+            aboutStage.setY(view.getScene().getWindow().getY() + 100);
+            aboutStage.showAndWait();
+        });
     }
 
     private void updateView() {
