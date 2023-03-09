@@ -14,9 +14,11 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 public class MenuPresenter {
+    // attributen aanmaken
     private final MenuView view;
     private final Model model;
     public MenuPresenter(MenuView view, Model model) {
+        // attributen initialiseren
         this.view = view;
         this.model = model;
 
@@ -24,7 +26,7 @@ public class MenuPresenter {
         this.updateView();
     }
     private void addEventHandlers(){
-        // gaat terug naar het homescherm
+        // gaat terug naar het homescherm als er op de knop terug wordt gedrukt
         this.view.getTerug().setOnAction(actionEvent -> {
             HomeView homeView = new HomeView();
             new HomePresenter(homeView, model);
@@ -32,12 +34,14 @@ public class MenuPresenter {
             this.view.getScene().setRoot(homeView);
     });
 
-        //play
+        //play aanroepen als erop gedrukt word, naar de play scene gaan
         this.view.getPlay().setOnAction(actionEvent -> {
+            // vars maken
             int size;
             int playerOption;
             boolean music = false;
 
+            // checken welke optie is geselecteerd
             if (this.view.getPvP().isSelected()){
                 playerOption = 1;
             } else if (this.view.getPvE().isSelected()) {
@@ -46,10 +50,12 @@ public class MenuPresenter {
                 playerOption = 3;
                 music = true;
             } else {
+                // als er geen optie is geselecteerd dan krijg je een popup
                 warningPopup("Please select a gamemode before you start the game");
                 return;
             }
 
+            // checken welke optie is geselecteerd
             if (this.view.getDrie().isSelected()){
                 size = 3;
             } else if (this.view.getVijf().isSelected()){
@@ -61,20 +67,30 @@ public class MenuPresenter {
                 return;
             }
 
+            // instantie van game aanmaken
             Game gameModel = new Game(size, playerOption);
 
+            // playerView aanmaken en presenter aanmaken
             PlayerView playerView = new PlayerView(playerOption);
+            // nieuwe stage aanmaken
             Stage playerStage = new Stage();
+            // nieuwe playerPresenter aanmaken en parameters meegeven
             PlayerPresenter playerPresenter = new PlayerPresenter(playerView, gameModel, playerStage);
+            //ppt
             playerStage.initOwner(this.view.getScene().getWindow());
             playerStage.initModality(Modality.APPLICATION_MODAL);
+            //scene aanmaken
             playerStage.setScene(new Scene(playerView));
-            playerStage.setHeight(200);
+            // grootte van de scene bepalen
+            playerStage.setHeight(210);
             playerStage.setWidth(290);
+            // de scene centreren
             playerStage.setX(this.view.getScene().getWindow().getX() + (this.view.getScene().getWindow().getWidth() / 2 - playerStage.getWidth() / 2));
             playerStage.setY(this.view.getScene().getWindow().getY() + (this.view.getScene().getWindow().getHeight() / 2 - playerStage.getHeight() / 2));
+            // de scene laten zien
             playerStage.showAndWait();
 
+            // als de namen zijn ingevuld dan gaat de gameView openen
             if (playerPresenter.isNamesFilled()) {
                 GameView gameView = new GameView(size, music);
                 new GamePresenter(gameView, gameModel);
@@ -89,6 +105,7 @@ public class MenuPresenter {
     }
 
     private void warningPopup(String message){
+        // popup aanmaken die een warning geeft en de meegegeven message laat zien
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("Warning");
         alert.setContentText(message);

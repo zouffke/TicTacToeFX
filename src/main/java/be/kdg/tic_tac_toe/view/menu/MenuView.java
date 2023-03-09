@@ -24,7 +24,7 @@ public class MenuView extends VBox {
     private VBox radioButtonBox1;
     private VBox radioButtonBox2;
 
-    public MenuView(){
+    public MenuView() {
         initializeNodes();
         layoutNodes();
     }
@@ -64,18 +64,20 @@ public class MenuView extends VBox {
         this.terug = new Button("terug");
     }
 
+    //voegt alle vars toe aan de scene zodat je ze kan zien
     private void layoutNodes() {
-        this.getChildren().addAll( this.gamemode, radioButtonBox1,this.bordSize,radioButtonBox2, this.play, this.terug);
+        this.getChildren().addAll(this.gamemode, radioButtonBox1, this.bordSize, radioButtonBox2, this.play, this.terug);
         this.setAlignment(Pos.TOP_CENTER);
-
+        //overal 50 pixels ruimte rond de buttons en de labels
         VBox.setMargin(this.radioButtonBox1, new Insets(50));
         VBox.setMargin(this.radioButtonBox2, new Insets(50));
-        radioButtonBox1.setPadding(new Insets(0, 0, 0, 350));
-        radioButtonBox2.setPadding(new Insets(0, 0, 0, 350));
+        //deze code zorgt ervoor dat de radiobuttons in het midden staan, als je de breedte van de scene veranderd dan veranderen ze ook mee
+        radioButtonBox1.setPadding(new Insets(0, 0, 0, this.getWidth() / 2));
+        radioButtonBox2.setPadding(new Insets(0, 0, 0, this.getWidth() / 2));
 
 
     }
-
+//maak getters voor de vars zodat je ze kan gebruiken in de presenter
     RadioButton getPvP() {
         return this.PvP;
     }

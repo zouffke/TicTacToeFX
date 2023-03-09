@@ -38,6 +38,7 @@ public class HomePresenter {
             view.getScene().setRoot(menuView);
         });
 
+        //als je op de knop highscore klikt dan gaat die naar de vieuw van highscore en maakt een nieuwe scene aan
         this.view.getHighscore().setOnAction(action -> {
             HighscoreVieuw highscoreView = new HighscoreVieuw();
             new HighscorePresenter(highscoreView, model);
