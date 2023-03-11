@@ -13,6 +13,7 @@ public class AboutView extends BorderPane {
     }
 
     private void initializeNodes() {
+        //een label met de speluitleg
         this.regels = new Label("1. Het spel wordt gespeeld op een spelbord van 3 rijen op 3 kolommen, dat initieel leeg is.\n" +
                 "2. Het spel heeft 2 spelers; X en O .\n" +
                 "3. De eerste speler is de speler die met X speelt.\n" +

@@ -24,16 +24,23 @@ public class PlayerPresenter {
     }
 
     private void addEventHandlers() {
+        // als je op de button klikt dan ga je naar gameview
         this.view.getOk().setOnAction(action -> {
             try {
+                // zals deze acties worden uitgevoerd/opgeroepen
                 this.model.setPlayers(this.view.getChoice(), this.view.getName1().getText(), this.view.getName2().getText());
                 this.namesFilled = true;
+
+                // als iets mis ging moet je volgende exeption gooien
             } catch (GameException e){
+                //de exeption is een alert warning popup
                 Alert warning = new Alert(Alert.AlertType.WARNING);
+                // de inhoud van de warning is de message
                 warning.setContentText(e.getMessage());
                 warning.showAndWait();
             }
             if (namesFilled) {
+                // als de namen zijn ingevuld dan kan je verder gaan en sluit de stage
                 this.playerStage.close();
             }
         });

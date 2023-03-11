@@ -13,7 +13,7 @@ public class HomePresenter {
     private final HomeView view;
     private final Model model;
 
-    //constructor waarin vieuw en model worden aangeroepen en waar addEventHandlers en updateView worden aangeroepen
+        //constructor waarin vieuw en model worden aangeroepen en waar addEventHandlers en updateView worden aangeroepen
     public HomePresenter(HomeView view, Model model) {
         this.view = view;
         this.model = model;
