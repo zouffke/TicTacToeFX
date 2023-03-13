@@ -36,23 +36,25 @@ public class GameView extends BorderPane {
         this.music = music;
         initializeNodes(boardSize);
 
-        Media media = new Media(Paths.get("src" + File.separator
-                + "main" + File.separator
-                + "java" + File.separator
-                + "be" + File.separator
-                + "kdg" + File.separator
-                + "tic_tac_toe" + File.separator
-                + "source" + File.separator
-                + "At_Dooms_Gate.mp3")
-                .toUri()
-                .toString());
 
-        player = new MediaPlayer(media);
+        if (music) {
+            Media media = new Media(Paths.get("src" + File.separator
+                            + "main" + File.separator
+                            + "java" + File.separator
+                            + "be" + File.separator
+                            + "kdg" + File.separator
+                            + "tic_tac_toe" + File.separator
+                            + "resources" + File.separator
+                            + "At_Dooms_Gate.mp3")
+                    .toUri()
+                    .toString());
 
-        if (music){
+            player = new MediaPlayer(media);
             player.setAutoPlay(true);
             player.setOnEndOfMedia(() -> player.seek(Duration.ZERO));
             player.play();
+        } else {
+            player = null;
         }
         layoutNodes();
     }
@@ -116,7 +118,7 @@ public class GameView extends BorderPane {
         return this.rules;
     }
 
-    public MenuItem getBack(){
+    public MenuItem getBack() {
         return this.back;
     }
 
@@ -124,7 +126,7 @@ public class GameView extends BorderPane {
         return this.figures;
     }
 
-    public MediaPlayer getPlayer(){
+    public MediaPlayer getPlayer() {
         return this.player;
     }
 
@@ -136,11 +138,11 @@ public class GameView extends BorderPane {
         return this.boardSize;
     }
 
-    Label getName1(){
+    Label getName1() {
         return this.name1;
     }
 
-    Label getName2(){
+    Label getName2() {
         return this.name2;
     }
 }

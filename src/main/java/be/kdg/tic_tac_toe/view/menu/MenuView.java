@@ -72,8 +72,8 @@ public class MenuView extends VBox {
         VBox.setMargin(this.radioButtonBox1, new Insets(50));
         VBox.setMargin(this.radioButtonBox2, new Insets(50));
         //deze code zorgt ervoor dat de radiobuttons in het midden staan, als je de breedte van de scene veranderd dan veranderen ze ook mee
-        radioButtonBox1.setPadding(new Insets(0, 0, 0, this.getWidth() / 2));
-        radioButtonBox2.setPadding(new Insets(0, 0, 0, this.getWidth() / 2));
+        radioButtonBox1.setPadding(new Insets(0, 0, 0, 350));
+        radioButtonBox2.setPadding(new Insets(0, 0, 0, 350));
 
 
     }

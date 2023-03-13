@@ -71,7 +71,7 @@ public class GamePresenter {
         view.getRules().setOnAction(event -> {
             AboutView aboutView = new AboutView();
             Model model1 = new Model();
-            new AboutPresenter( aboutView, model1);
+            new AboutPresenter(aboutView, model1);
             Stage aboutStage = new Stage();
             aboutStage.initOwner(view.getScene().getWindow());
             aboutStage.initModality(Modality.APPLICATION_MODAL);
@@ -124,9 +124,11 @@ public class GamePresenter {
         if (this.model.winCheck()) {
             gameOver = true;
             gameEndPopup("Win", String.format("%s has won\nDo you want to play again?", this.model.getCurrentPlayer().getNAME()));
+            this.model.addScore(false, this.model.getCurrentPlayer());
         } else if (this.model.drawCheck()) {
             gameOver = true;
             gameEndPopup("Draw", "It's a draw!\nDo you want to play again?");
+            this.model.addScore(true);
         } else {
             this.model.updateParameters();
         }
@@ -196,8 +198,10 @@ public class GamePresenter {
         this.view.getScene().setRoot(menuView);
         menuView.getScene().getWindow().setHeight(700);
         menuView.getScene().getWindow().setWidth(900);
-        if (this.view.getPlayer().isAutoPlay()) {
-            this.view.getPlayer().stop();
+        if (this.view.getPlayer() != null) {
+            if (this.view.getPlayer().isAutoPlay()) {
+                this.view.getPlayer().stop();
+            }
         }
     }
 }
