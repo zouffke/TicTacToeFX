@@ -1,7 +1,5 @@
 module com.example.screenreader {
     requires javafx.controls;
-    requires javafx.fxml;
-    requires freetts;
     requires javafx.media;
 
 

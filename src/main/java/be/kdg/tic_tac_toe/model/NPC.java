@@ -8,11 +8,6 @@ public class NPC extends Player {
         super("Bot");
     }
 
-    @Override
-    public String getNAME() {
-        return super.getNAME();
-    }
-
     void playNPC(Board board, Sort currentSort) {
         this.bestMove(board, currentSort);
     }

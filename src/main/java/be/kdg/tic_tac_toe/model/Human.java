@@ -5,8 +5,4 @@ public class Human extends Player {
         super(name);
     }
 
-    @Override
-    public String getNAME() {
-        return super.getNAME();
-    }
 }
