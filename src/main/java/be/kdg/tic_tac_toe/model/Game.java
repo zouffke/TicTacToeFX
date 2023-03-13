@@ -153,16 +153,15 @@ public class Game {
                 }
             }
 
-            Files.write(gamesSave, String.format("game:%d;dateStamp:%s;player1:%s;AS:%s;player2:%s;AS:%s;board:%dx%d%n"
-                            , gameNumber
-                            , LocalDateTime.now()
-                            , this.contribution.getName(1)
-                            , this.contribution.getSort(1)
-                            , this.contribution.getName(2)
-                            , this.contribution.getSort(2)
-                            , Board.getSize()
-                            , Board.getSize()).getBytes()
-                    , APPEND);
+            moves.append(String.format("game:%d;dateStamp:%s;player1:%s;AS:%s;player2:%s;AS:%s;board:%dx%d%n"
+                    , gameNumber
+                    , LocalDateTime.now()
+                    , this.contribution.getName(1)
+                    , this.contribution.getSort(1)
+                    , this.contribution.getName(2)
+                    , this.contribution.getSort(2)
+                    , Board.getSize()
+                    , Board.getSize()));
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -239,22 +238,26 @@ public class Game {
                 //read the line
                 String line = scanner.nextLine();
                 //check if the line contains the player and score
-                if (!(line.contains("player") && line.contains("score"))) {
-                    sb.append(String.format("%s%n", line));
-                } else if (draw) {
-                    if (line.replace(" ", "").equalsIgnoreCase(this.contribution.getName(1).replace(" ", ""))) {
+                if (line.contains("player") && line.contains("score")) {
+                    if (draw) {
+                        if (line.split(";")[0].split(":")[1].replace(" ", "").equalsIgnoreCase(this.contribution.getName(1).replace(" ", ""))) {
+                            pscore = Integer.parseInt(line.split(";")[1].split(":")[1]);
+                            pscore += score;
+                            sb.append(String.format("player:%s;score:%d%n", this.contribution.getName(1), pscore));
+                        } else if (line.split(";")[0].split(":")[1].replace(" ", "").equalsIgnoreCase(this.contribution.getName(2).replace(" ", ""))) {
+                            pscore = Integer.parseInt(line.split(";")[1].split(":")[1]);
+                            pscore += score;
+                            sb.append(String.format("player:%s;score:%d%n", this.contribution.getName(2), pscore));
+                        } else {
+                            sb.append(String.format("%s%n", line));
+                        }
+                    } else if (winner.getNAME().equalsIgnoreCase(line.split(";")[0].split(":")[1])) {
                         pscore = Integer.parseInt(line.split(";")[1].split(":")[1]);
                         pscore += score;
-                        sb.append(String.format("player:%s;score:%d%n", this.contribution.getName(1), pscore));
-                    } else if (line.replace(" ", "").equalsIgnoreCase(this.contribution.getName(2).replace(" ", ""))) {
-                        pscore = Integer.parseInt(line.split(";")[1].split(":")[1]);
-                        pscore += score;
-                        sb.append(String.format("player:%s;score:%d%n", this.contribution.getName(2), pscore));
+                        sb.append(String.format("player:%s;score:%d%n", winner.getNAME(), pscore));
+                    } else {
+                        sb.append(String.format("%s%n", line));
                     }
-                } else if (winner.getNAME().equalsIgnoreCase(line.split(";")[0].split(":")[1])) {
-                    pscore = Integer.parseInt(line.split(";")[1].split(":")[1]);
-                    pscore += score;
-                    sb.append(String.format("player:%s;score:%d%n", winner.getNAME(), pscore));
                 } else {
                     sb.append(String.format("%s%n", line));
                 }
