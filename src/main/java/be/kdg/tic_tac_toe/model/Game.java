@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.time.LocalDateTime;
 import java.util.Scanner;
 import java.util.concurrent.TimeUnit;
 
@@ -36,12 +37,14 @@ public class Game {
     private Player currentPlayer;
     private Sort currentSort;
     private int count;
+    private final StringBuilder moves;
 
     public Game(int boardChoice, int playerChoice) {
         this.count = 1;
         this.validMove = false;
         this.playerChoice = playerChoice;
         this.boardChoice = boardChoice;
+        this.moves = new StringBuilder();
 
         if (!Files.exists(gamesSave)) {
             try {
@@ -102,6 +105,7 @@ public class Game {
         System.out.printf("\n%s speelt met %s\n", contribution.getName(1), contribution.getSort(1));
         System.out.printf("en\n%s speelt met %s\n", contribution.getName(2), contribution.getSort(2));
         this.writePlayers();
+        this.initGameSave();
     }
 
     private void writePlayers() {
@@ -113,7 +117,6 @@ public class Game {
             while (scanner.hasNextLine()) {
                 //read the line
                 String line = scanner.nextLine();
-                System.out.println(line);
                 //check if the line contains the player and score
                 if (line.contains("player") && line.contains("score")) {
                     line = line.split(";")[0].split(":")[1];
@@ -134,6 +137,46 @@ public class Game {
                 Files.write(players, String.format("player:%s;score:0%n", this.contribution.getName(2)).getBytes(), APPEND);
             }
         } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void initGameSave() {
+        int gameNumber = 0;
+        try (Scanner scanner = new Scanner(gamesSave)) {
+            while (scanner.hasNextLine()) {
+                String line = scanner.nextLine();
+
+                if (line.contains("game") && line.contains("board")) {
+                    gameNumber = Integer.parseInt(line.split(";")[0].split(":")[1]);
+                    gameNumber++;
+                }
+            }
+
+            Files.write(gamesSave, String.format("game:%d;dateStamp:%s;player1:%s;AS:%s;player2:%s;AS:%s;board:%dx%d%n"
+                            , gameNumber
+                            , LocalDateTime.now()
+                            , this.contribution.getName(1)
+                            , this.contribution.getSort(1)
+                            , this.contribution.getName(2)
+                            , this.contribution.getSort(2)
+                            , Board.getSize()
+                            , Board.getSize()).getBytes()
+                    , APPEND);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void saveGameProgress(boolean draw) {
+        this.saveGameProgress(draw, null);
+    }
+
+    public void saveGameProgress(boolean draw, Player winner) {
+        try {
+            Files.write(gamesSave, String.format("%s%ngameEnd:%s%n", this.moves, draw ? "draw" : winner.getNAME()).getBytes(), APPEND);
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }
@@ -167,6 +210,7 @@ public class Game {
 
         if (validMove) {
             this.board.place(this.currentSort, y, x);
+            moves.append(String.format("%s:%d-%d;", this.currentSort, y, x));
         } else {
             throw new GameException("This is an invalid move");
         }
@@ -215,7 +259,6 @@ public class Game {
                     sb.append(String.format("%s%n", line));
                 }
             }
-            System.out.println(sb);
             Files.write(players, sb.toString().getBytes());
         } catch (Exception e) {
             e.printStackTrace();

@@ -18,7 +18,7 @@ public class Board {
         this.pieces = new Piece[Board.width][Board.length];
     }
 
-    private static int getSize() {
+    static int getSize() {
         return Board.width;
     }
 

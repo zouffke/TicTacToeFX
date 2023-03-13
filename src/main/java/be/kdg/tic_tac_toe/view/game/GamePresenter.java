@@ -118,12 +118,14 @@ public class GamePresenter {
     private void setGameOver() {
         if (this.model.winCheck()) {
             gameOver = true;
-            gameEndPopup("Win", String.format("%s has won\nDo you want to play again?", this.model.getCurrentPlayer().getNAME()));
             this.model.addScore(false, this.model.getCurrentPlayer());
+            this.model.saveGameProgress(false, this.model.getCurrentPlayer());
+            gameEndPopup("Win", String.format("%s has won\nDo you want to play again?", this.model.getCurrentPlayer().getNAME()));
         } else if (this.model.drawCheck()) {
             gameOver = true;
             gameEndPopup("Draw", "It's a draw!\nDo you want to play again?");
             this.model.addScore(true);
+            this.model.saveGameProgress(true);
         } else {
             this.model.updateParameters();
         }
