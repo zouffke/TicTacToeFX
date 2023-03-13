@@ -1,7 +1,6 @@
 package be.kdg.tic_tac_toe.view.menu;
 
 import be.kdg.tic_tac_toe.model.Game;
-import be.kdg.tic_tac_toe.model.Model;
 import be.kdg.tic_tac_toe.view.game.GamePresenter;
 import be.kdg.tic_tac_toe.view.game.GameView;
 import be.kdg.tic_tac_toe.view.home.HomePresenter;
@@ -16,23 +15,23 @@ import javafx.stage.Stage;
 public class MenuPresenter {
     // attributen aanmaken
     private final MenuView view;
-    private final Model model;
-    public MenuPresenter(MenuView view, Model model) {
+
+    public MenuPresenter(MenuView view) {
         // attributen initialiseren
         this.view = view;
-        this.model = model;
 
         this.addEventHandlers();
         this.updateView();
     }
-    private void addEventHandlers(){
+
+    private void addEventHandlers() {
         // gaat terug naar het homescherm als er op de knop terug wordt gedrukt
         this.view.getTerug().setOnAction(actionEvent -> {
             HomeView homeView = new HomeView();
-            new HomePresenter(homeView, model);
+            new HomePresenter(homeView);
 
             this.view.getScene().setRoot(homeView);
-    });
+        });
 
         //play aanroepen als erop gedrukt word, naar de play scene gaan
         this.view.getPlay().setOnAction(actionEvent -> {
@@ -42,11 +41,11 @@ public class MenuPresenter {
             boolean music = false;
 
             // checken welke optie is geselecteerd
-            if (this.view.getPvP().isSelected()){
+            if (this.view.getPvP().isSelected()) {
                 playerOption = 1;
             } else if (this.view.getPvE().isSelected()) {
                 playerOption = 2;
-            } else if (this.view.getUltraNightmare().isSelected()){
+            } else if (this.view.getUltraNightmare().isSelected()) {
                 playerOption = 3;
                 music = true;
             } else {
@@ -56,11 +55,11 @@ public class MenuPresenter {
             }
 
             // checken welke optie is geselecteerd
-            if (this.view.getDrie().isSelected()){
+            if (this.view.getDrie().isSelected()) {
                 size = 3;
-            } else if (this.view.getVijf().isSelected()){
+            } else if (this.view.getVijf().isSelected()) {
                 size = 5;
-            } else if (this.view.getZeven().isSelected()){
+            } else if (this.view.getZeven().isSelected()) {
                 size = 7;
             } else {
                 warningPopup("Please select a board size before you start the game");
@@ -101,10 +100,10 @@ public class MenuPresenter {
         });
     }
 
-    private void updateView(){
+    private void updateView() {
     }
 
-    private void warningPopup(String message){
+    private void warningPopup(String message) {
         // popup aanmaken die een warning geeft en de meegegeven message laat zien
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("Warning");

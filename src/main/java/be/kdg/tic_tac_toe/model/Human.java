@@ -1,7 +1,7 @@
 package be.kdg.tic_tac_toe.model;
 
-public class Human extends Player{
-    public Human(String name) {
+public class Human extends Player {
+    Human(String name) {
         super(name);
     }
 

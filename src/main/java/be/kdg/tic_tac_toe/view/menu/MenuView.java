@@ -77,7 +77,8 @@ public class MenuView extends VBox {
 
 
     }
-//maak getters voor de vars zodat je ze kan gebruiken in de presenter
+
+    //maak getters voor de vars zodat je ze kan gebruiken in de presenter
     RadioButton getPvP() {
         return this.PvP;
     }

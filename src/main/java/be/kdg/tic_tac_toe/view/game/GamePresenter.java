@@ -8,8 +8,6 @@ import be.kdg.tic_tac_toe.view.menu.MenuView;
 import be.kdg.tic_tac_toe.view.models.Figure;
 import javafx.application.Platform;
 import javafx.concurrent.Task;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonBar;
@@ -17,11 +15,9 @@ import javafx.scene.control.ButtonType;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
-
 import java.util.Optional;
 
 public class GamePresenter {
-
     private final GameView view;
     private final Game model;
     private final Board board;
@@ -70,8 +66,7 @@ public class GamePresenter {
         }
         view.getRules().setOnAction(event -> {
             AboutView aboutView = new AboutView();
-            Model model1 = new Model();
-            new AboutPresenter(aboutView, model1);
+            new AboutPresenter(aboutView);
             Stage aboutStage = new Stage();
             aboutStage.initOwner(view.getScene().getWindow());
             aboutStage.initModality(Modality.APPLICATION_MODAL);
@@ -192,8 +187,7 @@ public class GamePresenter {
 
     private void gotoMenu() {
         MenuView menuView = new MenuView();
-        Model model = new Model();
-        new MenuPresenter(menuView, model);
+        new MenuPresenter(menuView);
 
         this.view.getScene().setRoot(menuView);
         menuView.getScene().getWindow().setHeight(700);

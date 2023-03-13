@@ -12,14 +12,6 @@ import static java.nio.file.StandardOpenOption.APPEND;
 
 public class Game {
 
-    private Contribution contribution;
-    private final Board board;
-    private boolean validMove;
-    private Player currentPlayer;
-    private Sort currentSort;
-    private int count;
-    private final int playerChoice;
-    private final int boardChoice;
     private static final Path gamesSave = Paths.get("src" + File.separator +
             "main" + File.separator +
             "java" + File.separator +
@@ -36,6 +28,14 @@ public class Game {
             "tic_tac_toe" + File.separator +
             "resources" + File.separator +
             "players.txt");
+    private final Board board;
+    private final int playerChoice;
+    private final int boardChoice;
+    private Contribution contribution;
+    private boolean validMove;
+    private Player currentPlayer;
+    private Sort currentSort;
+    private int count;
 
     public Game(int boardChoice, int playerChoice) {
         this.count = 1;
@@ -68,6 +68,20 @@ public class Game {
         this.board = setBoard(boardChoice);
     }
 
+    private Board setBoard(int option) {
+        switch (option) {
+            case 5 -> {
+                return new Board(5, 5);
+            }
+            case 7 -> {
+                return new Board(7, 7);
+            }
+            default -> {
+                return new Board(3, 3);
+            }
+        }
+    }
+
     public void setPlayers(int choice, String name1, String name2) throws GameException {
         if (name1.isBlank() || name2.isBlank()) {
             throw new GameException("Please write your name in the given field(s) to continue");
@@ -90,17 +104,37 @@ public class Game {
         this.writePlayers();
     }
 
-    public Board setBoard(int option) {
-        switch (option) {
-            case 5 -> {
-                return new Board(5, 5);
+    private void writePlayers() {
+        boolean name1 = false;
+        boolean name2 = false;
+        //create the scanner
+        try (Scanner scanner = new Scanner(players)) {
+            //loop through the file
+            while (scanner.hasNextLine()) {
+                //read the line
+                String line = scanner.nextLine();
+                System.out.println(line);
+                //check if the line contains the player and score
+                if (line.contains("player") && line.contains("score")) {
+                    line = line.split(";")[0].split(":")[1];
+                }
+
+                //check if the name is already in the file
+                if (line.replace(" ", "").equalsIgnoreCase(this.contribution.getName(1).replace(" ", ""))) {
+                    name1 = true;
+                } else if (line.replace(" ", "").equalsIgnoreCase(this.contribution.getName(2).replace(" ", ""))) {
+                    name2 = true;
+                }
             }
-            case 7 -> {
-                return new Board(7, 7);
+            //if the name is not in the file, add it
+            if (!name1) {
+                Files.write(players, String.format("player:%s;score:0%n", this.contribution.getName(1)).getBytes(), APPEND);
             }
-            default -> {
-                return new Board(3, 3);
+            if (!name2) {
+                Files.write(players, String.format("player:%s;score:0%n", this.contribution.getName(2)).getBytes(), APPEND);
             }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 
@@ -138,38 +172,8 @@ public class Game {
         }
     }
 
-    private void writePlayers() {
-        boolean name1 = false;
-        boolean name2 = false;
-        //create the scanner
-        try (Scanner scanner = new Scanner(players)) {
-            //loop through the file
-            while (scanner.hasNextLine()) {
-                //read the line
-                String line = scanner.nextLine();
-                System.out.println(line);
-                //check if the line contains the player and score
-                if (line.contains("player") && line.contains("score")) {
-                    line = line.split(";")[0].split(":")[1];
-                }
-
-                //check if the name is already in the file
-                if (line.replace(" ", "").equalsIgnoreCase(this.contribution.getName(1).replace(" ", ""))) {
-                    name1 = true;
-                } else if (line.replace(" ", "").equalsIgnoreCase(this.contribution.getName(2).replace(" ", ""))) {
-                    name2 = true;
-                }
-            }
-            //if the name is not in the file, add it
-            if (!name1) {
-                Files.write(players, String.format("player:%s;score:0%n", this.contribution.getName(1)).getBytes(), APPEND);
-            }
-            if (!name2) {
-                Files.write(players, String.format("player:%s;score:0%n", this.contribution.getName(2)).getBytes(), APPEND);
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+    public void addScore(boolean draw) {
+        this.addScore(draw, null);
     }
 
     public void addScore(boolean draw, Player winner) {
@@ -185,7 +189,7 @@ public class Game {
         }
 
         try (Scanner scanner = new Scanner(players)) {
-            int pscore = 0;
+            int pscore;
             StringBuilder sb = new StringBuilder();
             while (scanner.hasNextLine()) {
                 //read the line
@@ -216,10 +220,6 @@ public class Game {
         } catch (Exception e) {
             e.printStackTrace();
         }
-    }
-
-    public void addScore(boolean draw) {
-        this.addScore(draw, null);
     }
 
     public boolean winCheck() {

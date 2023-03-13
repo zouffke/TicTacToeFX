@@ -1,20 +1,21 @@
 package be.kdg.tic_tac_toe;
 
-import be.kdg.tic_tac_toe.model.Model;
 import be.kdg.tic_tac_toe.view.home.HomePresenter;
 import be.kdg.tic_tac_toe.view.home.HomeView;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
-import java.io.IOException;
-
 public class Application extends javafx.application.Application {
+    public static void main(String[] args) {
+        launch();
+    }
+
     @Override
     public void start(Stage stage) {
 
         //create HomeView and Homepresenter
         HomeView view = new HomeView();
-        new HomePresenter(view, new Model());
+        new HomePresenter(view);
 
         //Create the scene
         Scene scene = new Scene(view);
@@ -29,9 +30,5 @@ public class Application extends javafx.application.Application {
         stage.setResizable(false);
         //zorgen dat je de scene kan zien
         stage.show();
-    }
-
-    public static void main(String[] args) {
-        launch();
     }
 }

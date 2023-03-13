@@ -1,7 +1,5 @@
 package be.kdg.tic_tac_toe.model;
 
-import java.util.Arrays;
-
 public class Board {
 
     private static int width;
@@ -9,7 +7,7 @@ public class Board {
     private final Piece[][] pieces;
 
 
-    public Board(int width, int length) {
+    Board(int width, int length) {
         if (width == length && width == 3 || width == 5 || width == 7) {
             Board.width = width;
             Board.length = length;
@@ -20,17 +18,21 @@ public class Board {
         this.pieces = new Piece[Board.width][Board.length];
     }
 
-    public boolean validMove(int y, int x) {
+    private static int getSize() {
+        return Board.width;
+    }
+
+    boolean validMove(int y, int x) {
         return this.pieces[y][x] == null;
     }
 
-    public void place(Sort currentSort, int y, int x) {
+    void place(Sort currentSort, int y, int x) {
         this.pieces[y][x] = new Piece(currentSort, y, x);
     }
 
-    public boolean win(Sort sort) {
+    boolean win(Sort sort) {
         //define the trigger
-        int trigger = (getSize() == 3) ? 3: 4;
+        int trigger = (getSize() == 3) ? 3 : 4;
 
         for (int y = 0; y < this.pieces.length; y++) {
             for (int x = 0; x < this.pieces[y].length; x++) {
@@ -91,7 +93,7 @@ public class Board {
         return pieces.length <= y || pieces.length <= x || y < 0 || x < 0;
     }
 
-    public boolean draw() {
+    boolean draw() {
         for (Piece[] piece : pieces) {
             for (Piece value : piece) {
                 if (value == null) {
@@ -102,20 +104,15 @@ public class Board {
         return true;
     }
 
-    public static int getSize() {
-        return Board.width;
-    }
-
-
     public Piece[][] getPieces() {
         return this.pieces;
     }
 
-    public void setPiece(int y, int x, Sort sort) {
+    void setPiece(int y, int x, Sort sort) {
         this.pieces[y][x] = new Piece(sort, y, x);
     }
 
-    public void setPieceNull(int y, int x) {
+    void setPieceNull(int y, int x) {
         this.pieces[y][x] = null;
     }
 }

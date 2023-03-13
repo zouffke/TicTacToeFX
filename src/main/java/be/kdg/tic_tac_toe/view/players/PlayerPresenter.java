@@ -28,7 +28,7 @@ public class PlayerPresenter {
             try {
                 this.model.setPlayers(this.view.getChoice(), this.view.getName1().getText(), this.view.getName2().getText());
                 this.namesFilled = true;
-            } catch (GameException e){
+            } catch (GameException e) {
                 Alert warning = new Alert(Alert.AlertType.WARNING);
                 warning.setContentText(e.getMessage());
                 warning.showAndWait();

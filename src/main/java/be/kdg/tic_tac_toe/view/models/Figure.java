@@ -10,8 +10,12 @@ public class Figure extends Canvas {
     private final int row;
     private final int column;
     private final int gridSize;
-    private Sort sort;
     private final GraphicsContext gc;
+    private Sort sort;
+
+    public Figure(int row, int column) {
+        this(row, column, null);
+    }
 
     public Figure(int row, int column, Sort sort) {
         super(100, 100);
@@ -23,10 +27,6 @@ public class Figure extends Canvas {
         this.gc = this.getGraphicsContext2D();
         gc.setLineWidth(5);
         draw();
-    }
-
-    public Figure(int row, int column){
-        this(row, column, null);
     }
 
     private void draw() {

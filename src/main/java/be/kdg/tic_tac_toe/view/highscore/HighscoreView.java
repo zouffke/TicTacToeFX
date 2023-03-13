@@ -7,7 +7,7 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
 
 
-public class HighscoreVieuw extends VBox {
+public class HighscoreView extends VBox {
 
     //create vars
     private Label titel;
@@ -19,7 +19,7 @@ public class HighscoreVieuw extends VBox {
     private Button terug;
 
     //constructor die initalizeNodes en layoutNodes aanroept zodat ze gebruikt kunne worden
-    public HighscoreVieuw() {
+    public HighscoreView() {
         initializeNodes();
         layoutNodes();
     }
@@ -56,7 +56,7 @@ public class HighscoreVieuw extends VBox {
 
     }
 
-    Button getTerug(){
+    Button getTerug() {
         return this.terug;
     }
 
