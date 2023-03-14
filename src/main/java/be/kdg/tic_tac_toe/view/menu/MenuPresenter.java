@@ -31,6 +31,8 @@ public class MenuPresenter {
             new HomePresenter(homeView);
 
             this.view.getScene().setRoot(homeView);
+            homeView.getScene().getStylesheets().clear();
+            homeView.getScene().getStylesheets().addAll("file:resources/stylesheets/home.css");
         });
 
         //play aanroepen als erop gedrukt word, naar de play scene gaan

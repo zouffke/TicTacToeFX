@@ -3,6 +3,7 @@ package be.kdg.tic_tac_toe.view.players;
 import be.kdg.tic_tac_toe.model.Game;
 import be.kdg.tic_tac_toe.model.GameException;
 import javafx.scene.control.Alert;
+import javafx.scene.input.KeyCode;
 import javafx.stage.Stage;
 
 public class PlayerPresenter {
@@ -25,24 +26,31 @@ public class PlayerPresenter {
 
     private void addEventHandlers() {
         // als je op de button klikt dan ga je naar gameview
-        this.view.getOk().setOnAction(action -> {
-            try {
-                // zals deze acties worden uitgevoerd/opgeroepen
-                this.model.setPlayers(this.view.getChoice(), this.view.getName1().getText(), this.view.getName2().getText());
-                this.namesFilled = true;
+        this.view.getOk().setOnAction(action -> fillNames());
+        this.view.setOnKeyPressed(keyEvent -> {
+            if (keyEvent.getCode().equals(KeyCode.ENTER)) {
+                fillNames();
+        }
+    });
+    }
 
-                // als iets mis ging moet je volgende exeption gooien
-            } catch (GameException e) {
-                Alert warning = new Alert(Alert.AlertType.WARNING);
-                // de inhoud van de warning is de message
-                warning.setContentText(e.getMessage());
-                warning.showAndWait();
-            }
-            if (namesFilled) {
-                // als de namen zijn ingevuld dan kan je verder gaan en sluit de stage
-                this.playerStage.close();
-            }
-        });
+    private void fillNames(){
+        try {
+            // zals deze acties worden uitgevoerd/opgeroepen
+            this.model.setPlayers(this.view.getChoice(), this.view.getName1().getText(), this.view.getName2().getText());
+            this.namesFilled = true;
+
+            // als iets mis ging moet je volgende exeption gooien
+        } catch (GameException e) {
+            Alert warning = new Alert(Alert.AlertType.WARNING);
+            // de inhoud van de warning is de message
+            warning.setContentText(e.getMessage());
+            warning.showAndWait();
+        }
+        if (namesFilled) {
+            // als de namen zijn ingevuld dan kan je verder gaan en sluit de stage
+            this.playerStage.close();
+        }
     }
 
     private void updateView() {
