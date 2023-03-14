@@ -32,8 +32,6 @@ public class PlayerPresenter {
                 this.namesFilled = true;
 
                 // als iets mis ging moet je volgende exeption gooien
-            } catch (GameException e){
-                //de exeption is een alert warning popup
             } catch (GameException e) {
                 Alert warning = new Alert(Alert.AlertType.WARNING);
                 // de inhoud van de warning is de message

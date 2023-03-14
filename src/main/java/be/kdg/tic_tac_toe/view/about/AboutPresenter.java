@@ -1,9 +1,6 @@
 package be.kdg.tic_tac_toe.view.about;
 
 
-import be.kdg.tic_tac_toe.model.Model;
-
-
 public class AboutPresenter {
     //vars aanmaken
     private final AboutView view;
