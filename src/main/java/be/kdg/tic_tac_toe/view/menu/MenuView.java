@@ -40,25 +40,40 @@ public class MenuView extends VBox {
         // radiobuttons initializeren en een naam geven
         this.PvP = new RadioButton("PvP");
         this.PvP.setToggleGroup(group);
+        this.PvP.getStyleClass().remove("radio-button");
+        this.PvP.getStyleClass().addAll("PvP", "toggle-button");
 
         this.PvE = new RadioButton("PvE");
         this.PvE.setToggleGroup(group);
+        this.PvE.getStyleClass().remove("radio-button");
+        this.PvE.getStyleClass().addAll("PvE", "toggle-button");
 
         this.ultraNightmare = new RadioButton("Ultra Nightmare ");
         this.ultraNightmare.setToggleGroup(group);
+        this.ultraNightmare.getStyleClass().remove("radio-button");
+        this.ultraNightmare.getStyleClass().addAll("nightmare", "toggle-button");
 
         radioButtonBox1.getChildren().addAll(this.PvP, this.PvE, this.ultraNightmare);
 
         this.gamemode = new Label("Gamemode");
+
         this.drie = new RadioButton("3X3");
         this.drie.setToggleGroup(group2);
+        this.drie.getStyleClass().remove("radio-button");
+        this.drie.getStyleClass().add("toggle-button");
 
         this.vijf = new RadioButton("5X5");
         this.vijf.setToggleGroup(group2);
+        this.vijf.getStyleClass().remove("radio-button");
+        this.vijf.getStyleClass().add("toggle-button");
 
         this.zeven = new RadioButton("7X7 ");
         this.zeven.setToggleGroup(group2);
+        this.zeven.getStyleClass().remove("radio-button");
+        this.zeven.getStyleClass().add("toggle-button");
+
         radioButtonBox2.getChildren().addAll(this.drie, this.vijf, this.zeven);
+
         this.bordSize = new Label("bordSize");
         this.play = new Button("play");
         this.terug = new Button("terug");

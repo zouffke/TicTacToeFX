@@ -1,3 +1,15 @@
-.root {
+.toggle-button{
+    -fx-background-radius: 10;
+    -fx-border-width: 2;
+}
+.PvP{
+    -fx-graphic: url("../icons/2P.png");
+}
 
+.PvE{
+    -fx-graphic: url("../icons/1P.png");
+}
+
+.nightmare{
+    -fx-graphic: url("../icons/nightmare.png");
 }

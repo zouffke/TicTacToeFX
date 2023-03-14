@@ -1,11 +1,8 @@
-.root {
-    -fx-background-color: LIGHTGRAY;
-}
-
 .button {
     -fx-background-radius: 10;
     -fx-pref-height: 50;
-    -fx-pref-width: 100;
+    -fx-pref-width: 120;
+    -fx-font-weight: bold;
 }
 
 .quitButton {
@@ -18,9 +15,4 @@
 .Box{
     -fx-alignment: center;
     -fx-spacing: 20;
-}
-
-.label{
-    -fx-font-size: 50;
-    -fx-font-weight: bold;
 }
