@@ -1,16 +1,7 @@
 .button {
-    -fx-background-radius: 10;
     -fx-pref-height: 50;
     -fx-pref-width: 120;
-    -fx-font-weight: bold;
 }
-
-.quitButton {
-    -fx-background-radius: 10;
-    -fx-pref-height: 20;
-    -fx-pref-width: 45;
-}
-
 
 .Box{
     -fx-alignment: center;

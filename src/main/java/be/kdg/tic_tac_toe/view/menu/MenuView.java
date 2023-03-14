@@ -6,9 +6,11 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.ToggleGroup;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
-public class MenuView extends VBox {
+public class MenuView extends BorderPane {
     // create vars
     private Label gamemode;
     private RadioButton PvP;
@@ -20,9 +22,6 @@ public class MenuView extends VBox {
     private RadioButton zeven;
     private Button play;
     private Button terug;
-    // Vbox is een manier om buttons(nodes) enzo juist te plaasten
-    private VBox radioButtonBox1;
-    private VBox radioButtonBox2;
 
     public MenuView() {
         initializeNodes();
@@ -32,8 +31,6 @@ public class MenuView extends VBox {
 
     private void initializeNodes() {
         //groepen en buttonboxen initializeren
-        radioButtonBox1 = new VBox();
-        radioButtonBox2 = new VBox();
         ToggleGroup group = new ToggleGroup();
         ToggleGroup group2 = new ToggleGroup();
 
@@ -53,44 +50,63 @@ public class MenuView extends VBox {
         this.ultraNightmare.getStyleClass().remove("radio-button");
         this.ultraNightmare.getStyleClass().addAll("nightmare", "toggle-button");
 
-        radioButtonBox1.getChildren().addAll(this.PvP, this.PvE, this.ultraNightmare);
 
         this.gamemode = new Label("Gamemode");
 
         this.drie = new RadioButton("3X3");
         this.drie.setToggleGroup(group2);
         this.drie.getStyleClass().remove("radio-button");
-        this.drie.getStyleClass().add("toggle-button");
+        this.drie.getStyleClass().addAll("toggle-button", "sizeButtons");
 
         this.vijf = new RadioButton("5X5");
         this.vijf.setToggleGroup(group2);
         this.vijf.getStyleClass().remove("radio-button");
-        this.vijf.getStyleClass().add("toggle-button");
+        this.vijf.getStyleClass().addAll("toggle-button", "sizeButtons");
 
         this.zeven = new RadioButton("7X7 ");
         this.zeven.setToggleGroup(group2);
         this.zeven.getStyleClass().remove("radio-button");
-        this.zeven.getStyleClass().add("toggle-button");
+        this.zeven.getStyleClass().addAll("toggle-button", "sizeButtons");
 
-        radioButtonBox2.getChildren().addAll(this.drie, this.vijf, this.zeven);
 
         this.bordSize = new Label("bordSize");
         this.play = new Button("play");
         this.terug = new Button("terug");
+        this.terug.getStyleClass().add("returnButton");
     }
 
     //voegt alle vars toe aan de scene zodat je ze kan zien
     private void layoutNodes() {
-        this.getChildren().addAll(this.gamemode, radioButtonBox1, this.bordSize, radioButtonBox2, this.play, this.terug);
-        this.setAlignment(Pos.TOP_CENTER);
-        //overal 50 pixels ruimte rond de buttons en de labels
-        VBox.setMargin(this.radioButtonBox1, new Insets(50));
-        VBox.setMargin(this.radioButtonBox2, new Insets(50));
-        //deze code zorgt ervoor dat de radiobuttons in het midden staan, als je de breedte van de scene veranderd dan veranderen ze ook mee
-        radioButtonBox1.setPadding(new Insets(0, 0, 0, 350));
-        radioButtonBox2.setPadding(new Insets(0, 0, 0, 350));
+        VBox main = new VBox();
+        VBox radioButtonBox1 = new VBox();
+        VBox radioButtonBox2 = new VBox();
 
+        this.setCenter(main);
+        this.setBottom(this.terug);
 
+        BorderPane.setAlignment(this.terug, Pos.CENTER);
+        BorderPane.setAlignment(main, Pos.CENTER);
+
+        BorderPane.setMargin(this.terug, new Insets(0, 0, 10, 0));
+
+        main.getChildren().addAll(this.gamemode, radioButtonBox1, this.bordSize, radioButtonBox2, this.play);
+        main.setAlignment(Pos.TOP_CENTER);
+
+        //Takes care of the player options
+        HBox line1 = new HBox();
+        line1.getChildren().addAll(this.PvP, this.PvE);
+        line1.getStyleClass().add("players");
+
+        radioButtonBox1.getChildren().addAll(line1, this.ultraNightmare);
+        radioButtonBox1.getStyleClass().add("players");
+
+        //takes care of the board options
+        HBox line2 = new HBox();
+        line2.getChildren().addAll(this.drie, this.vijf);
+        line2.getStyleClass().add("board");
+
+        radioButtonBox2.getChildren().addAll(line2, this.zeven);
+        radioButtonBox2.getStyleClass().add("board");
     }
 
     //maak getters voor de vars zodat je ze kan gebruiken in de presenter

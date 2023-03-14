@@ -1,15 +1,32 @@
-.toggle-button{
+.toggle-button {
     -fx-background-radius: 10;
     -fx-border-width: 2;
+    -fx-font-weight: bold;
 }
-.PvP{
+
+.PvP {
     -fx-graphic: url("../icons/2P.png");
 }
 
-.PvE{
+.PvE {
     -fx-graphic: url("../icons/1P.png");
 }
 
-.nightmare{
+.nightmare {
     -fx-graphic: url("../icons/nightmare.png");
+}
+
+.players {
+    -fx-alignment: center;
+    -fx-spacing: 20;
+}
+
+.board {
+    -fx-alignment: center;
+    -fx-spacing: 15;
+}
+
+.sizeButtons{
+    -fx-pref-height: 50;
+    -fx-pref-width: 80;
 }
