@@ -13,22 +13,12 @@ import static java.nio.file.StandardOpenOption.APPEND;
 
 public class Game {
 
-    private static final Path gamesSave = Paths.get("src" + File.separator +
-            "main" + File.separator +
-            "java" + File.separator +
-            "be" + File.separator +
-            "kdg" + File.separator +
-            "tic_tac_toe" + File.separator +
-            "resources" + File.separator +
-            "games.txt");
-    private static final Path players = Paths.get("src" + File.separator +
-            "main" + File.separator +
-            "java" + File.separator +
-            "be" + File.separator +
-            "kdg" + File.separator +
-            "tic_tac_toe" + File.separator +
-            "resources" + File.separator +
-            "players.txt");
+    private static final Path gamesSave = Paths.get("resources" + File.separator
+            + "saveFiles" + File.separator
+            + "games.txt");
+    private static final Path players = Paths.get("resources" + File.separator
+            + "saveFiles" + File.separator
+            + "players.txt");
     private final Board board;
     private final int playerChoice;
     private final int boardChoice;

@@ -21,6 +21,7 @@ public class Application extends javafx.application.Application {
         Scene scene = new Scene(view);
         //scene maken
         stage.setScene(scene);
+        scene.getStylesheets().add("file:resources/stylesheets/home.css");
         //titel van de scene bepalen
         stage.setTitle("Tic Tac Toe");
         //de afmetingen van de scene bepalen

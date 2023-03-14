@@ -36,16 +36,7 @@ public class GameView extends BorderPane {
         initializeNodes(boardSize);
 
         if (music) {
-            Media media = new Media(Paths.get("src" + File.separator
-                            + "main" + File.separator
-                            + "java" + File.separator
-                            + "be" + File.separator
-                            + "kdg" + File.separator
-                            + "tic_tac_toe" + File.separator
-                            + "resources" + File.separator
-                            + "At_Dooms_Gate.mp3")
-                    .toUri()
-                    .toString());
+            Media media = new Media(Paths.get( "resources" + File.separator + "At_Dooms_Gate.mp3").toUri().toString());
 
             player = new MediaPlayer(media);
             player.setAutoPlay(true);

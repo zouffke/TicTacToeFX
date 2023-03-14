@@ -4,15 +4,17 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.*;
 
-public class HomeView extends VBox {
+public class HomeView extends BorderPane {
 
     //create vars
     private Label titel;
     private Button play;
     private Button highscore;
     private Button quit;
+    private Button games;
+    private Button options;
 
     //constructor die initalizeNodes en layoutNodes aanroept zodat ze gebruikt kunne worden
     public HomeView() {
@@ -28,19 +30,33 @@ public class HomeView extends VBox {
         this.play = new Button("Play");
         this.highscore = new Button("Highscore");
         this.quit = new Button("Quit");
+        this.quit.getStyleClass().add("quitButton");
+        this.games = new Button("Previous games");
+        this.options = new Button("Options");
     }
 
     private void layoutNodes() {
-        // toevoegen van al de buttons en labels
-        this.getChildren().addAll(this.titel, this.play, this.highscore, this.quit);
+        this.setBottom(this.quit);
+        BorderPane.setAlignment(this.quit, Pos.CENTER);
+        BorderPane.setMargin(this.quit, new Insets(0, 0, 10, 0));
 
-        //positie van de buttons en labels zetten naar canter
-        this.setAlignment(Pos.TOP_CENTER);
 
-        //overal 50 pixels ruimte rond de buttons en de labels
-        VBox.setMargin(this.play, new Insets(50));
-        VBox.setMargin(this.highscore, new Insets(50));
-        VBox.setMargin(this.quit, new Insets(50));
+        HBox hBox = new HBox();
+        this.setCenter(hBox);
+
+        hBox.getStyleClass().add("Box");
+
+        VBox leftButtons = new VBox();
+        leftButtons.getStyleClass().add("Box");
+        VBox rightButtons = new VBox();
+        rightButtons.getStyleClass().add("Box");
+        hBox.getChildren().addAll(leftButtons, rightButtons);
+
+        leftButtons.getChildren().addAll(this.play, this.games);
+        rightButtons.getChildren().addAll(this.options, this.highscore);
+
+        this.setTop(this.titel);
+        BorderPane.setAlignment(this.titel, Pos.CENTER);
     }
 
     Button getPlay() {
