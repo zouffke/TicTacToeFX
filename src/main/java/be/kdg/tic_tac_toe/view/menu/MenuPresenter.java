@@ -31,7 +31,7 @@ public class MenuPresenter {
             new HomePresenter(homeView);
 
             this.view.getScene().setRoot(homeView);
-            homeView.getScene().getStylesheets().clear();
+            homeView.getScene().getStylesheets().remove("file:resources/stylesheets/menu.css");
             homeView.getScene().getStylesheets().addAll("file:resources/stylesheets/home.css");
         });
 
