@@ -35,6 +35,12 @@ public class GamePresenter {
 
         this.addEventHandlers();
         this.updateView();
+        this.addWindowEventHandlers();
+    }
+
+    private void addWindowEventHandlers() {
+        //TODO fix this
+        //view.getScene().getWindow().setOnCloseRequest(event -> exitPopup());
     }
 
     private void addEventHandlers() {
@@ -64,6 +70,7 @@ public class GamePresenter {
                 });
             }
         }
+
         view.getRules().setOnAction(event -> {
             AboutView aboutView = new AboutView();
             new AboutPresenter(aboutView);
@@ -138,7 +145,7 @@ public class GamePresenter {
     private void exitPopup() {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setTitle("Quit?");
-        alert.setContentText("Are you sure you want to quit?");
+        alert.setContentText("Are you sure you want to quit?%nAny unsaved progress will be lost.");
         Optional<ButtonType> result = alert.showAndWait();
         if (result.isPresent()) {
             if (result.get() == ButtonType.OK) {
@@ -178,7 +185,7 @@ public class GamePresenter {
     private void returnPopup() {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setTitle("Return?");
-        alert.setContentText("Are you sure you want to return to the menu?");
+        alert.setContentText("Are you sure you want to return to the menu?%nAny unsaved progress will be lost.");
         Optional<ButtonType> result = alert.showAndWait();
         if (result.isPresent()) {
             if (result.get() == ButtonType.OK) {

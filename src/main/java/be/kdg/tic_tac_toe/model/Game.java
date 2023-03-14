@@ -119,21 +119,19 @@ public class Game {
                 String line = scanner.nextLine();
                 //check if the line contains the player and score
                 if (line.contains("player") && line.contains("score")) {
-                    line = line.split(";")[0].split(":")[1];
-                }
-
-                //check if the name is already in the file
-                if (line.replace(" ", "").equalsIgnoreCase(this.contribution.getName(1).replace(" ", ""))) {
-                    name1 = true;
-                } else if (line.replace(" ", "").equalsIgnoreCase(this.contribution.getName(2).replace(" ", ""))) {
-                    name2 = true;
+                    //check if the name is already in the file
+                    if (checkPlayerName(line, 1)) {
+                        name1 = true;
+                    } else if (checkPlayerName(line, 2)) {
+                        name2 = true;
+                    }
                 }
             }
             //if the name is not in the file, add it
             if (!name1) {
                 Files.write(players, String.format("player:%s;score:0%n", this.contribution.getName(1)).getBytes(), APPEND);
             }
-            if (!name2) {
+            if (!name2 && this.contribution.getPlayer(2) instanceof Human) {
                 Files.write(players, String.format("player:%s;score:0%n", this.contribution.getName(2)).getBytes(), APPEND);
             }
         } catch (Exception e) {
@@ -232,7 +230,6 @@ public class Game {
         }
 
         try (Scanner scanner = new Scanner(players)) {
-            int pscore;
             StringBuilder sb = new StringBuilder();
             while (scanner.hasNextLine()) {
                 //read the line
@@ -240,21 +237,15 @@ public class Game {
                 //check if the line contains the player and score
                 if (line.contains("player") && line.contains("score")) {
                     if (draw) {
-                        if (line.split(";")[0].split(":")[1].replace(" ", "").equalsIgnoreCase(this.contribution.getName(1).replace(" ", ""))) {
-                            pscore = Integer.parseInt(line.split(";")[1].split(":")[1]);
-                            pscore += score;
-                            sb.append(String.format("player:%s;score:%d%n", this.contribution.getName(1), pscore));
-                        } else if (line.split(";")[0].split(":")[1].replace(" ", "").equalsIgnoreCase(this.contribution.getName(2).replace(" ", ""))) {
-                            pscore = Integer.parseInt(line.split(";")[1].split(":")[1]);
-                            pscore += score;
-                            sb.append(String.format("player:%s;score:%d%n", this.contribution.getName(2), pscore));
+                        if (checkPlayerName(line, 1)) {
+                            sb.append(String.format("player:%s;score:%d%n", this.contribution.getName(1), modifyScore(score, line)));
+                        } else if (checkPlayerName(line, 2)) {
+                            sb.append(String.format("player:%s;score:%d%n", this.contribution.getName(2), modifyScore(score, line)));
                         } else {
                             sb.append(String.format("%s%n", line));
                         }
-                    } else if (winner.getNAME().equalsIgnoreCase(line.split(";")[0].split(":")[1])) {
-                        pscore = Integer.parseInt(line.split(";")[1].split(":")[1]);
-                        pscore += score;
-                        sb.append(String.format("player:%s;score:%d%n", winner.getNAME(), pscore));
+                    } else if (winner.getNAME().equalsIgnoreCase(line.split(";")[0].split(":")[1]) && winner instanceof Human) {
+                        sb.append(String.format("player:%s;score:%d%n", winner.getNAME(), modifyScore(score, line)));
                     } else {
                         sb.append(String.format("%s%n", line));
                     }
@@ -262,10 +253,24 @@ public class Game {
                     sb.append(String.format("%s%n", line));
                 }
             }
+
             Files.write(players, sb.toString().getBytes());
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    private boolean checkPlayerName(String line, int index) {
+        return line.split(";")[0].
+                split(":")[1].
+                replace(" ", "").
+                equalsIgnoreCase(this.contribution.
+                        getName(index).replace(" ", ""))
+                && this.contribution.getPlayer(index) instanceof Human;
+    }
+
+    private int modifyScore(int score, String line) {
+        return Integer.parseInt(line.split(";")[1].split(":")[1]) + score;
     }
 
     public boolean winCheck() {
