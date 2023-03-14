@@ -8,13 +8,13 @@ import javafx.scene.layout.VBox;
 
 public class PlayerView extends VBox {
 
+    private final int choice;
     //create vars
     private Label player1;
     private Label player2;
-    private TextField name1;
     private TextField name2;
+    private TextField name1;
     private Button ok;
-    private final int choice;
 
     //constructor die initalizeNodes en layoutNodes aanroept zodat ze gebruikt kunnen worden
     public PlayerView(int choice) {
@@ -59,19 +59,19 @@ public class PlayerView extends VBox {
         VBox.setMargin(this.ok, new Insets(20, 5, 5, 200));
     }
     // getters maken voor de vars
-    public TextField getName1() {
+    TextField getName1() {
         return name1;
     }
 
-    public TextField getName2() {
+    TextField getName2() {
         return name2;
     }
 
-    public Button getOk(){
+    Button getOk() {
         return this.ok;
     }
 
-    public int getChoice(){
+    int getChoice() {
         return this.choice;
     }
 }

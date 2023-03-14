@@ -1,8 +1,7 @@
 package be.kdg.tic_tac_toe.view.home;
 
-import be.kdg.tic_tac_toe.model.Model;
 import be.kdg.tic_tac_toe.view.highscore.HighscorePresenter;
-import be.kdg.tic_tac_toe.view.highscore.HighscoreVieuw;
+import be.kdg.tic_tac_toe.view.highscore.HighscoreView;
 import be.kdg.tic_tac_toe.view.menu.MenuPresenter;
 import be.kdg.tic_tac_toe.view.menu.MenuView;
 import javafx.application.Platform;
@@ -11,12 +10,10 @@ public class HomePresenter {
 
     //attributen aanmaken
     private final HomeView view;
-    private final Model model;
 
-        //constructor waarin vieuw en model worden aangeroepen en waar addEventHandlers en updateView worden aangeroepen
-    public HomePresenter(HomeView view, Model model) {
+    //constructor waarin vieuw en model worden aangeroepen en waar addEventHandlers en updateView worden aangeroepen
+    public HomePresenter(HomeView view) {
         this.view = view;
-        this.model = model;
 
         this.addEventHandlers();
         this.updateView();
@@ -33,15 +30,15 @@ public class HomePresenter {
             //instantie van menuvieuw aanmaken
             MenuView menuView = new MenuView();
             //instantie menuPresenter aanmaken
-            new MenuPresenter(menuView, model);
+            new MenuPresenter(menuView);
             // scene van de huidige vieuw oproepen en de vieuw veranderen naar de nieuwe (menu vieuw)
             view.getScene().setRoot(menuView);
         });
 
         //als je op de knop highscore klikt dan gaat die naar de vieuw van highscore en maakt een nieuwe scene aan
         this.view.getHighscore().setOnAction(action -> {
-            HighscoreVieuw highscoreView = new HighscoreVieuw();
-            new HighscorePresenter(highscoreView, model);
+            HighscoreView highscoreView = new HighscoreView();
+            new HighscorePresenter(highscoreView);
             view.getScene().setRoot(highscoreView);
         });
 

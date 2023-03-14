@@ -8,8 +8,6 @@ import be.kdg.tic_tac_toe.view.menu.MenuView;
 import be.kdg.tic_tac_toe.view.models.Figure;
 import javafx.application.Platform;
 import javafx.concurrent.Task;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonBar;
@@ -17,11 +15,9 @@ import javafx.scene.control.ButtonType;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
-
 import java.util.Optional;
 
 public class GamePresenter {
-
     private final GameView view;
     private final Game model;
     private final Board board;
@@ -39,6 +35,12 @@ public class GamePresenter {
 
         this.addEventHandlers();
         this.updateView();
+        this.addWindowEventHandlers();
+    }
+
+    private void addWindowEventHandlers() {
+        //TODO fix this
+        //view.getScene().getWindow().setOnCloseRequest(event -> exitPopup());
     }
 
     private void addEventHandlers() {
@@ -68,10 +70,10 @@ public class GamePresenter {
                 });
             }
         }
+
         view.getRules().setOnAction(event -> {
             AboutView aboutView = new AboutView();
-            Model model1 = new Model();
-            new AboutPresenter( aboutView, model1);
+            new AboutPresenter(aboutView);
             Stage aboutStage = new Stage();
             aboutStage.initOwner(view.getScene().getWindow());
             aboutStage.initModality(Modality.APPLICATION_MODAL);
@@ -123,9 +125,13 @@ public class GamePresenter {
     private void setGameOver() {
         if (this.model.winCheck()) {
             gameOver = true;
+            this.model.addScore(false, this.model.getCurrentPlayer());
+            this.model.saveGameProgress(false, this.model.getCurrentPlayer());
             gameEndPopup("Win", String.format("%s has won\nDo you want to play again?", this.model.getCurrentPlayer().getNAME()));
         } else if (this.model.drawCheck()) {
             gameOver = true;
+            this.model.addScore(true);
+            this.model.saveGameProgress(true);
             gameEndPopup("Draw", "It's a draw!\nDo you want to play again?");
         } else {
             this.model.updateParameters();
@@ -139,7 +145,7 @@ public class GamePresenter {
     private void exitPopup() {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setTitle("Quit?");
-        alert.setContentText("Are you sure you want to quit?");
+        alert.setContentText("Are you sure you want to quit?%nAny unsaved progress will be lost.");
         Optional<ButtonType> result = alert.showAndWait();
         if (result.isPresent()) {
             if (result.get() == ButtonType.OK) {
@@ -179,7 +185,7 @@ public class GamePresenter {
     private void returnPopup() {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setTitle("Return?");
-        alert.setContentText("Are you sure you want to return to the menu?");
+        alert.setContentText("Are you sure you want to return to the menu?%nAny unsaved progress will be lost.");
         Optional<ButtonType> result = alert.showAndWait();
         if (result.isPresent()) {
             if (result.get() == ButtonType.OK) {
@@ -190,14 +196,15 @@ public class GamePresenter {
 
     private void gotoMenu() {
         MenuView menuView = new MenuView();
-        Model model = new Model();
-        new MenuPresenter(menuView, model);
+        new MenuPresenter(menuView);
 
         this.view.getScene().setRoot(menuView);
         menuView.getScene().getWindow().setHeight(700);
         menuView.getScene().getWindow().setWidth(900);
-        if (this.view.getPlayer().isAutoPlay()) {
-            this.view.getPlayer().stop();
+        if (this.view.getPlayer() != null) {
+            if (this.view.getPlayer().isAutoPlay()) {
+                this.view.getPlayer().stop();
+            }
         }
     }
 }

@@ -1,22 +1,14 @@
 package be.kdg.tic_tac_toe.model;
 
-import java.util.HashMap;
-import java.util.Map;
-
 public class NPC extends Player {
     private static final int MIN = -1000;
     private static final int MAX = 1000;
 
-    public NPC() {
+    NPC() {
         super("Bot");
     }
 
-    @Override
-    public String getNAME() {
-        return super.getNAME();
-    }
-
-    public void playNPC(Board board, Sort currentSort) {
+    void playNPC(Board board, Sort currentSort) {
         this.bestMove(board, currentSort);
     }
 

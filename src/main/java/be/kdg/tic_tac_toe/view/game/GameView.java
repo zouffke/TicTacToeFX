@@ -1,14 +1,14 @@
 package be.kdg.tic_tac_toe.view.game;
 
 import be.kdg.tic_tac_toe.view.models.Figure;
-import javafx.geometry.HPos;
 import javafx.geometry.Insets;
-import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
-import javafx.scene.layout.*;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.VBox;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.util.Duration;
@@ -17,7 +17,9 @@ import java.io.File;
 import java.nio.file.Paths;
 
 public class GameView extends BorderPane {
-
+    private final MediaPlayer player;
+    private final boolean music;
+    private final int boardSize;
     //game
     private MenuItem exit;
     private MenuItem back;
@@ -27,32 +29,21 @@ public class GameView extends BorderPane {
     private Figure[][] figures;
     private Label name1;
     private Label name2;
-    private final MediaPlayer player;
-    private final boolean music;
-    private final int boardSize;
 
     public GameView(int boardSize, boolean music) {
         this.boardSize = boardSize;
         this.music = music;
         initializeNodes(boardSize);
 
-        Media media = new Media(Paths.get("src" + File.separator
-                + "main" + File.separator
-                + "java" + File.separator
-                + "be" + File.separator
-                + "kdg" + File.separator
-                + "tic_tac_toe" + File.separator
-                + "source" + File.separator
-                + "At_Dooms_Gate.mp3")
-                .toUri()
-                .toString());
+        if (music) {
+            Media media = new Media(Paths.get( "resources" + File.separator + "At_Dooms_Gate.mp3").toUri().toString());
 
-        player = new MediaPlayer(media);
-
-        if (music){
+            player = new MediaPlayer(media);
             player.setAutoPlay(true);
             player.setOnEndOfMedia(() -> player.seek(Duration.ZERO));
             player.play();
+        } else {
+            player = null;
         }
         layoutNodes();
     }
@@ -108,39 +99,39 @@ public class GameView extends BorderPane {
         screenTop.getChildren().setAll(bar, players);
     }
 
-    public MenuItem getExit() {
+    MenuItem getExit() {
         return this.exit;
     }
 
-    public MenuItem getRules() {
+    MenuItem getRules() {
         return this.rules;
     }
 
-    public MenuItem getBack(){
+    MenuItem getBack() {
         return this.back;
     }
 
-    public Figure[][] getFigures() {
+    Figure[][] getFigures() {
         return this.figures;
     }
 
-    public MediaPlayer getPlayer(){
+    MediaPlayer getPlayer() {
         return this.player;
     }
 
-    public boolean getMusic() {
+    boolean getMusic() {
         return this.music;
     }
 
-    public int getBoardSize() {
+    int getBoardSize() {
         return this.boardSize;
     }
 
-    Label getName1(){
+    Label getName1() {
         return this.name1;
     }
 
-    Label getName2(){
+    Label getName2() {
         return this.name2;
     }
 }
