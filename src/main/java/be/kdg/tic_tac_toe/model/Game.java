@@ -162,7 +162,7 @@ public class Game {
 
     public void saveGameProgress(boolean draw, Player winner) {
         try {
-            Files.write(gamesSave, String.format("%s%ngameEnd:%s%n", this.moves, draw ? "draw" : winner.getNAME()).getBytes(), APPEND);
+            Files.write(gamesSave, String.format("%s%ngameEnd:%s%n", this.moves, draw ? "draw" : winner.toString()).getBytes(), APPEND);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -172,11 +172,11 @@ public class Game {
         if (this.count++ == 1) {
             this.currentPlayer = this.contribution.getSort(1).equals("X") ? this.contribution.getPlayer(1) : this.contribution.getPlayer(2);
             this.currentSort = Sort.X;
-            System.out.printf("\n%s's beurt;\n", this.currentPlayer.getNAME());
+            System.out.printf("\n%s's beurt;\n", this.currentPlayer.toString());
         } else {
             this.currentPlayer = this.contribution.getSort(1).equals("O") ? this.contribution.getPlayer(1) : this.contribution.getPlayer(2);
             this.currentSort = Sort.O;
-            System.out.printf("\n%s's beurt;\n", this.currentPlayer.getNAME());
+            System.out.printf("\n%s's beurt;\n", this.currentPlayer.toString());
             this.count = 1;
         }
     }
@@ -234,8 +234,8 @@ public class Game {
                         } else {
                             sb.append(String.format("%s%n", line));
                         }
-                    } else if (winner.getNAME().equalsIgnoreCase(line.split(";")[0].split(":")[1]) && winner instanceof Human) {
-                        sb.append(String.format("player:%s;score:%d%n", winner.getNAME(), modifyScore(score, line)));
+                    } else if (winner.toString().equalsIgnoreCase(line.split(";")[0].split(":")[1]) && winner instanceof Human) {
+                        sb.append(String.format("player:%s;score:%d%n", winner.toString(), modifyScore(score, line)));
                     } else {
                         sb.append(String.format("%s%n", line));
                     }

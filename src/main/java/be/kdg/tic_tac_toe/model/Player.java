@@ -1,14 +1,17 @@
 package be.kdg.tic_tac_toe.model;
 
 public class Player {
+    //variabele die niet kan veranderen genaamd NAME
     private final String NAME;
-
+//Constructor voor de var
     Player(String name) {
         this.NAME = name;
     }
 
-    public String getNAME() {
-        return NAME.substring(0, 1).toUpperCase() + NAME.substring(1).toLowerCase();
+    @Override
+    public String toString() {
+        //return de var naam
+        return this.NAME;
     }
 
 }

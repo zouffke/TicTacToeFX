@@ -46,7 +46,7 @@ class Contribution {
      * @return the name of the player. (String)
      */
     String getName(int index) {
-        return PLAYERS[index - 1].getNAME();
+        return PLAYERS[index - 1].toString();
     }
 
     /**

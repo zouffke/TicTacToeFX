@@ -127,7 +127,7 @@ public class GamePresenter {
             gameOver = true;
             this.model.addScore(false, this.model.getCurrentPlayer());
             this.model.saveGameProgress(false, this.model.getCurrentPlayer());
-            gameEndPopup("Win", String.format("%s has won\nDo you want to play again?", this.model.getCurrentPlayer().getNAME()));
+            gameEndPopup("Win", String.format("%s has won\nDo you want to play again?", this.model.getCurrentPlayer().toString()));
         } else if (this.model.drawCheck()) {
             gameOver = true;
             this.model.addScore(true);
