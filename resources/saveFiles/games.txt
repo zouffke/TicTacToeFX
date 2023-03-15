@@ -5,6 +5,3 @@
 //\\ANY CHANGE CAN CAUSE CORRUPTION OF YOUR SAVE FILE//\\
 //\\WHEN YOU EDIT THIS FILE, MAKE SURE YOU HAVE A BACKUP AND ALWAYS LEAVE ONE LINE EMPTY AT THE BOTTOM OF THIS FILE//\\
 ========================================================================================================================
-game:0;dateStamp:2023-03-15T10:32:21.519439300;player1:Luca;AS:X;player2:Quinten;AS:O;board:3x3
-X:0-0;O:1-0;X:0-1;O:1-1;X:0-2;
-gameEnd:Luca
