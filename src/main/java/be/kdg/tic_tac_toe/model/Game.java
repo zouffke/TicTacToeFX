@@ -84,10 +84,10 @@ public class Game {
 
         } else if (choice == 2) {
             //TODO change the second option to an easier NPC
-            this.contribution = new Contribution(name1);
+            this.contribution = new Contribution(name1, false);
 
         } else {
-            this.contribution = new Contribution(name1);
+            this.contribution = new Contribution(name1, true);
         }
 
         this.contribution.setSorts();

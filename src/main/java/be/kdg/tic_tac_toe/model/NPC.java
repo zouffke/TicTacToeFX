@@ -1,15 +1,42 @@
 package be.kdg.tic_tac_toe.model;
 
+import java.util.Random;
+
 public class NPC extends Player {
     private static final int MIN = -1000;
     private static final int MAX = 1000;
+    private Random random;
+    private boolean ai;
 
-    NPC() {
+
+    NPC(boolean ai) {
         super("Bot");
+        this.ai = ai;
+        if (!ai){
+             this.random = new Random();
+        }
     }
 
     void playNPC(Board board, Sort currentSort) {
-        this.bestMove(board, currentSort);
+        if (ai){
+            this.bestMove(board, currentSort);
+        }else{
+            this.randomMove(board, currentSort);
+        }
+
+    }
+
+    private void randomMove(Board board, Sort currentSort){
+      int size = board.getPieces().length;
+      int x;
+      int y;
+      do {
+           x = random.nextInt(size);
+           y = random.nextInt(size);
+      }while (board.getPieces()[x][y] != null);
+
+      board.place(currentSort, y, x);
+
     }
 
     private boolean movesAble(Board board) {

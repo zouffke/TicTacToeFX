@@ -24,8 +24,8 @@ class Contribution {
      *
      * @param name the name of the first player. (String)
      */
-    Contribution(String name) {
-        PLAYERS = new Player[]{new Human(name), new NPC()};
+    Contribution(String name, boolean ai) {
+        PLAYERS = new Player[]{new Human(name), new NPC(ai)};
         SORTS = new Sort[2];
     }
 
