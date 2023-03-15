@@ -1,6 +1,7 @@
 package be.kdg.tic_tac_toe.view.menu;
 
 import be.kdg.tic_tac_toe.model.Game;
+import be.kdg.tic_tac_toe.model.GameException;
 import be.kdg.tic_tac_toe.view.game.GamePresenter;
 import be.kdg.tic_tac_toe.view.game.GameView;
 import be.kdg.tic_tac_toe.view.home.HomePresenter;
@@ -32,7 +33,7 @@ public class MenuPresenter {
 
             this.view.getScene().setRoot(homeView);
             homeView.getScene().getStylesheets().remove("file:resources/stylesheets/menu.css");
-            homeView.getScene().getStylesheets().addAll("file:resources/stylesheets/home.css");
+            homeView.getScene().getStylesheets().add("file:resources/stylesheets/home.css");
         });
 
         //play aanroepen als erop gedrukt word, naar de play scene gaan
@@ -68,9 +69,17 @@ public class MenuPresenter {
                 return;
             }
 
+            //TODO temp for testing!
+
             // instantie van game aanmaken
             Game gameModel = new Game(size, playerOption);
 
+            try {
+                gameModel.setPlayers(1, "test1", "test2");
+            } catch (GameException e) {
+                e.printStackTrace();
+            }
+/*
             // playerView aanmaken en presenter aanmaken
             PlayerView playerView = new PlayerView(playerOption);
             // nieuwe stage aanmaken
@@ -92,15 +101,15 @@ public class MenuPresenter {
             playerStage.showAndWait();
 
             // als de namen zijn ingevuld dan gaat de gameView openen
-            if (playerPresenter.isNamesFilled()) {
+            if (playerPresenter.isNamesFilled()) {*/
                 GameView gameView = new GameView(size, music);
                 new GamePresenter(gameView, gameModel);
 
                 this.view.getScene().setRoot(gameView);
                 gameView.getScene().getWindow().sizeToScene();
-                gameView.getStyleClass().remove("file:resources/stylesheets/menu.css");
-                gameView.getStyleClass().add("file:resources/stylesheets/game.css");
-            }
+                gameView.getStylesheets().remove("file:resources/stylesheets/menu.css");
+                gameView.getStylesheets().add("file:resources/stylesheets/game.css");
+            //}
         });
     }
 

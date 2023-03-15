@@ -7,3 +7,7 @@
 ========================================================================================================================
 player:Luca;score:0
 player:Quinten;score:0
+player:Tset;score:0
+player:Test;score:0
+player:Test1;score:2
+player:Test2;score:0

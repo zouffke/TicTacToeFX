@@ -93,9 +93,6 @@ public class GameView extends BorderPane {
         name1.setPadding(new Insets(5, 0, 0, 15));
         name2.setPadding(new Insets(5, 15, 0, 0));
 
-        name1.setStyle("-fx-border-color: black; -fx-padding: 10px 20px 30px");
-        name2.setStyle("-fx-border-color: black;");
-
         screenTop.getChildren().setAll(bar, players);
     }
 
