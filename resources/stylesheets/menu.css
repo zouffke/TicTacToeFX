@@ -31,8 +31,8 @@
 }
 
 .playButton{
-    -fx-pref-width: 70;
-    -fx-pref-height: 50;
-    -fx-translate-y: 100;
+    -fx-pref-width: 80;
+    -fx-pref-height: 60;
+    -fx-translate-y: 70;
     -fx-font-size: 20;
 }

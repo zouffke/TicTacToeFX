@@ -98,6 +98,8 @@ public class MenuPresenter {
 
                 this.view.getScene().setRoot(gameView);
                 gameView.getScene().getWindow().sizeToScene();
+                gameView.getStyleClass().remove("file:resources/stylesheets/menu.css");
+                gameView.getStyleClass().add("file:resources/stylesheets/game.css");
             }
         });
     }
