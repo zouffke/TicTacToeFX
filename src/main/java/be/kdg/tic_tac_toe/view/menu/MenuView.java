@@ -77,20 +77,20 @@ public class MenuView extends BorderPane {
 
     //voegt alle vars toe aan de scene zodat je ze kan zien
     private void layoutNodes() {
-        VBox main = new VBox();
+        VBox mainField = new VBox();
         VBox radioButtonBox1 = new VBox();
         VBox radioButtonBox2 = new VBox();
 
-        this.setCenter(main);
+        this.setCenter(mainField);
         this.setBottom(this.terug);
 
         BorderPane.setAlignment(this.terug, Pos.CENTER);
-        BorderPane.setAlignment(main, Pos.CENTER);
+        BorderPane.setAlignment(mainField, Pos.CENTER);
 
         BorderPane.setMargin(this.terug, new Insets(0, 0, 10, 0));
 
-        main.getChildren().addAll(this.gamemode, radioButtonBox1, this.bordSize, radioButtonBox2, this.play);
-        main.setAlignment(Pos.TOP_CENTER);
+        mainField.getChildren().addAll(this.gamemode, radioButtonBox1, this.bordSize, radioButtonBox2, this.play);
+        mainField.setAlignment(Pos.TOP_CENTER);
 
         //Takes care of the player options
         HBox line1 = new HBox();
@@ -107,6 +107,8 @@ public class MenuView extends BorderPane {
 
         radioButtonBox2.getChildren().addAll(line2, this.zeven);
         radioButtonBox2.getStyleClass().add("board");
+
+        this.play.getStyleClass().add("playButton");
     }
 
     //maak getters voor de vars zodat je ze kan gebruiken in de presenter

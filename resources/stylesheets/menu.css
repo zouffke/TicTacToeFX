@@ -1,6 +1,5 @@
 .toggle-button {
     -fx-background-radius: 10;
-    -fx-border-width: 2;
     -fx-font-weight: bold;
 }
 
@@ -29,4 +28,11 @@
 .sizeButtons{
     -fx-pref-height: 50;
     -fx-pref-width: 80;
+}
+
+.playButton{
+    -fx-pref-width: 70;
+    -fx-pref-height: 50;
+    -fx-translate-y: 100;
+    -fx-font-size: 20;
 }
