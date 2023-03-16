@@ -110,7 +110,7 @@ public class GamePresenter {
     }
 
     private void currentTurn(){
-        if (this.view.getName1().getText().equals(this.model.getCurrentPlayer().getNAME())) {
+        if (this.view.getName1().getText().equals(this.model.getCurrentPlayer().toString())) {
             this.view.getName1().getStyleClass().add("turnTrue");
             this.view.getName2().getStyleClass().remove("turnTrue");
         } else {
