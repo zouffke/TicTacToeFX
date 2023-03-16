@@ -5,36 +5,3 @@
 //\\ANY CHANGE CAN CAUSE CORRUPTION OF YOUR SAVE FILE//\\
 //\\WHEN YOU EDIT THIS FILE, MAKE SURE YOU HAVE A BACKUP AND ALWAYS LEAVE ONE LINE EMPTY AT THE BOTTOM OF THIS FILE//\\
 ========================================================================================================================
-game:0;dateStamp:2023-03-14T16:05:26.889386;player1:Luca;AS:X;player2:Quinten;AS:O;board:3x3
-X:0-0;O:1-0;X:0-1;O:1-1;X:0-2;
-gameEnd:Luca
-game:1;dateStamp:2023-03-15T15:39:24.822691900;player1:Test1;AS:X;player2:Test2;AS:O;board:3x3
-X:0-0;O:1-0;X:2-0;O:0-1;X:1-1;O:2-1;X:0-2;
-gameEnd:Test1
-game:2;dateStamp:2023-03-15T15:42:07.480150300;player1:Bot1;AS:O;player2:Bot;AS:X;board:3x3
-
-gameEnd:Bot
-game:2;dateStamp:2023-03-15T15:42:07.480150300;player1:Bot1;AS:O;player2:Bot;AS:X;board:3x3
-
-gameEnd:Bot
-game:3;dateStamp:2023-03-15T18:40:50.664675200;player1:Test1;AS:X;player2:Test2;AS:O;board:3x3
-X:0-0;O:2-0;X:1-1;O:2-2;X:0-1;O:1-2;X:1-0;O:2-1;
-gameEnd:Test2
-game:4;dateStamp:2023-03-15T18:41:02.807227800;player1:Test1;AS:O;player2:Bot;AS:X;board:3x3
-O:1-1;O:2-1;O:2-2;O:0-1;
-gameEnd:Test1
-game:5;dateStamp:2023-03-16T10:12:56.755702500;player1:Test1;AS:O;player2:Test2;AS:X;board:3x3
-X:0-0;O:1-0;X:0-1;O:1-1;X:2-0;O:2-1;X:1-2;O:2-2;X:0-2;
-gameEnd:Test2
-game:6;dateStamp:2023-03-16T10:13:17.302913;player1:Test1;AS:O;player2:Test2;AS:X;board:3x3
-X:0-0;O:1-0;X:2-0;O:2-1;X:1-1;O:0-1;X:0-2;
-gameEnd:Test2
-game:7;dateStamp:2023-03-16T10:13:21.952397700;player1:Test1;AS:O;player2:Test2;AS:X;board:3x3
-X:0-0;O:1-0;X:0-1;O:1-1;X:1-2;O:0-2;X:2-0;O:2-1;X:2-2;
-gameEnd:draw
-game:8;dateStamp:2023-03-16T10:27:21.629664400;player1:Test1;AS:O;player2:Test2;AS:X;board:3x3
-X:0-0;O:1-0;X:0-1;O:1-1;X:0-2;
-gameEnd:Test2
-game:9;dateStamp:2023-03-16T10:27:30.588306500;player1:Test1;AS:O;player2:Test2;AS:X;board:3x3
-X:0-0;O:1-0;X:0-1;O:1-1;X:0-2;
-gameEnd:Test2
