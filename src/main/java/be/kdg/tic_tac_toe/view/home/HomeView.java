@@ -40,7 +40,6 @@ public class HomeView extends BorderPane {
         BorderPane.setAlignment(this.quit, Pos.CENTER);
         BorderPane.setMargin(this.quit, new Insets(0, 0, 10, 0));
 
-
         HBox hBox = new HBox();
         this.setCenter(hBox);
 

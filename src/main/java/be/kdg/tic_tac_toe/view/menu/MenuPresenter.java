@@ -6,12 +6,8 @@ import be.kdg.tic_tac_toe.view.game.GamePresenter;
 import be.kdg.tic_tac_toe.view.game.GameView;
 import be.kdg.tic_tac_toe.view.home.HomePresenter;
 import be.kdg.tic_tac_toe.view.home.HomeView;
-import be.kdg.tic_tac_toe.view.players.PlayerPresenter;
-import be.kdg.tic_tac_toe.view.players.PlayerView;
-import javafx.scene.Scene;
 import javafx.scene.control.Alert;
-import javafx.stage.Modality;
-import javafx.stage.Stage;
+
 
 public class MenuPresenter {
     // attributen aanmaken
@@ -103,12 +99,15 @@ public class MenuPresenter {
             // als de namen zijn ingevuld dan gaat de gameView openen
             if (playerPresenter.isNamesFilled()) {*/
                 GameView gameView = new GameView(size, music);
+
                 new GamePresenter(gameView, gameModel);
 
                 this.view.getScene().setRoot(gameView);
+
+                gameView.getScene().getStylesheets().remove("file:resources/stylesheets/menu.css");
+                gameView.getScene().getStylesheets().add("file:resources/stylesheets/game.css");
+
                 gameView.getScene().getWindow().sizeToScene();
-                gameView.getStylesheets().remove("file:resources/stylesheets/menu.css");
-                gameView.getStylesheets().add("file:resources/stylesheets/game.css");
             //}
         });
     }

@@ -1,3 +1,16 @@
 .label{
-    -fx-font-size: 13;
+    -fx-font-size: 100%;
+    -fx-font-weight: normal;
+}
+
+.names{
+    -fx-font-weight: bold;
+    -fx-border-width: 2;
+    -fx-border-color: darkgray;
+    -fx-padding: 5;
+    -fx-start-margin: 5;
+}
+
+.turnTrue{
+    -fx-background-color: lightgreen
 }

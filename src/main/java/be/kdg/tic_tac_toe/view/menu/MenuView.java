@@ -39,7 +39,6 @@ public class MenuView extends BorderPane {
         this.PvP.setToggleGroup(group);
         this.PvP.getStyleClass().remove("radio-button");
         this.PvP.getStyleClass().addAll("PvP", "toggle-button");
-
         this.PvE = new RadioButton("PvE");
         this.PvE.setToggleGroup(group);
         this.PvE.getStyleClass().remove("radio-button");

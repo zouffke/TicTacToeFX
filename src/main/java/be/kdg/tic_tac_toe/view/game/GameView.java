@@ -54,7 +54,9 @@ public class GameView extends BorderPane {
         this.rules = new MenuItem("Rules");
         this.figures = new Figure[boardSize][boardSize];
         this.name1 = new Label();
+        this.name1.getStyleClass().add("names");
         this.name2 = new Label();
+        this.name2.getStyleClass().add("names");
     }
 
     private void layoutNodes() {

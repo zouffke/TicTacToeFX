@@ -35,12 +35,6 @@ public class GamePresenter {
 
         this.addEventHandlers();
         this.updateView();
-        this.addWindowEventHandlers();
-    }
-
-    private void addWindowEventHandlers() {
-        //TODO fix this
-        //view.getScene().getWindow().setOnCloseRequest(event -> exitPopup());
     }
 
     private void addEventHandlers() {
@@ -115,6 +109,16 @@ public class GamePresenter {
         setGameOver();
     }
 
+    private void currentTurn(){
+        if (this.view.getName1().getText().equals(this.model.getCurrentPlayer().getNAME())) {
+            this.view.getName1().getStyleClass().add("turnTrue");
+            this.view.getName2().getStyleClass().remove("turnTrue");
+        } else {
+            this.view.getName2().getStyleClass().add("turnTrue");
+            this.view.getName1().getStyleClass().remove("turnTrue");
+        }
+    }
+
     private void callNPC() {
         if (this.model.getCurrentPlayer() instanceof NPC) {
             this.model.npcMove();
@@ -135,6 +139,7 @@ public class GamePresenter {
             gameEndPopup("Draw", "It's a draw!\nDo you want to play again?");
         } else {
             this.model.updateParameters();
+            currentTurn();
         }
 
         if (this.model.getCurrentPlayer() instanceof Human) {
@@ -145,8 +150,9 @@ public class GamePresenter {
     private void exitPopup() {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setTitle("Quit?");
-        alert.setContentText("Are you sure you want to quit?%nAny unsaved progress will be lost.");
+        alert.setContentText("Are you sure you want to quit?\nAny unsaved progress will be lost.");
         Optional<ButtonType> result = alert.showAndWait();
+
         if (result.isPresent()) {
             if (result.get() == ButtonType.OK) {
                 Platform.exit();
@@ -185,7 +191,7 @@ public class GamePresenter {
     private void returnPopup() {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setTitle("Return?");
-        alert.setContentText("Are you sure you want to return to the menu?%nAny unsaved progress will be lost.");
+        alert.setContentText("Are you sure you want to return to the menu?\nAny unsaved progress will be lost.");
         Optional<ButtonType> result = alert.showAndWait();
         if (result.isPresent()) {
             if (result.get() == ButtonType.OK) {
@@ -199,6 +205,8 @@ public class GamePresenter {
         new MenuPresenter(menuView);
 
         this.view.getScene().setRoot(menuView);
+        menuView.getScene().getStylesheets().remove("file:resources/stylesheets/game.css");
+        menuView.getScene().getStylesheets().add("file:resources/stylesheets/menu.css");
         menuView.getScene().getWindow().setHeight(700);
         menuView.getScene().getWindow().setWidth(900);
         if (this.view.getPlayer() != null) {

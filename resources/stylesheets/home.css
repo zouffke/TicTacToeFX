@@ -3,6 +3,11 @@
     -fx-pref-width: 120;
 }
 
+.toggle-button {
+    -fx-background-radius: 10;
+    -fx-font-weight: bold;
+}
+
 .Box{
     -fx-alignment: center;
     -fx-spacing: 20;
