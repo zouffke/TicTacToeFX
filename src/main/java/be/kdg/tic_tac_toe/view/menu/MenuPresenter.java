@@ -1,12 +1,16 @@
 package be.kdg.tic_tac_toe.view.menu;
 
 import be.kdg.tic_tac_toe.model.Game;
-import be.kdg.tic_tac_toe.model.GameException;
 import be.kdg.tic_tac_toe.view.game.GamePresenter;
 import be.kdg.tic_tac_toe.view.game.GameView;
 import be.kdg.tic_tac_toe.view.home.HomePresenter;
 import be.kdg.tic_tac_toe.view.home.HomeView;
+import be.kdg.tic_tac_toe.view.players.PlayerPresenter;
+import be.kdg.tic_tac_toe.view.players.PlayerView;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 
 
 public class MenuPresenter {
@@ -65,17 +69,9 @@ public class MenuPresenter {
                 return;
             }
 
-            //TODO temp for testing!
-
             // instantie van game aanmaken
             Game gameModel = new Game(size, playerOption);
 
-            try {
-                gameModel.setPlayers(1, "test1", "test2");
-            } catch (GameException e) {
-                e.printStackTrace();
-            }
-/*
             // playerView aanmaken en presenter aanmaken
             PlayerView playerView = new PlayerView(playerOption);
             // nieuwe stage aanmaken
@@ -97,7 +93,7 @@ public class MenuPresenter {
             playerStage.showAndWait();
 
             // als de namen zijn ingevuld dan gaat de gameView openen
-            if (playerPresenter.isNamesFilled()) {*/
+            if (playerPresenter.isNamesFilled()) {
                 GameView gameView = new GameView(size, music);
 
                 new GamePresenter(gameView, gameModel);
@@ -108,7 +104,7 @@ public class MenuPresenter {
                 gameView.getScene().getStylesheets().add("file:resources/stylesheets/game.css");
 
                 gameView.getScene().getWindow().sizeToScene();
-            //}
+            }
         });
     }
 
