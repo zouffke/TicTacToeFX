@@ -4,9 +4,10 @@ package be.kdg.tic_tac_toe.model;
  * Holds the bord that is used by the @game class and the MVP to display the game.
  */
 public class Board {
-
+    //vars aanmaken
     private static int width;
     private static int length;
+    // 2 dimensionele array
     private final Piece[][] pieces;
 
     /**
@@ -16,13 +17,17 @@ public class Board {
      * @param length this is the length of the board
      */
     Board(int width, int length) {
+        //width en length zijn gelijk omdat het telkens een vierkant moet zijn
+        //width is ook gelijk aan 3 voor 3x3, 5 voor 5x5 en 7 voor 7x7
         if (width == length && width == 3 || width == 5 || width == 7) {
             Board.width = width;
             Board.length = length;
+            //als er iets anders dan 3, 5 of 7 zou binnenkomen dan is de standaard 3
         } else {
             Board.width = 3;
             Board.length = 3;
         }
+        //de pieces hebben de afmetingen van het gekozen bord
         this.pieces = new Piece[Board.width][Board.length];
     }
 
@@ -32,6 +37,7 @@ public class Board {
      * @return the size of the board
      */
     static int getSize() {
+        //de size van het bord is de wijdte van het bord
         return Board.width;
     }
 
@@ -43,6 +49,7 @@ public class Board {
      * @return boolean if the move is valid or not
      */
     boolean validMove(int y, int x) {
+        //als de x en y coordintaat null zijn betekend het dat er niks opstaat en dus een valid move
         return this.pieces[y][x] == null;
     }
 
@@ -54,6 +61,7 @@ public class Board {
      * @param x           the x coordinate of the move
      */
     void place(Sort currentSort, int y, int x) {
+        //op de plaats van het piece een nieuwe zetten van de current sort
         this.pieces[y][x] = new Piece(currentSort, y, x);
     }
 
@@ -65,11 +73,19 @@ public class Board {
      */
     boolean win(Sort sort) {
         //define the trigger
+        //als de getsize gelijk is aan 3 dan is de trigger ook 3
+        // is de size niet gelijk aan 3 dus 5 of 7 dan is de trigger 4
         int trigger = (getSize() == 3) ? 3 : 4;
 
+        //this.pieces.length is de lengte van de array (3)
+        //als de y kleiner is dan de lengte (3) dan gaat y eentje omhoog en gaat de for verder
         for (int y = 0; y < this.pieces.length; y++) {
+            //pieces[y].length is 3 want voor y die als eerste 0 is zijn er 3 beschikbare vakje voor x
+            //dus als x kleiner is dan die pt.length dan gaat x eentje omhoog
             for (int x = 0; x < this.pieces[y].length; x++) {
+                //als pieces xy niet null is en der dus iets staat en als de equalsSort gelijk is aan true
                 if (this.pieces[y][x] != null && this.pieces[y][x].equalsSort(sort)) {
+                    //
                     for (int yy = -1; yy <= 1; yy++) {
                         for (int xx = -1; xx <= 1; xx++) {
                             //out of bounds check

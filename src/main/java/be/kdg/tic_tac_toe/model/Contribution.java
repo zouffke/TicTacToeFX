@@ -75,6 +75,7 @@ class Contribution {
      * Is used when a new game is started.
      */
     void setSorts() {
+        //de sortkeuze 0 kiest een random, X of O, de sort 1 kiest dan de andere
         SORTS[0] = Sort.randomSort();
         SORTS[1] = Sort.oppositSort(SORTS[0]);
     }
