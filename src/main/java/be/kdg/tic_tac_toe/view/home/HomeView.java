@@ -30,7 +30,7 @@ public class HomeView extends BorderPane {
         this.play = new Button("Play");
         this.highscore = new Button("Highscore");
         this.quit = new Button("Quit");
-        this.quit.getStyleClass().add("quitButton");
+        this.quit.getStyleClass().add("returnButton");
         this.games = new Button("Previous games");
         this.options = new Button("Options");
     }
@@ -39,7 +39,6 @@ public class HomeView extends BorderPane {
         this.setBottom(this.quit);
         BorderPane.setAlignment(this.quit, Pos.CENTER);
         BorderPane.setMargin(this.quit, new Insets(0, 0, 10, 0));
-
 
         HBox hBox = new HBox();
         this.setCenter(hBox);

@@ -54,7 +54,9 @@ public class GameView extends BorderPane {
         this.rules = new MenuItem("Rules");
         this.figures = new Figure[boardSize][boardSize];
         this.name1 = new Label();
+        this.name1.getStyleClass().add("names");
         this.name2 = new Label();
+        this.name2.getStyleClass().add("names");
     }
 
     private void layoutNodes() {
@@ -92,9 +94,6 @@ public class GameView extends BorderPane {
         players.setRight(name2);
         name1.setPadding(new Insets(5, 0, 0, 15));
         name2.setPadding(new Insets(5, 15, 0, 0));
-
-        name1.setStyle("-fx-border-color: black; -fx-padding: 10px 20px 30px");
-        name2.setStyle("-fx-border-color: black;");
 
         screenTop.getChildren().setAll(bar, players);
     }

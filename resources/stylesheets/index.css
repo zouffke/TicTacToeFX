@@ -1,0 +1,18 @@
+.root {
+    -fx-background-color: LIGHTGRAY;
+}
+
+.label{
+    -fx-font-size: 50;
+    -fx-font-weight: bold;
+}
+
+.button {
+    -fx-background-radius: 10;
+    -fx-font-weight: bold;
+}
+
+.returnButton {
+    -fx-pref-height: 20;
+    -fx-pref-width: 50;
+}

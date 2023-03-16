@@ -12,6 +12,7 @@ import javafx.scene.control.Alert;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
+
 public class MenuPresenter {
     // attributen aanmaken
     private final MenuView view;
@@ -31,8 +32,8 @@ public class MenuPresenter {
             new HomePresenter(homeView);
 
             this.view.getScene().setRoot(homeView);
-            homeView.getScene().getStylesheets().clear();
-            homeView.getScene().getStylesheets().addAll("file:resources/stylesheets/home.css");
+            homeView.getScene().getStylesheets().remove("file:resources/stylesheets/menu.css");
+            homeView.getScene().getStylesheets().add("file:resources/stylesheets/home.css");
         });
 
         //play aanroepen als erop gedrukt word, naar de play scene gaan
@@ -94,9 +95,14 @@ public class MenuPresenter {
             // als de namen zijn ingevuld dan gaat de gameView openen
             if (playerPresenter.isNamesFilled()) {
                 GameView gameView = new GameView(size, music);
+
                 new GamePresenter(gameView, gameModel);
 
                 this.view.getScene().setRoot(gameView);
+
+                gameView.getScene().getStylesheets().remove("file:resources/stylesheets/menu.css");
+                gameView.getScene().getStylesheets().add("file:resources/stylesheets/game.css");
+
                 gameView.getScene().getWindow().sizeToScene();
             }
         });

@@ -33,8 +33,8 @@ public class HomePresenter {
             new MenuPresenter(menuView);
             // scene van de huidige vieuw oproepen en de vieuw veranderen naar de nieuwe (menu vieuw)
             view.getScene().setRoot(menuView);
-            menuView.getScene().getStylesheets().clear();
-            menuView.getScene().getStylesheets().addAll("file:resources/stylesheets/menu.css");
+            menuView.getScene().getStylesheets().remove("file:resources/stylesheets/home.css");
+            menuView.getScene().getStylesheets().add("file:resources/stylesheets/menu.css");
         });
 
         //als je op de knop highscore klikt dan gaat die naar de vieuw van highscore en maakt een nieuwe scene aan
