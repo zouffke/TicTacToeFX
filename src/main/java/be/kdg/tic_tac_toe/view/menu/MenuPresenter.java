@@ -96,9 +96,8 @@ public class MenuPresenter {
             if (playerPresenter.isNamesFilled()) {
                 GameView gameView = new GameView(size, music);
 
-                new GamePresenter(gameView, gameModel);
-
                 this.view.getScene().setRoot(gameView);
+                new GamePresenter(gameView, gameModel);
 
                 gameView.getScene().getStylesheets().remove("file:resources/stylesheets/menu.css");
                 gameView.getScene().getStylesheets().add("file:resources/stylesheets/game.css");

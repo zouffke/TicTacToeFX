@@ -23,18 +23,77 @@ public class GamePresenter {
     private final Board board;
     private boolean humanTurn;
     private boolean gameOver;
+    private int y;
+    private int x;
 
     public GamePresenter(GameView view, Game model) {
         this.view = view;
         this.model = model;
         this.board = model.getBoard();
         this.gameOver = false;
+        this.y = 0;
+        this.x = 0;
 
         this.view.getName1().setText(this.model.getPlayer1());
         this.view.getName2().setText(this.model.getPlayer2());
 
         this.addEventHandlers();
         this.updateView();
+
+        this.addKeyEventHandlers();
+    }
+
+    private void addKeyEventHandlers() {
+        this.view.getScene().setOnKeyPressed(event -> {
+            switch (event.getCode()) {
+                case LEFT -> {
+                    if (x > 0) {
+                        x--;
+                    }
+                }
+                case RIGHT -> {
+                    if (x < this.view.getBoardSize() - 1) {
+                        x++;
+                    }
+                }
+                case UP -> {
+                    if (y > 0) {
+                        y--;
+                    }
+                }
+                case DOWN -> {
+                    if (y < this.view.getBoardSize() - 1) {
+                        y++;
+                    }
+                }
+                case SPACE -> {
+                    if (!gameOver) {
+                        if (humanTurn) {
+                            try {
+                                this.model.place(y, x);
+                                this.humanTurn = false;
+                                updateView();
+                            } catch (GameException e) {
+                                Alert warning = new Alert(Alert.AlertType.WARNING);
+                                warning.setContentText(e.getMessage());
+                                warning.showAndWait();
+                            }
+                        }
+                    }
+                }
+            }
+            updateSelector();
+        });
+    }
+
+    private void updateSelector() {
+        for (int i = 0; i < this.view.getBoardSize(); i++) {
+            for (int j = 0; j < this.view.getBoardSize(); j++) {
+                this.view.getBackgroundPane()[i][j].getStyleClass().remove("selected");
+            }
+        }
+
+        this.view.getBackgroundPane()[x][y].getStyleClass().add("selected");
     }
 
     private void addEventHandlers() {
@@ -109,8 +168,8 @@ public class GamePresenter {
         setGameOver();
     }
 
-    private void currentTurn(){
-        if (this.view.getName1().getText().equals(this.model.getCurrentPlayer().getNAME())) {
+    private void currentTurn() {
+        if (this.view.getName1().getText().equals(this.model.getCurrentPlayer().toString())) {
             this.view.getName1().getStyleClass().add("turnTrue");
             this.view.getName2().getStyleClass().remove("turnTrue");
         } else {
@@ -131,12 +190,20 @@ public class GamePresenter {
             gameOver = true;
             this.model.addScore(false, this.model.getCurrentPlayer());
             this.model.saveGameProgress(false, this.model.getCurrentPlayer());
+            if (this.model.getCurrentPlayer() instanceof Human) {
+                this.humanTurn = true;
+            }
             gameEndPopup("Win", String.format("%s has won\nDo you want to play again?", this.model.getCurrentPlayer().toString()));
+            return;
         } else if (this.model.drawCheck()) {
             gameOver = true;
             this.model.addScore(true);
             this.model.saveGameProgress(true);
+            if (this.model.getCurrentPlayer() instanceof Human) {
+                this.humanTurn = true;
+            }
             gameEndPopup("Draw", "It's a draw!\nDo you want to play again?");
+            return;
         } else {
             this.model.updateParameters();
             currentTurn();

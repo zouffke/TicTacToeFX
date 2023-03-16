@@ -7,7 +7,7 @@ public class NPC extends Player {
     private static final int MIN = -1000;
     private static final int MAX = 1000;
     private Random random;
-    private boolean ai;
+    private final boolean ai;
 
 
     NPC(boolean ai) {
@@ -41,7 +41,7 @@ public class NPC extends Player {
       do {
            x = random.nextInt(size);
            y = random.nextInt(size);
-      }while (board.getPieces()[x][y] != null);
+      }while (board.getPieces()[y][x] != null);
     // de functie place word aangeroepen en de current sort(x of O) word geplaatst op de gekozen y en x coordinaten
       board.place(currentSort, y, x);
 
