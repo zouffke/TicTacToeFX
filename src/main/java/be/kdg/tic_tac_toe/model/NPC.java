@@ -55,7 +55,7 @@ public class NPC extends Player {
     private int evaluation(Board board, Sort ownSort, Sort opponent) {
         //minimax
         if (board.win(ownSort)) {
-            return 10;
+            return +10;
         } else if (board.win(opponent)) {
             return -10;
         }
@@ -66,9 +66,14 @@ public class NPC extends Player {
     private int minimax(Board board, int depth, boolean max, Sort ownSort, int alpha, int beta) {
         Piece[][] pieces = board.getPieces();
 
-        //get the score of the current board
         Sort opponent = Sort.oppositSort(ownSort);
-        int score = evaluation(board, ownSort, opponent);
+        int score;
+        //get the score of the current board
+        if (max) {
+            score = evaluation(board, ownSort, opponent);
+        } else {
+            score = -evaluation(board, opponent, ownSort);
+        }
 
 
         if (score == 10) {
@@ -88,7 +93,7 @@ public class NPC extends Player {
                         board.setPiece(y, x, ownSort);
 
                         //calculate the value of this move
-                        int value = minimax(board, depth + 1, false, ownSort, alpha, beta);
+                        int value = minimax(board, ++depth, false, ownSort, alpha, beta);
 
                         //determine the best move
                         best = Math.max(best, value);
@@ -115,7 +120,7 @@ public class NPC extends Player {
                         board.setPiece(y, x, opponent);
 
                         //calculate the value of this move
-                        int value = minimax(board, depth + 1, true, ownSort, alpha, beta);
+                        int value = minimax(board, ++depth, true, ownSort, alpha, beta);
 
                         best = Math.min(best, value);
                         beta = Math.min(beta, best);

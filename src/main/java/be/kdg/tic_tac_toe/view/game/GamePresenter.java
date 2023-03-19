@@ -47,30 +47,30 @@ public class GamePresenter {
         this.view.getScene().setOnKeyPressed(event -> {
             switch (event.getCode()) {
                 case LEFT -> {
-                    if (x > 0) {
-                        x--;
-                    }
-                }
-                case RIGHT -> {
-                    if (x < this.view.getBoardSize() - 1) {
-                        x++;
-                    }
-                }
-                case UP -> {
                     if (y > 0) {
                         y--;
                     }
                 }
-                case DOWN -> {
+                case RIGHT -> {
                     if (y < this.view.getBoardSize() - 1) {
                         y++;
+                    }
+                }
+                case UP -> {
+                    if (x > 0) {
+                        x--;
+                    }
+                }
+                case DOWN -> {
+                    if (x < this.view.getBoardSize() - 1) {
+                        x++;
                     }
                 }
                 case SPACE -> {
                     if (!gameOver) {
                         if (humanTurn) {
                             try {
-                                this.model.place(y, x);
+                                this.model.place(x, y);
                                 this.humanTurn = false;
                                 updateView();
                             } catch (GameException e) {
@@ -93,7 +93,7 @@ public class GamePresenter {
             }
         }
 
-        this.view.getBackgroundPane()[x][y].getStyleClass().add("selected");
+        this.view.getBackgroundPane()[y][x].getStyleClass().add("selected");
     }
 
     private void addEventHandlers() {
@@ -242,8 +242,8 @@ public class GamePresenter {
                     GameView newGameView = new GameView(this.view.getBoardSize(), this.view.getMusic());
                     Game newGameModel = new Game(this.model.getBoardChoice(), this.model.getPlayerChoice());
                     newGameModel.setPlayers(this.model.getPlayerChoice(), this.model.getPlayer1(), this.model.getPlayer2());
-                    new GamePresenter(newGameView, newGameModel);
                     this.view.getScene().setRoot(newGameView);
+                    new GamePresenter(newGameView, newGameModel);
                 } catch (GameException e) {
                     Alert error = new Alert(Alert.AlertType.ERROR);
                     error.setContentText("Sorry, it seems like something went wrong.\nPlease try again later");

@@ -5,3 +5,24 @@
 //\\ANY CHANGE CAN CAUSE CORRUPTION OF YOUR SAVE FILE//\\
 //\\WHEN YOU EDIT THIS FILE, MAKE SURE YOU HAVE A BACKUP AND ALWAYS LEAVE ONE LINE EMPTY AT THE BOTTOM OF THIS FILE//\\
 ========================================================================================================================
+game:0;dateStamp:2023-03-19T10:13:47.315886200;player1:edrt;AS:O;player2:Bot;AS:X;board:3x3
+O:1-1;O:0-2;O:1-0;O:1-2;
+gameEnd:edrt
+game:1;dateStamp:2023-03-19T10:18:13.084963700;player1:tgy;AS:O;player2:Bot;AS:X;board:3x3
+O:1-1;O:0-2;O:1-2;
+gameEnd:Bot
+game:1;dateStamp:2023-03-19T10:18:13.084963700;player1:tgy;AS:O;player2:Bot;AS:X;board:3x3
+O:1-1;O:0-2;O:1-2;
+gameEnd:Bot
+game:2;dateStamp:2023-03-19T10:18:38.895184900;player1:xdrtdrt;AS:X;player2:Bot;AS:O;board:3x3
+X:0-0;X:1-1;X:0-2;X:1-0;
+gameEnd:Bot
+game:2;dateStamp:2023-03-19T10:18:38.895184900;player1:xdrtdrt;AS:X;player2:Bot;AS:O;board:3x3
+X:0-0;X:1-1;X:0-2;X:1-0;
+gameEnd:Bot
+game:3;dateStamp:2023-03-19T10:23:42.444179900;player1:qdsfg;AS:O;player2:azer;AS:X;board:3x3
+X:2-2;O:0-0;X:1-0;O:2-0;X:2-1;O:0-1;X:0-2;O:1-2;X:1-1;
+gameEnd:draw
+game:4;dateStamp:2023-03-19T10:24:01.660670300;player1:qdsfg;AS:O;player2:azer;AS:X;board:3x3
+X:0-0;O:2-0;X:0-1;O:1-0;X:2-1;O:0-2;X:2-2;O:1-1;
+gameEnd:qdsfg
