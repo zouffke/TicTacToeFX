@@ -45,6 +45,8 @@ public class HomePresenter {
             try {
                 HighscoreView highscoreView = new HighscoreView();
                 view.getScene().setRoot(highscoreView);
+                highscoreView.getScene().getStylesheets().remove("file:resources/stylesheets/home.css");
+                highscoreView.getScene().getStylesheets().add("file:resources/stylesheets/highscores.css");
                 new HighscorePresenter(highscoreView, new PlayersSave());
             } catch (SaveFileException e){
                 Alert error = new Alert(Alert.AlertType.ERROR);
