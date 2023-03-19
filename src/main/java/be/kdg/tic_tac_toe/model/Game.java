@@ -168,16 +168,16 @@ public class Game {
         }
     }
 
-    public void addScore(boolean draw) {
+    public void addScore(boolean draw) throws GameException {
         this.addScore(draw, null);
     }
 
-    public void addScore(boolean draw, Player winner) {
-        playersSave.updateScore(draw, winner, this.contribution);
-    }
-
-    private int modifyScore(int score, String line) {
-        return Integer.parseInt(line.split(";")[1].split(":")[1]) + score;
+    public void addScore(boolean draw, Player winner) throws GameException {
+        try {
+            playersSave.updateScore(draw, winner, this.contribution);
+        } catch (SaveFileException e) {
+            throw new GameException(e.getMessage());
+        }
     }
 
     public boolean winCheck() {

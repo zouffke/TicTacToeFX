@@ -186,31 +186,33 @@ public class GamePresenter {
     }
 
     private void setGameOver() {
-        if (this.model.winCheck()) {
-            gameOver = true;
-            this.model.addScore(false, this.model.getCurrentPlayer());
-            this.model.saveGameProgress(false, this.model.getCurrentPlayer());
-            if (this.model.getCurrentPlayer() instanceof Human) {
-                this.humanTurn = true;
+        try {
+            if (this.model.winCheck()) {
+                gameOver = true;
+                this.model.addScore(false, this.model.getCurrentPlayer());
+                this.model.saveGameProgress(false, this.model.getCurrentPlayer());
+                if (this.model.getCurrentPlayer() instanceof Human) {
+                    this.humanTurn = true;
+                }
+                gameEndPopup("Win", String.format("%s has won\nDo you want to play again?", this.model.getCurrentPlayer().toString()));
+            } else if (this.model.drawCheck()) {
+                gameOver = true;
+                this.model.addScore(true);
+                this.model.saveGameProgress(true);
+                if (this.model.getCurrentPlayer() instanceof Human) {
+                    this.humanTurn = true;
+                }
+                gameEndPopup("Draw", "It's a draw!\nDo you want to play again?");
+            } else {
+                this.model.updateParameters();
+                currentTurn();
             }
-            gameEndPopup("Win", String.format("%s has won\nDo you want to play again?", this.model.getCurrentPlayer().toString()));
-            return;
-        } else if (this.model.drawCheck()) {
-            gameOver = true;
-            this.model.addScore(true);
-            this.model.saveGameProgress(true);
-            if (this.model.getCurrentPlayer() instanceof Human) {
-                this.humanTurn = true;
-            }
-            gameEndPopup("Draw", "It's a draw!\nDo you want to play again?");
-            return;
-        } else {
-            this.model.updateParameters();
-            currentTurn();
-        }
 
-        if (this.model.getCurrentPlayer() instanceof Human) {
-            this.humanTurn = true;
+            if (this.model.getCurrentPlayer() instanceof Human) {
+                this.humanTurn = true;
+            }
+        } catch (GameException e) {
+            errorPopup(e.getMessage());
         }
     }
 
@@ -245,9 +247,7 @@ public class GamePresenter {
                     this.view.getScene().setRoot(newGameView);
                     new GamePresenter(newGameView, newGameModel);
                 } catch (GameException e) {
-                    Alert error = new Alert(Alert.AlertType.ERROR);
-                    error.setContentText(String.format("Sorry, it seems like something went wrong.%nPlease try again later%n%n(Error:%s)", e.getMessage()));
-                    error.show();
+                    this.errorPopup(e.getMessage());
                 }
             } else {
                 gotoMenu();
@@ -281,5 +281,11 @@ public class GamePresenter {
                 this.view.getPlayer().stop();
             }
         }
+    }
+
+    private void errorPopup(String e) {
+        Alert error = new Alert(Alert.AlertType.ERROR);
+        error.setContentText(String.format("Sorry, it seems like something went wrong.%nPlease try again later%n%n(Error:%s)", e));
+        error.show();
     }
 }
