@@ -16,9 +16,6 @@ public class Game {
     private static final Path gamesSave = Paths.get("resources" + File.separator
             + "saveFiles" + File.separator
             + "games.txt");
-    private static final Path players = Paths.get("resources" + File.separator
-            + "saveFiles" + File.separator
-            + "players.txt");
     private final Board board;
     private final int playerChoice;
     private final int boardChoice;
@@ -28,13 +25,20 @@ public class Game {
     private Sort currentSort;
     private int count;
     private final StringBuilder moves;
+    private final PlayersSave playersSave;
 
-    public Game(int boardChoice, int playerChoice) {
+    public Game(int boardChoice, int playerChoice) throws GameException {
         this.count = 1;
         this.validMove = false;
         this.playerChoice = playerChoice;
         this.boardChoice = boardChoice;
         this.moves = new StringBuilder();
+
+        try {
+            this.playersSave = new PlayersSave();
+        } catch (SaveFileException e) {
+            throw new GameException(e.getMessage());
+        }
 
         if (!Files.exists(gamesSave)) {
             try {
@@ -45,17 +49,6 @@ public class Game {
             }
         } else {
             System.out.println("File already exists: " + gamesSave.getFileName());
-        }
-
-        if (!Files.exists(players)) {
-            try {
-                Files.createFile(players);
-                System.out.println("File created: " + players.getFileName());
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        } else {
-            System.out.println("File already exists: " + players.getFileName());
         }
 
         this.board = setBoard(boardChoice);
@@ -83,7 +76,6 @@ public class Game {
             this.contribution = new Contribution(name1, name2);
 
         } else if (choice == 2) {
-            //TODO change the second option to an easier NPC
             this.contribution = new Contribution(name1, false);
 
         } else {
@@ -94,39 +86,12 @@ public class Game {
 
         System.out.printf("\n%s speelt met %s\n", contribution.getName(1), contribution.getSort(1));
         System.out.printf("en\n%s speelt met %s\n", contribution.getName(2), contribution.getSort(2));
-        this.writePlayers();
-        this.initGameSave();
-    }
-
-    private void writePlayers() {
-        boolean name1 = false;
-        boolean name2 = false;
-        //create the scanner
-        try (Scanner scanner = new Scanner(players)) {
-            //loop through the file
-            while (scanner.hasNextLine()) {
-                //read the line
-                String line = scanner.nextLine();
-                //check if the line contains the player and score
-                if (line.contains("player") && line.contains("score")) {
-                    //check if the name is already in the file
-                    if (checkPlayerName(line, 1)) {
-                        name1 = true;
-                    } else if (checkPlayerName(line, 2)) {
-                        name2 = true;
-                    }
-                }
-            }
-            //if the name is not in the file, add it
-            if (!name1) {
-                Files.write(players, String.format("player:%s;score:0%n", this.contribution.getName(1)).getBytes(), APPEND);
-            }
-            if (!name2 && this.contribution.getPlayer(2) instanceof Human) {
-                Files.write(players, String.format("player:%s;score:0%n", this.contribution.getName(2)).getBytes(), APPEND);
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
+        try {
+            playersSave.writePlayers(this.contribution.getName(1), this.contribution.getName(2), this.contribution.getPlayer(2) instanceof Human);
+        } catch (SaveFileException e) {
+            throw new GameException(e.getMessage());
         }
+        this.initGameSave();
     }
 
     private void initGameSave() {
@@ -208,55 +173,7 @@ public class Game {
     }
 
     public void addScore(boolean draw, Player winner) {
-        int score = 0;
-        if (draw) {
-            score = 1;
-        } else {
-            if (this.contribution.getPlayer(2) instanceof NPC && winner instanceof Human) {
-                score = 3;
-            } else if (this.contribution.getPlayer(2) instanceof Human) {
-                score = 2;
-            }
-        }
-
-        try (Scanner scanner = new Scanner(players)) {
-            StringBuilder sb = new StringBuilder();
-            while (scanner.hasNextLine()) {
-                //read the line
-                String line = scanner.nextLine();
-                //check if the line contains the player and score
-                if (line.contains("player") && line.contains("score")) {
-                    if (draw) {
-                        if (checkPlayerName(line, 1)) {
-                            sb.append(String.format("player:%s;score:%d%n", this.contribution.getName(1), modifyScore(score, line)));
-                        } else if (checkPlayerName(line, 2)) {
-                            sb.append(String.format("player:%s;score:%d%n", this.contribution.getName(2), modifyScore(score, line)));
-                        } else {
-                            sb.append(String.format("%s%n", line));
-                        }
-                    } else if (winner.toString().equalsIgnoreCase(line.split(";")[0].split(":")[1]) && winner instanceof Human) {
-                        sb.append(String.format("player:%s;score:%d%n", winner.toString(), modifyScore(score, line)));
-                    } else {
-                        sb.append(String.format("%s%n", line));
-                    }
-                } else {
-                    sb.append(String.format("%s%n", line));
-                }
-            }
-
-            Files.write(players, sb.toString().getBytes());
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-    private boolean checkPlayerName(String line, int index) {
-        return line.split(";")[0].
-                split(":")[1].
-                replace(" ", "").
-                equalsIgnoreCase(this.contribution.
-                        getName(index).replace(" ", ""))
-                && this.contribution.getPlayer(index) instanceof Human;
+        playersSave.updateScore(draw, winner, this.contribution);
     }
 
     private int modifyScore(int score, String line) {

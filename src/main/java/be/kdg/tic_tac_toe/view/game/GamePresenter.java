@@ -246,7 +246,7 @@ public class GamePresenter {
                     new GamePresenter(newGameView, newGameModel);
                 } catch (GameException e) {
                     Alert error = new Alert(Alert.AlertType.ERROR);
-                    error.setContentText("Sorry, it seems like something went wrong.\nPlease try again later");
+                    error.setContentText(String.format("Sorry, it seems like something went wrong.%nPlease try again later%n%n(Error:%s)", e.getMessage()));
                     error.show();
                 }
             } else {

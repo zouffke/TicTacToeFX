@@ -26,3 +26,9 @@ gameEnd:draw
 game:4;dateStamp:2023-03-19T10:24:01.660670300;player1:qdsfg;AS:O;player2:azer;AS:X;board:3x3
 X:0-0;O:2-0;X:0-1;O:1-0;X:2-1;O:0-2;X:2-2;O:1-1;
 gameEnd:qdsfg
+game:5;dateStamp:2023-03-19T10:28:21.749560100;player1:sdfg;AS:X;player2:Bot;AS:O;board:3x3
+X:0-0;X:1-1;X:0-2;X:1-0;
+gameEnd:Bot
+game:5;dateStamp:2023-03-19T10:28:21.749560100;player1:sdfg;AS:X;player2:Bot;AS:O;board:3x3
+X:0-0;X:1-1;X:0-2;X:1-0;
+gameEnd:Bot
