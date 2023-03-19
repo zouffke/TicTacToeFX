@@ -10,7 +10,7 @@ import java.util.TreeSet;
 
 import static java.nio.file.StandardOpenOption.APPEND;
 
-class PlayersSave {
+public class PlayersSave {
     private static final Path players = Paths.get("resources" + File.separator + "saveFiles" + File.separator + "players.txt");
 
     private final TreeSet<String> playersMap;
@@ -24,7 +24,7 @@ class PlayersSave {
             ========================================================================================================================
             """;
 
-    PlayersSave() throws SaveFileException {
+    public PlayersSave() throws SaveFileException {
         playersMap = new TreeSet<>((o1, o2) -> {
             int compare = o2.split(";")[1].split(":")[1].compareTo(o1.split(";")[1].split(":")[1]);
             if (compare == 0) {
@@ -34,6 +34,7 @@ class PlayersSave {
             }
         });
         this.checkFile();
+        this.fillList();
     }
 
     private void checkFile() throws SaveFileException {
@@ -100,7 +101,6 @@ class PlayersSave {
         } catch (IOException e) {
             throw new SaveFileException("An Error occurred in: " + players.getFileName());
         }
-        System.out.println(playersMap);
     }
 
     void updateScore(boolean draw, Player winner, Contribution contribution) throws SaveFileException {
@@ -145,7 +145,6 @@ class PlayersSave {
         } catch (IOException e) {
             throw new SaveFileException("An Error occurred in: " + players.getFileName());
         }
-        System.out.println(playersMap);
     }
 
     private void addScore(String player, int score) {
@@ -168,5 +167,15 @@ class PlayersSave {
         return Integer.parseInt(line.split(";")[1].split(":")[1]);
     }
 
+    public String getPlayer(int index) throws SaveFileException {
+        try {
+            return playersMap.toArray()[index].toString().split(";")[0].split(":")[1];
+        } catch (ArrayIndexOutOfBoundsException e) {
+            throw new SaveFileException("There are no players in the file to display here.");
+        }
+    }
 
+    public int getScore(int index) {
+        return Integer.parseInt(playersMap.toArray()[index].toString().split(";")[1].split(":")[1]);
+    }
 }

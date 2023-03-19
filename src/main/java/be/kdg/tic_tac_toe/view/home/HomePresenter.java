@@ -1,10 +1,13 @@
 package be.kdg.tic_tac_toe.view.home;
 
+import be.kdg.tic_tac_toe.model.PlayersSave;
+import be.kdg.tic_tac_toe.model.SaveFileException;
 import be.kdg.tic_tac_toe.view.highscore.HighscorePresenter;
 import be.kdg.tic_tac_toe.view.highscore.HighscoreView;
 import be.kdg.tic_tac_toe.view.menu.MenuPresenter;
 import be.kdg.tic_tac_toe.view.menu.MenuView;
 import javafx.application.Platform;
+import javafx.scene.control.Alert;
 
 public class HomePresenter {
 
@@ -39,9 +42,15 @@ public class HomePresenter {
 
         //als je op de knop highscore klikt dan gaat die naar de vieuw van highscore en maakt een nieuwe scene aan
         this.view.getHighscore().setOnAction(action -> {
-            HighscoreView highscoreView = new HighscoreView();
-            new HighscorePresenter(highscoreView);
-            view.getScene().setRoot(highscoreView);
+            try {
+                HighscoreView highscoreView = new HighscoreView();
+                view.getScene().setRoot(highscoreView);
+                new HighscorePresenter(highscoreView, new PlayersSave());
+            } catch (SaveFileException e){
+                Alert error = new Alert(Alert.AlertType.ERROR);
+                error.setContentText(String.format("Sorry, it seems like something went wrong.%nPlease try again later%n%n(Error:%s)", e.getMessage()));
+                error.show();
+            }
         });
 
     }
