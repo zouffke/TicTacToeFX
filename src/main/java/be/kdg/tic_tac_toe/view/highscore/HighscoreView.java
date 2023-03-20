@@ -4,10 +4,11 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 
 
-public class HighscoreView extends VBox {
+public class HighscoreView extends BorderPane {
 
     //create vars
     private Label titel;
@@ -28,28 +29,33 @@ public class HighscoreView extends VBox {
         //de volgende buttons initializeren en ze een naam geven
         for (int i = 0; i < this.scores.length; i++) {
             this.scores[i] = new Label();
+            this.scores[i].getStyleClass().add("scores");
         }
+        this.scores[0].getStyleClass().add("first");
+        this.scores[1].getStyleClass().add("second");
+        this.scores[2].getStyleClass().add("third");
+
         this.terug = new Button("terug");
+        this.terug.getStyleClass().add("returnButton");
 
     }
 
     private void layoutNodes() {
-        // toevoegen van al de buttons en labels
-        this.getChildren().add(this.titel);
-        for (Label score : scores) {
-            this.getChildren().add(score);
-        }
-        this.getChildren().add(this.terug);
+        VBox vBox = new VBox();
+        vBox.getStyleClass().add("vBox");
+        this.setTop(this.titel);
+        this.setCenter(vBox);
+        this.setBottom(this.terug);
 
-        //positie van de buttons en labels zetten naar canter
-        this.setAlignment(Pos.TOP_CENTER);
+        BorderPane.setAlignment(this.titel, Pos.CENTER);
+        BorderPane.setAlignment(vBox, Pos.CENTER);
+        BorderPane.setAlignment(this.terug, Pos.CENTER);
 
-        //overal 50 pixels ruimte rond de buttons en de labels
-        VBox.setMargin(this.titel, new Insets(50));
+        BorderPane.setMargin(this.terug, new Insets(0, 0, 10, 0));
+
         for (Label score : scores) {
-            VBox.setMargin(score, new Insets(50));
+            vBox.getChildren().add(score);
         }
-        VBox.setMargin(this.terug, new Insets(50));
 
     }
 

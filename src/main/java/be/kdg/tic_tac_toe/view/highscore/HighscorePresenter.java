@@ -23,13 +23,20 @@ public class HighscorePresenter {
             new HomePresenter(homeView);
 
             this.view.getScene().setRoot(homeView);
+            homeView.getScene().getStylesheets().remove("file:resources/stylesheets/highscores.css");
+            homeView.getScene().getStylesheets().add("file:resources/stylesheets/home.css");
         });
     }
 
     private void updateView() {
         for (int i = 0; i < this.view.getScores().length; i++) {
             try {
-                this.view.getScores()[i].setText(String.format("%-5s ||| %d", this.model.getPlayer(i), this.model.getScore(i)));
+                int width = 30;
+                char fill = '.';
+                String topad = this.model.getPlayer(i);
+                String padded = topad + new String(new char[width - topad.length()]).replace("\0", String.valueOf(fill));
+
+                this.view.getScores()[i].setText(String.format("%s%d", padded, this.model.getScore(i)).replace(" ", "."));
             } catch (SaveFileException e) {
                 this.view.getScores()[i].setText("No scores yet");
             }
