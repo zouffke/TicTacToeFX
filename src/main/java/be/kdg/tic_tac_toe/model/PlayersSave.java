@@ -178,4 +178,12 @@ public class PlayersSave {
     public int getScore(int index) {
         return Integer.parseInt(playersMap.toArray()[index].toString().split(";")[1].split(":")[1]);
     }
+
+    public void clearSave() throws SaveFileException {
+        try {
+            Files.write(players, template.getBytes());
+        } catch (IOException e) {
+            throw new SaveFileException("An Error occurred in: " + players.getFileName());
+        }
+    }
 }

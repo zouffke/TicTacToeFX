@@ -72,4 +72,8 @@ public class HomeView extends BorderPane {
         // de quit button getten
         return this.quit;
     }
+
+    Button getOptions(){
+        return this.options;
+    }
 }

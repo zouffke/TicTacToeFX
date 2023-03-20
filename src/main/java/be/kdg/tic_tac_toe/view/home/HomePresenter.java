@@ -6,6 +6,8 @@ import be.kdg.tic_tac_toe.view.highscore.HighscorePresenter;
 import be.kdg.tic_tac_toe.view.highscore.HighscoreView;
 import be.kdg.tic_tac_toe.view.menu.MenuPresenter;
 import be.kdg.tic_tac_toe.view.menu.MenuView;
+import be.kdg.tic_tac_toe.view.settings.SettingsPresenter;
+import be.kdg.tic_tac_toe.view.settings.SettingsView;
 import javafx.application.Platform;
 import javafx.scene.control.Alert;
 
@@ -48,13 +50,29 @@ public class HomePresenter {
                 highscoreView.getScene().getStylesheets().remove("file:resources/stylesheets/home.css");
                 highscoreView.getScene().getStylesheets().add("file:resources/stylesheets/highscores.css");
                 new HighscorePresenter(highscoreView, new PlayersSave());
-            } catch (SaveFileException e){
-                Alert error = new Alert(Alert.AlertType.ERROR);
-                error.setContentText(String.format("Sorry, it seems like something went wrong.%nPlease try again later%n%n(Error:%s)", e.getMessage()));
-                error.show();
+            } catch (SaveFileException e) {
+                ErrorPopup(e.getMessage());
             }
         });
 
+        this.view.getOptions().setOnAction(action -> {
+            try {
+                SettingsView settingsView = new SettingsView();
+                this.view.getScene().setRoot(settingsView);
+                new SettingsPresenter(new PlayersSave(), settingsView);
+                settingsView.getScene().getStylesheets().remove("file:resources/stylesheets/home.css");
+                settingsView.getScene().getStylesheets().add("file:resources/stylesheets/settings.css");
+            } catch (SaveFileException e) {
+                ErrorPopup(e.getMessage());
+            }
+        });
+
+    }
+
+    private void ErrorPopup(String msg) {
+        Alert error = new Alert(Alert.AlertType.ERROR);
+        error.setContentText(String.format("Sorry, it seems like something went wrong.%nPlease try again later%n%n(Error:%s)", msg));
+        error.show();
     }
 
     private void updateView() {
