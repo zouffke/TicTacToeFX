@@ -190,7 +190,7 @@ public class GamePresenter {
             if (this.model.winCheck()) {
                 gameOver = true;
                 this.model.addScore(false, this.model.getCurrentPlayer());
-                this.model.saveGameProgress(false, this.model.getCurrentPlayer());
+                this.model.saveGameProgress(this.model.getCurrentPlayer().toString());
                 if (this.model.getCurrentPlayer() instanceof Human) {
                     this.humanTurn = true;
                 }
@@ -198,7 +198,7 @@ public class GamePresenter {
             } else if (this.model.drawCheck()) {
                 gameOver = true;
                 this.model.addScore(true);
-                this.model.saveGameProgress(true);
+                this.model.saveGameProgress("Draw");
                 if (this.model.getCurrentPlayer() instanceof Human) {
                     this.humanTurn = true;
                 }
@@ -285,7 +285,7 @@ public class GamePresenter {
 
     private void errorPopup(String e) {
         Alert error = new Alert(Alert.AlertType.ERROR);
-        error.setContentText(String.format("Sorry, it seems like something went wrong.%nPlease try again later%n%n(Error:%s)", e));
+        error.setContentText(String.format("Sorry, it seems like something went wrong.%nPlease try again later%n%n(Error: %s)", e));
         error.show();
     }
 }

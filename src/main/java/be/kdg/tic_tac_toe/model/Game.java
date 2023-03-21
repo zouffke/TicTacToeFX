@@ -1,15 +1,7 @@
 package be.kdg.tic_tac_toe.model;
 
-import java.io.File;
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.time.LocalDateTime;
-import java.util.Scanner;
 import java.util.concurrent.TimeUnit;
 
-import static java.nio.file.StandardOpenOption.APPEND;
 
 public class Game {
     private final Board board;
@@ -31,7 +23,7 @@ public class Game {
 
         try {
             this.playersSave = new PlayersSave();
-            this.gamesSave = new GamesSave(this.contribution);
+            this.gamesSave = new GamesSave();
         } catch (SaveFileException e) {
             throw new GameException(e.getMessage());
         }
@@ -72,6 +64,7 @@ public class Game {
         System.out.printf("\n%s speelt met %s\n", contribution.getName(1), contribution.getSort(1));
         System.out.printf("en\n%s speelt met %s\n", contribution.getName(2), contribution.getSort(2));
         try {
+            this.gamesSave.setContribution(this.contribution);
             playersSave.writePlayers(this.contribution.getName(1), this.contribution.getName(2), this.contribution.getPlayer(2) instanceof Human);
             gamesSave.initGameSave();
         } catch (SaveFileException e) {
@@ -79,15 +72,11 @@ public class Game {
         }
     }
 
-    public void saveGameProgress(boolean draw) {
-        this.saveGameProgress(draw, null);
-    }
-
-    public void saveGameProgress(boolean draw, Player winner) {
+    public void saveGameProgress(String winner) throws GameException {
         try {
-            Files.write(gamesSave, String.format("%s%ngameEnd:%s%n", this.moves, draw ? "draw" : winner.toString()).getBytes(), APPEND);
-        } catch (IOException e) {
-            e.printStackTrace();
+            this.gamesSave.saveGameProgress(winner);
+        } catch (SaveFileException e){
+            throw new GameException(e.getMessage());
         }
     }
 
@@ -111,7 +100,7 @@ public class Game {
         } catch (InterruptedException ex) {
             ex.printStackTrace();
         } finally {
-            npc.playNPC(this.board, this.currentSort);
+           this.gamesSave.addMove(npc.playNPC(this.board, this.currentSort));
         }
     }
 
@@ -120,7 +109,7 @@ public class Game {
 
         if (validMove) {
             this.board.place(this.currentSort, y, x);
-            moves.append(String.format("%s:%d-%d;", this.currentSort, y, x));
+            this.gamesSave.addMove(String.format("%s:%d-%d;", this.currentSort, y, x));
         } else {
             throw new GameException("This is an invalid move");
         }

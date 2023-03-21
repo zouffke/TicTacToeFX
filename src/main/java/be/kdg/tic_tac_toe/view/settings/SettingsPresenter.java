@@ -1,5 +1,6 @@
 package be.kdg.tic_tac_toe.view.settings;
 
+import be.kdg.tic_tac_toe.model.GamesSave;
 import be.kdg.tic_tac_toe.model.PlayersSave;
 import be.kdg.tic_tac_toe.model.SaveFileException;
 import be.kdg.tic_tac_toe.view.home.HomePresenter;
@@ -11,11 +12,13 @@ import java.util.Optional;
 
 
 public class SettingsPresenter {
-    private final PlayersSave model;
+    private final PlayersSave playersSave;
+    private final GamesSave gamesSave;
     private final SettingsView view;
 
-    public SettingsPresenter(PlayersSave model, SettingsView view) {
-        this.model = model;
+    public SettingsPresenter(PlayersSave playersSave, GamesSave gamesSave, SettingsView view) {
+        this.playersSave = playersSave;
+        this.gamesSave = gamesSave;
         this.view = view;
 
         this.addEventHandlers();
@@ -35,10 +38,21 @@ public class SettingsPresenter {
             Optional<ButtonType> result = warningPopup("players");
             if (result.isPresent() && result.get() == ButtonType.OK)
                 try {
-                    this.model.clearSave();
-                    this.InfoPopup("Players");
+                    this.playersSave.clearSave();
+                    this.infoPopup("Players");
                 } catch (SaveFileException e) {
-                    ErrorPopup(e.getMessage());
+                    errorPopup(e.getMessage());
+                }
+        });
+
+        this.view.getClearGames().setOnAction(actionEvent ->{
+            Optional<ButtonType> result = warningPopup("games");
+            if (result.isPresent() && result.get() == ButtonType.OK)
+                try {
+                    this.gamesSave.clearSave();
+                    this.infoPopup("games");
+                } catch (SaveFileException e) {
+                    errorPopup(e.getMessage());
                 }
         });
     }
@@ -52,13 +66,13 @@ public class SettingsPresenter {
         return warning.showAndWait();
     }
 
-    private void ErrorPopup(String msg){
+    private void errorPopup(String msg){
         Alert error = new Alert(Alert.AlertType.ERROR);
-        error.setContentText(String.format("Sorry, it seems like something went wrong.%nPlease try again later%n%n(Error:%s)", msg));
+        error.setContentText(String.format("Sorry, it seems like something went wrong.%nPlease try again later%n%n(Error: %s)", msg));
         error.show();
     }
 
-    private void InfoPopup(String msg){
+    private void infoPopup(String msg){
         Alert info = new Alert(Alert.AlertType.INFORMATION);
         info.setContentText(String.format("The %s file has been cleared", msg));
         info.show();

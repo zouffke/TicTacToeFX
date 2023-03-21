@@ -2,12 +2,15 @@ package be.kdg.tic_tac_toe.model;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+
+import static java.nio.file.StandardOpenOption.APPEND;
 
 public class GamesSave implements SaveFiles {
     private static final String template = """
@@ -17,27 +20,24 @@ public class GamesSave implements SaveFiles {
             //\\\\REMOVING LINES WILL CAUSE ERRORS EVEN BLANK LINES//\\\\
             //\\\\ANY CHANGE CAN CAUSE CORRUPTION OF YOUR SAVE FILE//\\\\
             //\\\\WHEN YOU EDIT THIS FILE, MAKE SURE YOU HAVE A BACKUP AND ALWAYS LEAVE ONE LINE EMPTY AT THE BOTTOM OF THIS FILE//\\\\
-            ========================================================================================================================""";
+            ========================================================================================================================
+            """;
 
     private static final Path gamesSave = Paths.get("resources" + File.separator
             + "saveFiles" + File.separator
             + "games.txt");
-    private List<String[]> gamesList;
+    private final List<String[]> gamesList;
     private Contribution contribution;
     private int gameNumber;
-    private StringBuilder moves;
+    private final StringBuilder moves;
 
-    public GamesSave(Contribution contribution) throws SaveFileException {
+    public GamesSave() throws SaveFileException {
         this.gamesList = new ArrayList<>();
-        this.contribution = contribution;
         this.moves = new StringBuilder();
 
         SaveFiles.checkFile(gamesSave);
     }
 
-    public GamesSave() throws SaveFileException {
-        this(null);
-    }
 
     void initGameSave() throws SaveFileException {
         gameNumber = 0;
@@ -52,7 +52,7 @@ public class GamesSave implements SaveFiles {
                 }
             }
 
-            String newGame = String.format("game:%d;dateStamp:%s;player1:%s;AS:%s;player2:%s;AS:%s;board:%dx%d%n"
+            String newGame = String.format("game:%d;dateStamp:%s;player1:%s;AS:%s;player2:%s;AS:%s;board:%dx%d"
                     , gameNumber
                     , LocalDateTime.now()
                     , this.contribution.getName(1)
@@ -80,4 +80,33 @@ public class GamesSave implements SaveFiles {
     private void addGameLine(String heading) {
         this.addGameLine(heading, null, null);
     }
+
+    void addMove(String move){
+        this.moves.append(move).append(";");
+    }
+
+    void saveGameProgress(String winner) throws SaveFileException {
+        this.gamesList.get(gameNumber)[1] = this.moves.toString();
+        this.gamesList.get(gameNumber)[2] = String.format("Game End: %s", winner);
+
+        try {
+            Files.write(gamesSave, String.format("%s%n%s%n%s%n", this.gamesList.get(gameNumber)[0], this.gamesList.get(gameNumber)[1], this.gamesList.get(gameNumber)[2]).getBytes(), APPEND);
+        } catch (IOException e){
+            throw new SaveFileException("File could not be written: " + gamesSave.getFileName());
+        }
+    }
+
+    void setContribution(Contribution contribution){
+        this.contribution = contribution;
+    }
+
+    public void clearSave() throws SaveFileException{
+        try {
+            Files.write(gamesSave, template.getBytes());
+        } catch (IOException e) {
+            e.printStackTrace();
+            throw new SaveFileException("An Error occurred in: " + gamesSave.getFileName());
+        }
+    }
+
 }

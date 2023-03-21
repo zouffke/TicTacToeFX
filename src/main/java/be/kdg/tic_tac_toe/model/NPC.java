@@ -21,18 +21,18 @@ public class NPC extends Player {
         }
     }
 
-    void playNPC(Board board, Sort currentSort) {
+    String playNPC(Board board, Sort currentSort) {
         //als de keuze ai is dan moet de minimax aangesproken worden en de beste move uitgevoerd worden
         if (ai){
-            this.bestMove(board, currentSort);
+           return this.bestMove(board, currentSort);
             //word de ai niet aangesproken dan moet de makkelijke computer spelen en dus een gewone random gooien voor de plaats
         }else{
-            this.randomMove(board, currentSort);
+           return this.randomMove(board, currentSort);
         }
 
     }
 
-    private void randomMove(Board board, Sort currentSort){
+    private String randomMove(Board board, Sort currentSort){
         // de size van het bord is zo groot als de lengte van de pieces aan mekaar
       int size = board.getPieces().length;
       int x;
@@ -44,7 +44,7 @@ public class NPC extends Player {
       }while (board.getPieces()[y][x] != null);
     // de functie place word aangeroepen en de current sort(x of O) word geplaatst op de gekozen y en x coordinaten
       board.place(currentSort, y, x);
-
+        return String.format("%s:%d-%d;", currentSort, y, x);
     }
 
     private boolean movesAble(Board board) {
@@ -138,7 +138,7 @@ public class NPC extends Player {
         }
     }
 
-    private void bestMove(Board board, Sort ownSort) {
+    private String bestMove(Board board, Sort ownSort) {
         Piece[][] pieces = board.getPieces();
 
         boolean max;
@@ -167,7 +167,7 @@ public class NPC extends Player {
                 }
             }
         }
-        System.out.println("\nBest move is " + bestVal);
         board.place(ownSort, column, row);
+        return String.format("%s:%d-%d;", ownSort, column, row);
     }
 }

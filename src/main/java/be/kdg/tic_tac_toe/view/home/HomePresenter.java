@@ -1,5 +1,6 @@
 package be.kdg.tic_tac_toe.view.home;
 
+import be.kdg.tic_tac_toe.model.GamesSave;
 import be.kdg.tic_tac_toe.model.PlayersSave;
 import be.kdg.tic_tac_toe.model.SaveFileException;
 import be.kdg.tic_tac_toe.view.highscore.HighscorePresenter;
@@ -59,7 +60,7 @@ public class HomePresenter {
             try {
                 SettingsView settingsView = new SettingsView();
                 this.view.getScene().setRoot(settingsView);
-                new SettingsPresenter(new PlayersSave(), settingsView);
+                new SettingsPresenter(new PlayersSave(), new GamesSave(), settingsView);
                 settingsView.getScene().getStylesheets().remove("file:resources/stylesheets/home.css");
                 settingsView.getScene().getStylesheets().add("file:resources/stylesheets/settings.css");
             } catch (SaveFileException e) {
@@ -71,7 +72,7 @@ public class HomePresenter {
 
     private void ErrorPopup(String msg) {
         Alert error = new Alert(Alert.AlertType.ERROR);
-        error.setContentText(String.format("Sorry, it seems like something went wrong.%nPlease try again later%n%n(Error:%s)", msg));
+        error.setContentText(String.format("Sorry, it seems like something went wrong.%nPlease try again later%n%n(Error: %s)", msg));
         error.show();
     }
 
