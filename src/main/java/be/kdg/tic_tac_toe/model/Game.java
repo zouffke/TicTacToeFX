@@ -12,10 +12,6 @@ import java.util.concurrent.TimeUnit;
 import static java.nio.file.StandardOpenOption.APPEND;
 
 public class Game {
-
-    private static final Path gamesSave = Paths.get("resources" + File.separator
-            + "saveFiles" + File.separator
-            + "games.txt");
     private final Board board;
     private final int playerChoice;
     private final int boardChoice;
@@ -24,31 +20,20 @@ public class Game {
     private Player currentPlayer;
     private Sort currentSort;
     private int count;
-    private final StringBuilder moves;
     private final PlayersSave playersSave;
+    private final GamesSave gamesSave;
 
     public Game(int boardChoice, int playerChoice) throws GameException {
         this.count = 1;
         this.validMove = false;
         this.playerChoice = playerChoice;
         this.boardChoice = boardChoice;
-        this.moves = new StringBuilder();
 
         try {
             this.playersSave = new PlayersSave();
+            this.gamesSave = new GamesSave(this.contribution);
         } catch (SaveFileException e) {
             throw new GameException(e.getMessage());
-        }
-
-        if (!Files.exists(gamesSave)) {
-            try {
-                Files.createFile(gamesSave);
-                System.out.println("File created: " + gamesSave.getFileName());
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        } else {
-            System.out.println("File already exists: " + gamesSave.getFileName());
         }
 
         this.board = setBoard(boardChoice);
@@ -88,36 +73,9 @@ public class Game {
         System.out.printf("en\n%s speelt met %s\n", contribution.getName(2), contribution.getSort(2));
         try {
             playersSave.writePlayers(this.contribution.getName(1), this.contribution.getName(2), this.contribution.getPlayer(2) instanceof Human);
+            gamesSave.initGameSave();
         } catch (SaveFileException e) {
             throw new GameException(e.getMessage());
-        }
-        this.initGameSave();
-    }
-
-    private void initGameSave() {
-        int gameNumber = 0;
-        try (Scanner scanner = new Scanner(gamesSave)) {
-            while (scanner.hasNextLine()) {
-                String line = scanner.nextLine();
-
-                if (line.contains("game") && line.contains("board")) {
-                    gameNumber = Integer.parseInt(line.split(";")[0].split(":")[1]);
-                    gameNumber++;
-                }
-            }
-
-            moves.append(String.format("game:%d;dateStamp:%s;player1:%s;AS:%s;player2:%s;AS:%s;board:%dx%d%n"
-                    , gameNumber
-                    , LocalDateTime.now()
-                    , this.contribution.getName(1)
-                    , this.contribution.getSort(1)
-                    , this.contribution.getName(2)
-                    , this.contribution.getSort(2)
-                    , Board.getSize()
-                    , Board.getSize()));
-
-        } catch (Exception e) {
-            e.printStackTrace();
         }
     }
 

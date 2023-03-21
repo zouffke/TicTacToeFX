@@ -10,7 +10,7 @@ import java.util.TreeSet;
 
 import static java.nio.file.StandardOpenOption.APPEND;
 
-public class PlayersSave {
+public class PlayersSave implements SaveFiles {
     private static final Path players = Paths.get("resources" + File.separator + "saveFiles" + File.separator + "players.txt");
 
     private final TreeSet<String> playersMap;
@@ -33,21 +33,8 @@ public class PlayersSave {
                 return compare;
             }
         });
-        this.checkFile();
+        SaveFiles.checkFile(players);
         this.fillList();
-    }
-
-    private void checkFile() throws SaveFileException {
-        if (!Files.exists(players)) {
-            try {
-                Files.createFile(players);
-                System.out.println("File created: " + players.getFileName());
-            } catch (IOException e) {
-                throw new SaveFileException("File could not be created: " + players.getFileName());
-            }
-        } else {
-            System.out.println("File already exists: " + players.getFileName());
-        }
     }
 
     void writePlayers(String playerName1, String playerName2, boolean human) throws SaveFileException {
