@@ -76,4 +76,8 @@ public class HomeView extends BorderPane {
     Button getOptions(){
         return this.options;
     }
+
+    Button getGames(){
+        return this.games;
+    }
 }

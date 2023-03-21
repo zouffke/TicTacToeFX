@@ -35,7 +35,7 @@ public class HighscoreView extends BorderPane {
         this.scores[1].getStyleClass().add("second");
         this.scores[2].getStyleClass().add("third");
 
-        this.terug = new Button("terug");
+        this.terug = new Button("Back");
         this.terug.getStyleClass().add("returnButton");
 
     }

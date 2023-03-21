@@ -109,4 +109,12 @@ public class GamesSave implements SaveFiles {
         }
     }
 
+    public int getSize(){
+        return this.gamesList.size();
+    }
+
+    public String getGame(int index){
+        return this.gamesList.get(index)[0];
+    }
+
 }

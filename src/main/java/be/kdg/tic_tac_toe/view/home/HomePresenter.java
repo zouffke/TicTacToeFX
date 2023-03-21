@@ -1,5 +1,6 @@
 package be.kdg.tic_tac_toe.view.home;
 
+import be.kdg.tic_tac_toe.model.GameException;
 import be.kdg.tic_tac_toe.model.GamesSave;
 import be.kdg.tic_tac_toe.model.PlayersSave;
 import be.kdg.tic_tac_toe.model.SaveFileException;
@@ -7,6 +8,8 @@ import be.kdg.tic_tac_toe.view.highscore.HighscorePresenter;
 import be.kdg.tic_tac_toe.view.highscore.HighscoreView;
 import be.kdg.tic_tac_toe.view.menu.MenuPresenter;
 import be.kdg.tic_tac_toe.view.menu.MenuView;
+import be.kdg.tic_tac_toe.view.previous_games.PreviousGamesPresenter;
+import be.kdg.tic_tac_toe.view.previous_games.PreviousGamesView;
 import be.kdg.tic_tac_toe.view.settings.SettingsPresenter;
 import be.kdg.tic_tac_toe.view.settings.SettingsView;
 import javafx.application.Platform;
@@ -63,6 +66,18 @@ public class HomePresenter {
                 new SettingsPresenter(new PlayersSave(), new GamesSave(), settingsView);
                 settingsView.getScene().getStylesheets().remove("file:resources/stylesheets/home.css");
                 settingsView.getScene().getStylesheets().add("file:resources/stylesheets/settings.css");
+            } catch (SaveFileException e) {
+                ErrorPopup(e.getMessage());
+            }
+        });
+
+        this.view.getGames().setOnAction(action -> {
+            try {
+                PreviousGamesView gamesView = new PreviousGamesView();
+                this.view.getScene().setRoot(gamesView);
+                new PreviousGamesPresenter(new GamesSave(), gamesView);
+                gamesView.getScene().getStylesheets().remove("file:resources/stylesheets/home.css");
+                gamesView.getScene().getStylesheets().add("file:resources/stylesheets/previousGames.css");
             } catch (SaveFileException e) {
                 ErrorPopup(e.getMessage());
             }
