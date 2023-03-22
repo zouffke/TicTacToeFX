@@ -1,0 +1,10 @@
+.returnButton {
+    -fx-pref-height: 20;
+    -fx-pref-width: 50;
+}
+
+.menu-button {
+    -fx-pref-height: 20;
+    -fx-pref-width: 300;
+    -fx-font-size: 20;
+}

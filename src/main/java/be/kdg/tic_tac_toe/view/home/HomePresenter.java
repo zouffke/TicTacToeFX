@@ -1,10 +1,19 @@
 package be.kdg.tic_tac_toe.view.home;
 
+import be.kdg.tic_tac_toe.model.GameException;
+import be.kdg.tic_tac_toe.model.GamesSave;
+import be.kdg.tic_tac_toe.model.PlayersSave;
+import be.kdg.tic_tac_toe.model.SaveFileException;
 import be.kdg.tic_tac_toe.view.highscore.HighscorePresenter;
 import be.kdg.tic_tac_toe.view.highscore.HighscoreView;
 import be.kdg.tic_tac_toe.view.menu.MenuPresenter;
 import be.kdg.tic_tac_toe.view.menu.MenuView;
+import be.kdg.tic_tac_toe.view.previous_games.PreviousGamesPresenter;
+import be.kdg.tic_tac_toe.view.previous_games.PreviousGamesView;
+import be.kdg.tic_tac_toe.view.settings.SettingsPresenter;
+import be.kdg.tic_tac_toe.view.settings.SettingsView;
 import javafx.application.Platform;
+import javafx.scene.control.Alert;
 
 public class HomePresenter {
 
@@ -39,11 +48,47 @@ public class HomePresenter {
 
         //als je op de knop highscore klikt dan gaat die naar de vieuw van highscore en maakt een nieuwe scene aan
         this.view.getHighscore().setOnAction(action -> {
-            HighscoreView highscoreView = new HighscoreView();
-            new HighscorePresenter(highscoreView);
-            view.getScene().setRoot(highscoreView);
+            try {
+                HighscoreView highscoreView = new HighscoreView();
+                view.getScene().setRoot(highscoreView);
+                highscoreView.getScene().getStylesheets().remove("file:resources/stylesheets/home.css");
+                highscoreView.getScene().getStylesheets().add("file:resources/stylesheets/highscores.css");
+                new HighscorePresenter(highscoreView, new PlayersSave());
+            } catch (SaveFileException e) {
+                ErrorPopup(e.getMessage());
+            }
         });
 
+        this.view.getOptions().setOnAction(action -> {
+            try {
+                SettingsView settingsView = new SettingsView();
+                this.view.getScene().setRoot(settingsView);
+                new SettingsPresenter(new PlayersSave(), new GamesSave(), settingsView);
+                settingsView.getScene().getStylesheets().remove("file:resources/stylesheets/home.css");
+                settingsView.getScene().getStylesheets().add("file:resources/stylesheets/settings.css");
+            } catch (SaveFileException e) {
+                ErrorPopup(e.getMessage());
+            }
+        });
+
+        this.view.getGames().setOnAction(action -> {
+            try {
+                PreviousGamesView gamesView = new PreviousGamesView();
+                this.view.getScene().setRoot(gamesView);
+                new PreviousGamesPresenter(new GamesSave(), gamesView);
+                gamesView.getScene().getStylesheets().remove("file:resources/stylesheets/home.css");
+                gamesView.getScene().getStylesheets().add("file:resources/stylesheets/previousGames.css");
+            } catch (SaveFileException e) {
+                ErrorPopup(e.getMessage());
+            }
+        });
+
+    }
+
+    private void ErrorPopup(String msg) {
+        Alert error = new Alert(Alert.AlertType.ERROR);
+        error.setContentText(String.format("Sorry, it seems like something went wrong.%nPlease try again later%n%n(Error: %s)", msg));
+        error.show();
     }
 
     private void updateView() {

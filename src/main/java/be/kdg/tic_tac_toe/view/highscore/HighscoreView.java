@@ -4,18 +4,15 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 
 
-public class HighscoreView extends VBox {
+public class HighscoreView extends BorderPane {
 
     //create vars
     private Label titel;
-    private Label score1;
-    private Label score2;
-    private Label score3;
-    private Label score4;
-    private Label score5;
+    private Label[] scores;
     private Button terug;
 
     //constructor die initalizeNodes en layoutNodes aanroept zodat ze gebruikt kunne worden
@@ -25,34 +22,40 @@ public class HighscoreView extends VBox {
     }
 
     private void initializeNodes() {
+        this.scores = new Label[5];
         //een naam maken voor het label titel genaamd tic tac toe
         this.titel = new Label("Highscores");
 
         //de volgende buttons initializeren en ze een naam geven
-        this.score1 = new Label("'undefined'");
-        this.score2 = new Label("'undefined'");
-        this.score3 = new Label("'undefined'");
-        this.score4 = new Label("'undefined'");
-        this.score5 = new Label("'undefined'");
-        this.terug = new Button("terug");
+        for (int i = 0; i < this.scores.length; i++) {
+            this.scores[i] = new Label();
+            this.scores[i].getStyleClass().add("scores");
+        }
+        this.scores[0].getStyleClass().add("first");
+        this.scores[1].getStyleClass().add("second");
+        this.scores[2].getStyleClass().add("third");
+
+        this.terug = new Button("Back");
+        this.terug.getStyleClass().add("returnButton");
 
     }
 
     private void layoutNodes() {
-        // toevoegen van al de buttons en labels
-        this.getChildren().addAll(this.titel, this.score1, this.score2, this.score3, this.score4, this.score5, this.terug);
+        VBox vBox = new VBox();
+        vBox.getStyleClass().add("vBox");
+        this.setTop(this.titel);
+        this.setCenter(vBox);
+        this.setBottom(this.terug);
 
-        //positie van de buttons en labels zetten naar canter
-        this.setAlignment(Pos.TOP_CENTER);
+        BorderPane.setAlignment(this.titel, Pos.CENTER);
+        BorderPane.setAlignment(vBox, Pos.CENTER);
+        BorderPane.setAlignment(this.terug, Pos.CENTER);
 
-        //overal 50 pixels ruimte rond de buttons en de labels
-        VBox.setMargin(this.titel, new Insets(50));
-        VBox.setMargin(this.score1, new Insets(50));
-        VBox.setMargin(this.score2, new Insets(50));
-        VBox.setMargin(this.score3, new Insets(50));
-        VBox.setMargin(this.score4, new Insets(50));
-        VBox.setMargin(this.score5, new Insets(50));
-        VBox.setMargin(this.terug, new Insets(50));
+        BorderPane.setMargin(this.terug, new Insets(0, 0, 10, 0));
+
+        for (Label score : scores) {
+            vBox.getChildren().add(score);
+        }
 
     }
 
@@ -60,7 +63,9 @@ public class HighscoreView extends VBox {
         return this.terug;
     }
 
-
+    Label[] getScores() {
+        return this.scores;
+    }
 }
 
 

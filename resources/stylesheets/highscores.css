@@ -1,0 +1,23 @@
+.title{
+
+}
+.scores {
+    -fx-font-size: 35px;
+}
+
+.first{
+    -fx-background-color: GOLD;
+}
+
+.second{
+    -fx-background-color: SILVER;
+}
+
+.third{
+    -fx-background-color: #cd7f32;
+}
+
+.vBox{
+    -fx-alignment: CENTER;
+    -fx-spacing: 30;
+}

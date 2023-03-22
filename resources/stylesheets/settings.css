@@ -1,0 +1,17 @@
+.button {
+    -fx-pref-height: 50;
+    -fx-pref-width: 120;
+}
+
+.returnButton {
+    -fx-pref-height: 20;
+    -fx-pref-width: 50;
+}
+
+.hBox {
+    -fx-spacing: 10;
+    -fx-alignment: CENTER;
+}
+
+
+

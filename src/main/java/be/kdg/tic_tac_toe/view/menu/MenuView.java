@@ -70,7 +70,7 @@ public class MenuView extends BorderPane {
 
         this.bordSize = new Label("bordSize");
         this.play = new Button("play");
-        this.terug = new Button("terug");
+        this.terug = new Button("back");
         this.terug.getStyleClass().add("returnButton");
     }
 

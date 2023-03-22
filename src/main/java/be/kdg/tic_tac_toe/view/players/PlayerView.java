@@ -31,7 +31,7 @@ public class PlayerView extends VBox {
         // een nieuw tekstfield maken om iets in te vullen
         this.name1 = new TextField();
         if (choice != 1){
-            //als de keuze bij gamemode niet 1  was (pvp) dan word er een nieuwe textfield aangemaakt en ingevuld met 'bot'
+            //als de keuze bij gamemode niet 1 was (pvp) dan word er een nieuwe textfield aangemaakt en ingevuld met 'bot'
             this.name2 = new TextField("Bot");
             // je kan dit tekstveld niet aanpass,
             this.name2.setEditable(false);

@@ -12,5 +12,12 @@
 }
 
 .turnTrue{
-    -fx-background-color: lightgreen
+    -fx-background-color: lightgreen;
+}
+
+.selected{
+    -fx-border-width: 3;
+    -fx-border-color: #24a0ed;
+    -fx-opacity: 0.5;
+    -fx-background-color: #c5c5c5;
 }

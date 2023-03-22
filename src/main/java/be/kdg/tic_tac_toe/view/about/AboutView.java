@@ -24,9 +24,5 @@ public class AboutView extends BorderPane {
     private void layoutNodes() {
         this.setCenter(regels);
     }
-
-    Label getRegels() {
-        return this.regels;
-    }
 }
 

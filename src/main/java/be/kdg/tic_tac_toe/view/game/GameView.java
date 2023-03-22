@@ -6,9 +6,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.GridPane;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.*;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.util.Duration;
@@ -27,6 +25,7 @@ public class GameView extends BorderPane {
     private MenuItem rules;
     //game view
     private Figure[][] figures;
+    private Pane[][] background;
     private Label name1;
     private Label name2;
 
@@ -53,6 +52,7 @@ public class GameView extends BorderPane {
         this.back = new MenuItem("Return");
         this.rules = new MenuItem("Rules");
         this.figures = new Figure[boardSize][boardSize];
+        this.background = new Pane[boardSize][boardSize];
         this.name1 = new Label();
         this.name1.getStyleClass().add("names");
         this.name2 = new Label();
@@ -76,13 +76,16 @@ public class GameView extends BorderPane {
         for (int i = 0; i < figures.length; i++) {
             for (int j = 0; j < figures[i].length; j++) {
                 figures[i][j] = new Figure(i, j);
-                grid.add(figures[i][j], i, j);
+
+                StackPane stack = new StackPane(figures[i][j]);
+                background[i][j] = new Pane(stack);
+                background[i][j].setMaxSize(100, 100);
+
+                grid.add(background[i][j], i, j);
             }
         }
 
         grid.setGridLinesVisible(true);
-
-        //grid.setBorder(new Border(new BorderStroke(Color.RED, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
 
         BorderPane.setMargin(grid, new Insets(50));
         this.setCenter(grid);
@@ -132,5 +135,9 @@ public class GameView extends BorderPane {
 
     Label getName2() {
         return this.name2;
+    }
+
+    Pane[][] getBackgroundPane() {
+        return this.background;
     }
 }
