@@ -11,12 +11,11 @@ public class Game {
     private boolean validMove;
     private Player currentPlayer;
     private Sort currentSort;
-    private int count;
+    private boolean firstPlayer = true;
     private final PlayersSave playersSave;
     private final GamesSave gamesSave;
 
     public Game(int boardChoice, int playerChoice) throws GameException {
-        this.count = 1;
         this.validMove = false;
         this.playerChoice = playerChoice;
         this.boardChoice = boardChoice;
@@ -81,7 +80,7 @@ public class Game {
     }
 
     public void updateParameters() {
-        if (this.count++ == 1) {
+        if (this.firstPlayer) {
             this.currentPlayer = this.contribution.getSort(1).equals("X") ? this.contribution.getPlayer(1) : this.contribution.getPlayer(2);
             this.currentSort = Sort.X;
             System.out.printf("\n%s's beurt;\n", this.currentPlayer.toString());
@@ -89,8 +88,8 @@ public class Game {
             this.currentPlayer = this.contribution.getSort(1).equals("O") ? this.contribution.getPlayer(1) : this.contribution.getPlayer(2);
             this.currentSort = Sort.O;
             System.out.printf("\n%s's beurt;\n", this.currentPlayer.toString());
-            this.count = 1;
         }
+        this.firstPlayer = !this.firstPlayer;
     }
 
     public void npcMove() {
@@ -157,6 +156,10 @@ public class Game {
 
     public String getPlayer2() {
         return this.contribution.getName(2);
+    }
+
+    public boolean getHuman(){
+        return this.currentPlayer instanceof Human;
     }
 
 }

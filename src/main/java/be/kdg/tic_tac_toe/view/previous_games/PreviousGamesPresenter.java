@@ -23,7 +23,7 @@ public class PreviousGamesPresenter {
             HomeView homeView = new HomeView();
             this.view.getScene().setRoot(homeView);
             new HomePresenter(homeView);
-            homeView.getScene().getStylesheets().remove("file:resources/stylesheets/settings.css");
+            homeView.getScene().getStylesheets().remove("file:resources/stylesheets/previousGames.css");
             homeView.getScene().getStylesheets().add("file:resources/stylesheets/home.css");
         });
     }

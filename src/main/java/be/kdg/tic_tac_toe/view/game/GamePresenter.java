@@ -1,13 +1,15 @@
 package be.kdg.tic_tac_toe.view.game;
 
-import be.kdg.tic_tac_toe.model.*;
+import be.kdg.tic_tac_toe.model.Board;
+import be.kdg.tic_tac_toe.model.Game;
+import be.kdg.tic_tac_toe.model.GameException;
+import be.kdg.tic_tac_toe.model.Sort;
 import be.kdg.tic_tac_toe.view.about.AboutPresenter;
 import be.kdg.tic_tac_toe.view.about.AboutView;
 import be.kdg.tic_tac_toe.view.menu.MenuPresenter;
 import be.kdg.tic_tac_toe.view.menu.MenuView;
 import be.kdg.tic_tac_toe.view.models.Figure;
 import javafx.application.Platform;
-import javafx.concurrent.Task;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonBar;
@@ -16,12 +18,15 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 import java.util.Optional;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
 
 public class GamePresenter {
     private final GameView view;
     private final Game model;
     private final Board board;
-    private boolean humanTurn;
     private boolean gameOver;
     private int y;
     private int x;
@@ -37,9 +42,11 @@ public class GamePresenter {
         this.view.getName1().setText(this.model.getPlayer1());
         this.view.getName2().setText(this.model.getPlayer2());
 
-        this.addEventHandlers();
+        this.setGameOver();
+        this.callNPC();
         this.updateView();
 
+        this.addEventHandlers();
         this.addKeyEventHandlers();
     }
 
@@ -68,10 +75,9 @@ public class GamePresenter {
                 }
                 case SPACE -> {
                     if (!gameOver) {
-                        if (humanTurn) {
+                        if (this.model.getHuman()) {
                             try {
                                 this.model.place(x, y);
-                                this.humanTurn = false;
                                 updateView();
                             } catch (GameException e) {
                                 Alert warning = new Alert(Alert.AlertType.WARNING);
@@ -107,17 +113,18 @@ public class GamePresenter {
         for (Figure[] rows : this.view.getFigures()) {
             for (Figure figure : rows) {
                 figure.setOnMouseClicked(event -> {
-                    if (!gameOver) {
-                        if (humanTurn) {
-                            try {
-                                this.model.place(figure.getColumn(), figure.getRow());
-                                this.humanTurn = false;
-                                updateView();
-                            } catch (GameException e) {
-                                Alert alert = new Alert(Alert.AlertType.ERROR);
-                                alert.setContentText(e.getMessage());
-                                alert.showAndWait();
-                            }
+                    if (this.model.getHuman() && !gameOver) {
+                        try {
+                            this.model.place(figure.getColumn(), figure.getRow());
+                            this.updateView();
+
+                            this.setGameOver();
+                            this.callNPC();
+
+                        } catch (GameException e) {
+                            Alert alert = new Alert(Alert.AlertType.ERROR);
+                            alert.setContentText(e.getMessage());
+                            alert.showAndWait();
                         }
                     }
                 });
@@ -151,21 +158,6 @@ public class GamePresenter {
                 }
             }
         }
-
-        if (!gameOver) {
-            if (!humanTurn) {
-                //wait for the screen to render before calling the NPC function
-                Task<Void> task = new Task<>() {
-                    @Override
-                    public Void call() {
-                        callNPC();
-                        return null;
-                    }
-                };
-                new Thread(task).start();
-            }
-        }
-        setGameOver();
     }
 
     private void currentTurn() {
@@ -179,9 +171,18 @@ public class GamePresenter {
     }
 
     private void callNPC() {
-        if (this.model.getCurrentPlayer() instanceof NPC) {
-            this.model.npcMove();
-            updateView();
+        if (!this.model.getHuman() && !gameOver) {
+            ExecutorService pool = Executors.newSingleThreadExecutor();
+            Future<?> future = pool.submit(model::npcMove);
+
+            try {
+                future.get();
+            } catch (InterruptedException | ExecutionException e) {
+                future.cancel(true);
+            }
+
+            this.updateView();
+            this.setGameOver();
         }
     }
 
@@ -191,25 +192,16 @@ public class GamePresenter {
                 gameOver = true;
                 this.model.addScore(false, this.model.getCurrentPlayer());
                 this.model.saveGameProgress(this.model.getCurrentPlayer().toString());
-                if (this.model.getCurrentPlayer() instanceof Human) {
-                    this.humanTurn = true;
-                }
                 gameEndPopup("Win", String.format("%s has won\nDo you want to play again?", this.model.getCurrentPlayer().toString()));
             } else if (this.model.drawCheck()) {
                 gameOver = true;
                 this.model.addScore(true);
                 this.model.saveGameProgress("Draw");
-                if (this.model.getCurrentPlayer() instanceof Human) {
-                    this.humanTurn = true;
-                }
+
                 gameEndPopup("Draw", "It's a draw!\nDo you want to play again?");
             } else {
                 this.model.updateParameters();
                 currentTurn();
-            }
-
-            if (this.model.getCurrentPlayer() instanceof Human) {
-                this.humanTurn = true;
             }
         } catch (GameException e) {
             errorPopup(e.getMessage());

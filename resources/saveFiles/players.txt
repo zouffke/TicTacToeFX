@@ -5,5 +5,43 @@
 //\\ANY CHANGE CAN CAUSE CORRUPTION OF YOUR SAVE FILE//\\
 //\\WHEN YOU EDIT THIS FILE, MAKE SURE YOU HAVE A BACKUP AND ALWAYS LEAVE ONE LINE EMPTY AT THE BOTTOM OF THIS FILE//\\
 ========================================================================================================================
-player:sdfg;score:2
-player:zert;score:0
+player:dsf;score:6
+player:a;score:4
+player:lllllll;score:3
+player:f;score:2
+player:z;score:2
+player:^wsdf;score:0
+player:d;score:0
+player:dfgh;score:0
+player:dfsg;score:0
+player:dhgfhd;score:0
+player:dxfgh;score:0
+player:f;score:0
+player:fdnfgbdv;score:0
+player:fgth;score:0
+player:fsdgw;score:0
+player:fsdvsc;score:0
+player:ftcvgbh;score:0
+player:ftg;score:0
+player:gfsd;score:0
+player:gfsdq;score:0
+player:hjk;score:0
+player:j;score:0
+player:k;score:0
+player:ktu;score:0
+player:ll;score:0
+player:ng fbdv;score:0
+player:qsdf;score:0
+player:r;score:0
+player:s;score:0
+player:sdfg;score:0
+player:t;score:0
+player:tegfsd;score:0
+player:tehfsdg;score:0
+player:thrgf;score:0
+player:tregf;score:0
+player:x;score:0
+player:y;score:0
+player:yjthbgfdv;score:0
+player:z;score:0
+player:a;score:0
