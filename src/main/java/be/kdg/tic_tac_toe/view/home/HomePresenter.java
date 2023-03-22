@@ -1,6 +1,5 @@
 package be.kdg.tic_tac_toe.view.home;
 
-import be.kdg.tic_tac_toe.model.GameException;
 import be.kdg.tic_tac_toe.model.GamesSave;
 import be.kdg.tic_tac_toe.model.PlayersSave;
 import be.kdg.tic_tac_toe.model.SaveFileException;
