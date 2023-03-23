@@ -5,15 +5,3 @@
 //\\ANY CHANGE CAN CAUSE CORRUPTION OF YOUR SAVE FILE//\\
 //\\WHEN YOU EDIT THIS FILE, MAKE SURE YOU HAVE A BACKUP AND ALWAYS LEAVE ONE LINE EMPTY AT THE BOTTOM OF THIS FILE//\\
 ========================================================================================================================
-player=eryt;score=2
-player=hgfds;score=2
-player=zet;score=2
-player='ytrzed;score=0
-player=Luca;score=0
-player=aze;score=0
-player=drtyfutgi;score=0
-player=fdgqs;score=0
-player=sdfg;score=0
-player=trezfd;score=0
-player=zert;score=0
-player=zret;score=0

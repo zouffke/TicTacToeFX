@@ -115,7 +115,7 @@ public class Game {
 
         if (validMove) {
             this.board.place(this.currentSort, y, x);
-            this.gamesSave.addMove(String.format("%s:%d-%d;", this.currentSort, y, x));
+            this.gamesSave.addMove(String.format("%s=%d-%d;", this.currentSort, y, x));
         } else {
             throw new GameException("This is an invalid move");
         }

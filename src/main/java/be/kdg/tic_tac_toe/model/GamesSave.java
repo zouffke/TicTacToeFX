@@ -7,6 +7,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 
@@ -29,11 +30,9 @@ public class GamesSave {
     private final List<GameSaveObjects> gamesList;
     private Contribution contribution;
     private int gameNumber;
-    private final StringBuilder moves;
 
     public GamesSave() throws SaveFileException {
         this.gamesList = new ArrayList<>();
-        this.moves = new StringBuilder();
         this.gameNumber = 0;
 
         SaveFiles.checkFile(gamesSave);
@@ -65,12 +64,18 @@ public class GamesSave {
                 , new Player(SaveFiles.getSubString(heading, 4))
                 , Sort.valueOf(SaveFiles.getSubString(heading, 5))
                 , SaveFiles.getSubString(heading, 6)
-                , moves
+                , this.fillMoves(moves)
                 , new Player(SaveFiles.getSubString(winner, 0))));
     }
 
-    private GameSaveObjects createObject(int gameNumber, LocalDateTime date, Player player1, Sort sort1, Player player2, Sort sort2, String board, String moves, Player winner) {
+    private GameSaveObjects createObject(int gameNumber, LocalDateTime date, Player player1, Sort sort1, Player player2, Sort sort2, String board, List<String> moves, Player winner) {
         return new GameSaveObjects(gameNumber, date, player1, sort1, player2, sort2, board, moves, winner);
+    }
+
+    private List<String> fillMoves(String moves) {
+        String[] movesArray = moves.split(";");
+
+        return new ArrayList<>(Arrays.asList(movesArray));
     }
 
     void initGameSave() {
@@ -91,11 +96,10 @@ public class GamesSave {
     }
 
     void addMove(String move) {
-        this.moves.append(move);
+        this.gamesList.get(this.gameNumber).addMove(move);
     }
 
     void saveGameProgress(String winner) throws SaveFileException {
-        this.gamesList.get(this.gameNumber).setMoves(this.moves.toString());
         this.gamesList.get(this.gameNumber).setWinner(new Player(winner));
 
         try {

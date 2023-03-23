@@ -44,7 +44,7 @@ public class NPC extends Player {
       }while (board.getPieces()[y][x] != null);
     // de functie place word aangeroepen en de current sort(x of O) word geplaatst op de gekozen y en x coordinaten
       board.place(currentSort, y, x);
-        return String.format("%s:%d-%d;", currentSort, y, x);
+        return String.format("%s=%d-%d;", currentSort, y, x);
     }
 
     private boolean movesAble(Board board) {
@@ -168,6 +168,6 @@ public class NPC extends Player {
             }
         }
         board.place(ownSort, column, row);
-        return String.format("%s:%d-%d;", ownSort, column, row);
+        return String.format("%s=%d-%d;", ownSort, column, row);
     }
 }

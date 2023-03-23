@@ -6,6 +6,7 @@ import be.kdg.tic_tac_toe.view.gameHistory.GameHistoryPresenter;
 import be.kdg.tic_tac_toe.view.gameHistory.GameHistoryView;
 import be.kdg.tic_tac_toe.view.home.HomePresenter;
 import be.kdg.tic_tac_toe.view.home.HomeView;
+
 import java.time.format.DateTimeFormatter;
 
 public class PreviousGamesPresenter {
@@ -31,11 +32,13 @@ public class PreviousGamesPresenter {
         });
 
         this.view.getList().setOnMouseClicked(action -> {
-            int index = this.view.getList().getSelectionModel().getSelectedIndex();
-            if (index != -1) {
-                GameHistoryView gameHistoryView = new GameHistoryView();
-                this.view.getScene().setRoot(gameHistoryView);
-                new GameHistoryPresenter(this.model.getGame(index), gameHistoryView);
+            if (this.model.getSize() != 0) {
+                int index = this.view.getList().getSelectionModel().getSelectedIndex();
+                if (index != -1) {
+                    GameHistoryView gameHistoryView = new GameHistoryView();
+                    this.view.getScene().setRoot(gameHistoryView);
+                    new GameHistoryPresenter(this.model.getGame(index), gameHistoryView);
+                }
             }
         });
     }
