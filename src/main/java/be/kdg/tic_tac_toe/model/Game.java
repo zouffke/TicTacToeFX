@@ -14,11 +14,10 @@ public class Game {
     private boolean firstPlayer = true;
     private final PlayersSave playersSave;
     private final GamesSave gamesSave;
-    private boolean gameEnded;
 
     public Game(int boardChoice, int playerChoice) throws GameException {
+        //vars initializeren, valid move begint op false omdat ze eerst moeten checkken of het true is
         this.validMove = false;
-        this.gameEnded = false;
         this.playerChoice = playerChoice;
         this.boardChoice = boardChoice;
 
@@ -28,11 +27,15 @@ public class Game {
         } catch (SaveFileException e) {
             throw new GameException(e.getMessage());
         }
-
+    // het gekozen bord genereren
         this.board = setBoard(boardChoice);
     }
 
     private Board setBoard(int option) {
+        //de bordsize kiezen
+        //kiezen ze 5 dan moet de width en lengt op 5 gezet worden
+        //kiezen ze 7 dan moet de width en lengt op 5 gezet worden
+        //hij staat default op 3x3
         switch (option) {
             case 5 -> {
                 return new Board(5, 5);
@@ -47,6 +50,8 @@ public class Game {
     }
 
     public void setPlayers(int choice, String name1, String name2) throws GameException {
+        //exception handeling als de namen niet zijn ingevuld word er een exception gegooid die zegt dat de namen
+        //ingevuld moeten worden om door te gaan
         if (name1.isBlank() || name2.isBlank()) {
             throw new GameException("Please write your name in the given field(s) to continue");
         }
@@ -56,17 +61,19 @@ public class Game {
         }
 
         if (choice == 1) {
+            //als keuze 1 is dan spelen we pvp en moeten er dus 2 namen gegeven worden
             this.contribution = new Contribution(name1, name2);
 
         } else if (choice == 2) {
+            // als de keuze 2 is dan word de ai op false gezet wat bedenkt dat het de makkelijke is --> random bot
             this.contribution = new Contribution(name1, false);
-
+        // als 1 en 2 niet gekozen zijn word de ai op true gezet en gaat de minimax in werking
         } else {
             this.contribution = new Contribution(name1, true);
         }
 
         this.contribution.setSorts();
-
+        // hier word bepaald wie met wat speelt (X, O)
         System.out.printf("\n%s speelt met %s\n", contribution.getName(1), contribution.getSort(1));
         System.out.printf("en\n%s speelt met %s\n", contribution.getName(2), contribution.getSort(2));
         try {
@@ -111,6 +118,7 @@ public class Game {
     }
 
     public void place(int x, int y) throws GameException {
+        //checkt of de zet die gemaakt word valid is zo niet gooit een exception
         validMove = board.validMove(y, x);
 
         if (validMove) {
@@ -134,17 +142,11 @@ public class Game {
     }
 
     public boolean winCheck() {
-        this.gameEnded = this.board.win(this.currentSort);
-        return this.gameEnded;
+        return this.board.win(this.currentSort);
     }
 
     public boolean drawCheck() {
-        this.gameEnded = this.board.draw();
-        return this.gameEnded;
-    }
-
-    public boolean getGameEnded() {
-        return !this.gameEnded;
+        return this.board.draw();
     }
 
     public Board getBoard() {

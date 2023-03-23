@@ -85,7 +85,7 @@ public class Board {
             for (int x = 0; x < this.pieces[y].length; x++) {
                 //als pieces xy niet null is en der dus iets staat en als de equalsSort gelijk is aan true
                 if (this.pieces[y][x] != null && this.pieces[y][x].equalsSort(sort)) {
-                    //
+                    //wat staat errond
                     for (int yy = -1; yy <= 1; yy++) {
                         for (int xx = -1; xx <= 1; xx++) {
                             //out of bounds check
