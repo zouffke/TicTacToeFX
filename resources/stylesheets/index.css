@@ -16,3 +16,9 @@
     -fx-pref-height: 20;
     -fx-pref-width: 50;
 }
+
+.list-cell {
+    -fx-font-weight: bold;
+    -fx-font-size: 15;
+    -fx-padding: 5;
+}

@@ -91,7 +91,7 @@ public class GamesSave {
     }
 
     void addMove(String move) {
-        this.moves.append(move).append(";");
+        this.moves.append(move);
     }
 
     void saveGameProgress(String winner) throws SaveFileException {
@@ -123,5 +123,9 @@ public class GamesSave {
 
     public int getSize() {
         return this.gamesList.size();
+    }
+
+    public GameSaveObjects getGame(int index) {
+        return this.gamesList.get(index);
     }
 }

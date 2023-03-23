@@ -19,6 +19,6 @@ public final class SaveFiles {
     }
 
     public static String getSubString(String line, int index) {
-         return line.split(";")[index].split(":")[1];
+         return line.split(";")[index].split("=")[1];
     }
 }

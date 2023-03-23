@@ -5,6 +5,12 @@
 //\\ANY CHANGE CAN CAUSE CORRUPTION OF YOUR SAVE FILE//\\
 //\\WHEN YOU EDIT THIS FILE, MAKE SURE YOU HAVE A BACKUP AND ALWAYS LEAVE ONE LINE EMPTY AT THE BOTTOM OF THIS FILE//\\
 ========================================================================================================================
-game:0;dateStamp:2023-03-23T12:31:39.847270400;player1:jg;sort1:X;player2:erza;sort2:O;board:3x3
-X:0-0;;O:1-0;;X:0-1;;O:1-1;;X:0-2;;
-jg
+game=0;dateStamp=2023-03-23T14:17:47.216031900;player1=hgfds;sort1=X;player2=zret;sort2=O;board=3x3
+X:0-0;O:1-0;X:0-1;O:1-1;X:0-2;
+GameEnd=hgfds
+game=1;dateStamp=2023-03-23T14:43:13.527065200;player1=eryt;sort1=X;player2=aze;sort2=O;board=3x3
+X:0-0;O:1-0;X:0-1;O:0-2;X:1-1;O:1-2;X:2-2;
+GameEnd=eryt
+game=2;dateStamp=2023-03-23T15:16:38.137354900;player1=sdfg;sort1=O;player2=zet;sort2=X;board=3x3
+X:0-0;O:1-0;X:0-1;O:1-1;X:0-2;
+GameEnd=zet

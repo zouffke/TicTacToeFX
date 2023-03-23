@@ -58,10 +58,10 @@ public class PlayersSave {
             }
             //if the name is not in the file, add it
             if (!name1) {
-                Files.write(players, String.format("player:%s;score:0%n", playerName1).getBytes(), APPEND);
+                Files.write(players, String.format("player=%s;score=0%n", playerName1).getBytes(), APPEND);
             }
             if (!name2 && human) {
-                Files.write(players, String.format("player:%s;score:0%n", playerName2).getBytes(), APPEND);
+                Files.write(players, String.format("player=%s;score=0%n", playerName2).getBytes(), APPEND);
             }
 
             this.fillList();
@@ -140,7 +140,7 @@ public class PlayersSave {
                 String line = playersMap.toArray()[i].toString();
                 int newScore = this.getScore(line) + score;
                 playersMap.remove(line);
-                playersMap.add(String.format("player:%s;score:%d", player, newScore));
+                playersMap.add(String.format("player=%s;score=%d", player, newScore));
                 return;
             }
         }

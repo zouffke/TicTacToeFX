@@ -34,9 +34,9 @@ public class GameSaveObjects {
     }
 
     String getHeading(){
-        return String.format("game:%d;dateStamp:%s;player1:%s;sort1:%s;player2:%s;sort2:%s;board:%s"
+        return String.format("game=%d;dateStamp=%s;player1=%s;sort1=%s;player2=%s;sort2=%s;board=%s"
                 , gameNumber
-                , date.toString()
+                , date
                 , player1.toString()
                 , sort1.toString()
                 , player2.toString()
@@ -44,11 +44,18 @@ public class GameSaveObjects {
                 , board);
     }
 
-    String getMoves(){
+    public String getMoves(){
         return this.moves;
     }
 
     String getWinner(){
-        return this.winner.toString();
+        return String.format("GameEnd=%s", this.winner.toString());
+    }
+
+    public LocalDateTime getDate() {
+        return this.date;
+    }
+    public int getGameNumber(){
+        return this.gameNumber;
     }
 }

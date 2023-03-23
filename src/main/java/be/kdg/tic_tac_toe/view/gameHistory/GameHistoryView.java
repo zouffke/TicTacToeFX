@@ -1,29 +1,33 @@
-package be.kdg.tic_tac_toe.view.previous_games;
+package be.kdg.tic_tac_toe.view.gameHistory;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
-import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.ListView;
 import javafx.scene.layout.BorderPane;
 
-public class PreviousGamesView extends BorderPane {
+public class GameHistoryView extends BorderPane {
 
     private Label title;
-    private ListView<String> list;
-    private ObservableList<String> games;
     private Button back;
+    private ListView<String> list;
+    private ObservableList<String> moves;
 
 
-    public PreviousGamesView() {
+    public GameHistoryView() {
         this.initializeNodes();
         this.layoutNodes();
     }
 
     private void initializeNodes() {
-        this.title = new Label("Previous Games");
+        this.title = new Label();
+
         this.list = new ListView<>();
-        this.games = FXCollections.observableArrayList();
+        this.moves = FXCollections.observableArrayList();
+
         this.back = new Button("Back");
     }
 
@@ -32,8 +36,7 @@ public class PreviousGamesView extends BorderPane {
         BorderPane.setAlignment(this.title, Pos.CENTER);
 
         this.setCenter(this.list);
-        BorderPane.setAlignment(this.list, Pos.CENTER);
-        this.list.setItems(this.games);
+        this.list.setItems(this.moves);
         BorderPane.setMargin(this.list, new Insets(25));
 
         this.setBottom(this.back);
@@ -46,11 +49,11 @@ public class PreviousGamesView extends BorderPane {
         return this.back;
     }
 
-    ObservableList<String> getGames(){
-        return this.games;
+    Label getTitle() {
+        return this.title;
     }
 
-    ListView<String> getList(){
-        return this.list;
+    ObservableList<String> getMoves(){
+        return this.moves;
     }
 }

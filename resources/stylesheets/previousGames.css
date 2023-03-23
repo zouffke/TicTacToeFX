@@ -8,9 +8,3 @@
     -fx-pref-width: 300;
     -fx-font-size: 20;
 }
-
-.list-cell {
-    -fx-font-weight: bold;
-    -fx-font-size: 15;
-    -fx-padding: 5;
-}
