@@ -14,6 +14,7 @@ public class Game {
     private boolean firstPlayer = true;
     private final PlayersSave playersSave;
     private final GamesSave gamesSave;
+    private boolean gameEnded = false;
 
     public Game(int boardChoice, int playerChoice) throws GameException {
         //vars initializeren, valid move begint op false omdat ze eerst moeten checkken of het true is
@@ -142,11 +143,13 @@ public class Game {
     }
 
     public boolean winCheck() {
-        return this.board.win(this.currentSort);
+        this.gameEnded = this.board.win(this.currentSort);
+        return this.gameEnded;
     }
 
     public boolean drawCheck() {
-        return this.board.draw();
+        this.gameEnded = this.board.draw();
+        return this.gameEnded;
     }
 
     public Board getBoard() {
@@ -175,6 +178,10 @@ public class Game {
 
     public boolean getHuman(){
         return this.currentPlayer instanceof Human;
+    }
+
+    public boolean getGameEnded() {
+        return !this.gameEnded;
     }
 
 }
