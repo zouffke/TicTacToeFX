@@ -18,7 +18,7 @@ public final class SaveFiles {
         }
     }
 
-    static String getSubString(String line, int index) {
+    public static String getSubString(String line, int index) {
          return line.split(";")[index].split(":")[1];
     }
 }

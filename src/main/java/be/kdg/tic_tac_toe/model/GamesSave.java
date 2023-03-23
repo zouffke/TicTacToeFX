@@ -26,7 +26,7 @@ public class GamesSave {
     private static final Path gamesSave = Paths.get("resources" + File.separator
             + "saveFiles" + File.separator
             + "games.txt");
-    private final List<String[]> gamesList;
+    private final List<GameSaveObjects> gamesList;
     private Contribution contribution;
     private int gameNumber;
     private final StringBuilder moves;
@@ -34,13 +34,13 @@ public class GamesSave {
     public GamesSave() throws SaveFileException {
         this.gamesList = new ArrayList<>();
         this.moves = new StringBuilder();
+        this.gameNumber = 0;
 
         SaveFiles.checkFile(gamesSave);
+        this.fillList();
     }
 
-
-    void initGameSave() throws SaveFileException {
-        gameNumber = 0;
+    private void fillList() throws SaveFileException {
         try (Scanner scanner = new Scanner(gamesSave)) {
             while (scanner.hasNextLine()) {
                 String line = scanner.nextLine();
@@ -48,37 +48,46 @@ public class GamesSave {
                 if (line.contains("game") && line.contains("board")) {
                     gameNumber = this.getGameNumber(line);
                     gameNumber++;
-                    addGameLine(line, scanner.nextLine(), scanner.nextLine());
+                    this.addGameLine(line, scanner.nextLine(), scanner.nextLine());
                 }
             }
-
-            String newGame = String.format("game:%d;dateStamp:%s;player1:%s;AS:%s;player2:%s;AS:%s;board:%dx%d"
-                    , gameNumber
-                    , LocalDateTime.now()
-                    , this.contribution.getName(1)
-                    , this.contribution.getSort(1)
-                    , this.contribution.getName(2)
-                    , this.contribution.getSort(2)
-                    , Board.getSize()
-                    , Board.getSize());
-
-            this.addGameLine(newGame);
-
         } catch (IOException e) {
-            throw new SaveFileException("File could not be written: " + gamesSave.getFileName());
+            throw new SaveFileException("File could not be read: " + gamesSave.getFileName());
         }
+    }
+
+    private void addGameLine(String heading, String moves, String winner) {
+        this.gamesList.add(this.createObject(
+                Integer.parseInt(SaveFiles.getSubString(heading, 0))
+                , LocalDateTime.parse(SaveFiles.getSubString(heading, 1))
+                , new Player(SaveFiles.getSubString(heading, 2))
+                , Sort.valueOf(SaveFiles.getSubString(heading, 3))
+                , new Player(SaveFiles.getSubString(heading, 4))
+                , Sort.valueOf(SaveFiles.getSubString(heading, 5))
+                , SaveFiles.getSubString(heading, 6)
+                , moves
+                , new Player(SaveFiles.getSubString(winner, 0))));
+    }
+
+    private GameSaveObjects createObject(int gameNumber, LocalDateTime date, Player player1, Sort sort1, Player player2, Sort sort2, String board, String moves, Player winner) {
+        return new GameSaveObjects(gameNumber, date, player1, sort1, player2, sort2, board, moves, winner);
+    }
+
+    void initGameSave() {
+        this.gamesList.add(this.createObject(
+                this.gameNumber
+                , LocalDateTime.now()
+                , this.contribution.getPlayer(1)
+                , Sort.valueOf(this.contribution.getSort(1))
+                , this.contribution.getPlayer(2)
+                , Sort.valueOf(this.contribution.getSort(2))
+                , String.format("%dx%d", Board.getSize(), Board.getSize())
+                , null
+                , null));
     }
 
     private int getGameNumber(String line) {
         return Integer.parseInt(SaveFiles.getSubString(line, 0));
-    }
-
-    private void addGameLine(String heading, String moves, String winner) {
-        this.gamesList.add(new String[]{heading, moves, winner});
-    }
-
-    private void addGameLine(String heading) {
-        this.addGameLine(heading, null, null);
     }
 
     void addMove(String move) {
@@ -86,14 +95,14 @@ public class GamesSave {
     }
 
     void saveGameProgress(String winner) throws SaveFileException {
-        this.gamesList.get(gameNumber)[1] = this.moves.toString();
-        this.gamesList.get(gameNumber)[2] = String.format("Game End: %s", winner);
+        this.gamesList.get(this.gameNumber).setMoves(this.moves.toString());
+        this.gamesList.get(this.gameNumber).setWinner(new Player(winner));
 
         try {
             Files.write(gamesSave, String.format("%s%n%s%n%s%n"
-                    , this.gamesList.get(gameNumber)[0]
-                    , this.gamesList.get(gameNumber)[1]
-                    , this.gamesList.get(gameNumber)[2]).getBytes(), APPEND);
+                    , this.gamesList.get(gameNumber).getHeading()
+                    , this.gamesList.get(gameNumber).getMoves()
+                    , this.gamesList.get(gameNumber).getWinner()).getBytes(), APPEND);
         } catch (IOException e) {
             throw new SaveFileException("File could not be written: " + gamesSave.getFileName());
         }
@@ -115,9 +124,4 @@ public class GamesSave {
     public int getSize() {
         return this.gamesList.size();
     }
-
-    public String getGame(int index) {
-        return this.gamesList.get(index)[0];
-    }
-
 }

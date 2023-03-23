@@ -5,3 +5,8 @@
 //\\ANY CHANGE CAN CAUSE CORRUPTION OF YOUR SAVE FILE//\\
 //\\WHEN YOU EDIT THIS FILE, MAKE SURE YOU HAVE A BACKUP AND ALWAYS LEAVE ONE LINE EMPTY AT THE BOTTOM OF THIS FILE//\\
 ========================================================================================================================
+player:jg;score:2
+player:zert;score:2
+player:erza;score:0
+player:g;score:0
+player:sfd;score:0

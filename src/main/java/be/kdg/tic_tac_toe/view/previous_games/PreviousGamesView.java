@@ -1,17 +1,18 @@
 package be.kdg.tic_tac_toe.view.previous_games;
 
+import javafx.beans.Observable;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
-import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.Label;
-import javafx.scene.control.MenuButton;
+import javafx.scene.control.*;
 import javafx.scene.layout.BorderPane;
 
 public class PreviousGamesView extends BorderPane {
 
     private Label title;
-    private MenuButton games;
+    private ListView<String> list;
+    private ObservableList<String> games;
     private Button back;
 
 
@@ -22,7 +23,8 @@ public class PreviousGamesView extends BorderPane {
 
     private void initializeNodes() {
         this.title = new Label("Previous Games");
-        this.games = new MenuButton("Games");
+        this.list = new ListView<>();
+        this.games = FXCollections.observableArrayList();
         this.back = new Button("Back");
     }
 
@@ -30,8 +32,10 @@ public class PreviousGamesView extends BorderPane {
         this.setTop(this.title);
         BorderPane.setAlignment(this.title, Pos.CENTER);
 
-        this.setCenter(this.games);
-        BorderPane.setAlignment(this.games, Pos.CENTER);
+        this.setCenter(this.list);
+        BorderPane.setAlignment(this.list, Pos.CENTER);
+        this.list.setItems(this.games);
+        BorderPane.setMargin(this.list, new Insets(10));
 
         this.setBottom(this.back);
         BorderPane.setAlignment(this.back, Pos.CENTER);
@@ -43,7 +47,7 @@ public class PreviousGamesView extends BorderPane {
         return this.back;
     }
 
-    MenuButton getGames(){
+    ObservableList<String> getGames(){
         return this.games;
     }
 }
