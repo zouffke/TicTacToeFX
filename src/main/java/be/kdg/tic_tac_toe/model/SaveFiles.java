@@ -4,7 +4,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 
-public interface SaveFiles {
+public final class SaveFiles {
      static void checkFile(Path file) throws SaveFileException {
         if (!Files.exists(file)) {
             try {
@@ -16,5 +16,9 @@ public interface SaveFiles {
         } else {
             System.out.println("File already exists: " + file.getFileName());
         }
+    }
+
+    static String getSubString(String line, int index) {
+         return line.split(";")[index].split(":")[1];
     }
 }

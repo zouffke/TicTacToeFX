@@ -10,7 +10,7 @@ import java.util.TreeSet;
 
 import static java.nio.file.StandardOpenOption.APPEND;
 
-public class PlayersSave implements SaveFiles {
+public class PlayersSave {
     private static final Path players = Paths.get("resources" + File.separator + "saveFiles" + File.separator + "players.txt");
 
     private final TreeSet<String> playersMap;
@@ -26,9 +26,9 @@ public class PlayersSave implements SaveFiles {
 
     public PlayersSave() throws SaveFileException {
         playersMap = new TreeSet<>((o1, o2) -> {
-            int compare = o2.split(";")[1].split(":")[1].compareTo(o1.split(";")[1].split(":")[1]);
+            int compare = SaveFiles.getSubString(o2, 1).compareTo(SaveFiles.getSubString(o1, 1));
             if (compare == 0) {
-                return o1.split(";")[0].split(":")[1].compareTo(o2.split(";")[0].split(":")[1]);
+                return SaveFiles.getSubString(o1, 0).compareTo(SaveFiles.getSubString(o2, 0));
             } else {
                 return compare;
             }
@@ -147,23 +147,23 @@ public class PlayersSave implements SaveFiles {
     }
 
     private String getPlayer(String line) {
-        return line.split(";")[0].split(":")[1];
+        return SaveFiles.getSubString(line, 0);
     }
 
     private int getScore(String line) {
-        return Integer.parseInt(line.split(";")[1].split(":")[1]);
+        return Integer.parseInt(SaveFiles.getSubString(line, 1));
     }
 
     public String getPlayer(int index) throws SaveFileException {
         try {
-            return playersMap.toArray()[index].toString().split(";")[0].split(":")[1];
+            return SaveFiles.getSubString(playersMap.toArray()[index].toString(), 0);
         } catch (ArrayIndexOutOfBoundsException e) {
             throw new SaveFileException("There are no players in the file to display here.");
         }
     }
 
     public int getScore(int index) {
-        return Integer.parseInt(playersMap.toArray()[index].toString().split(";")[1].split(":")[1]);
+        return Integer.parseInt(SaveFiles.getSubString(playersMap.toArray()[index].toString(), 1));
     }
 
     public void clearSave() throws SaveFileException {
