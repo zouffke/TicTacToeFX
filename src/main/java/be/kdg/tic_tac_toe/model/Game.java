@@ -14,9 +14,11 @@ public class Game {
     private boolean firstPlayer = true;
     private final PlayersSave playersSave;
     private final GamesSave gamesSave;
+    private boolean gameEnded;
 
     public Game(int boardChoice, int playerChoice) throws GameException {
         this.validMove = false;
+        this.gameEnded = false;
         this.playerChoice = playerChoice;
         this.boardChoice = boardChoice;
 
@@ -48,6 +50,11 @@ public class Game {
         if (name1.isBlank() || name2.isBlank()) {
             throw new GameException("Please write your name in the given field(s) to continue");
         }
+
+        if (name1.equalsIgnoreCase(name2)) {
+            throw new GameException("Please write a different name for player 2");
+        }
+
         if (choice == 1) {
             this.contribution = new Contribution(name1, name2);
 
@@ -127,11 +134,17 @@ public class Game {
     }
 
     public boolean winCheck() {
-        return this.board.win(this.currentSort);
+        this.gameEnded = this.board.win(this.currentSort);
+        return this.gameEnded;
     }
 
     public boolean drawCheck() {
-        return this.board.draw();
+        this.gameEnded = this.board.draw();
+        return this.gameEnded;
+    }
+
+    public boolean getGameEnded() {
+        return !this.gameEnded;
     }
 
     public Board getBoard() {

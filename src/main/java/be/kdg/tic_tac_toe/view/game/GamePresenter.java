@@ -27,7 +27,6 @@ public class GamePresenter {
     private final GameView view;
     private final Game model;
     private final Board board;
-    private boolean gameOver;
     private int y;
     private int x;
 
@@ -35,7 +34,6 @@ public class GamePresenter {
         this.view = view;
         this.model = model;
         this.board = model.getBoard();
-        this.gameOver = false;
         this.y = 0;
         this.x = 0;
 
@@ -74,7 +72,7 @@ public class GamePresenter {
                     }
                 }
                 case SPACE -> {
-                    if (!gameOver) {
+                    if (this.model.getGameEnded()) {
                         if (this.model.getHuman()) {
                             try {
                                 this.model.place(x, y);
@@ -113,7 +111,7 @@ public class GamePresenter {
         for (Figure[] rows : this.view.getFigures()) {
             for (Figure figure : rows) {
                 figure.setOnMouseClicked(event -> {
-                    if (this.model.getHuman() && !gameOver) {
+                    if (this.model.getHuman() && this.model.getGameEnded()) {
                         try {
                             this.model.place(figure.getColumn(), figure.getRow());
                             this.updateView();
@@ -171,7 +169,7 @@ public class GamePresenter {
     }
 
     private void callNPC() {
-        if (!this.model.getHuman() && !gameOver) {
+        if (!this.model.getHuman() && this.model.getGameEnded()) {
             ExecutorService pool = Executors.newSingleThreadExecutor();
             Future<?> future = pool.submit(model::npcMove);
 
@@ -189,12 +187,10 @@ public class GamePresenter {
     private void setGameOver() {
         try {
             if (this.model.winCheck()) {
-                gameOver = true;
                 this.model.addScore(false, this.model.getCurrentPlayer());
                 this.model.saveGameProgress(this.model.getCurrentPlayer().toString());
                 gameEndPopup("Win", String.format("%s has won\nDo you want to play again?", this.model.getCurrentPlayer().toString()));
             } else if (this.model.drawCheck()) {
-                gameOver = true;
                 this.model.addScore(true);
                 this.model.saveGameProgress("Draw");
 
