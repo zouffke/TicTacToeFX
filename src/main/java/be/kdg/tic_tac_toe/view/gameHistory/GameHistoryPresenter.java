@@ -36,10 +36,10 @@ public class GameHistoryPresenter {
     }
 
     private void updateView() {
-        this.view.getTitle().setText(String.format("Game %d", this.model.getGameNumber()));
+        this.view.getTitle().setText(String.format("Game %d", this.model.getGameNumber() + 1));
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/MM/y HH:mm");
 
-        this.view.getMoves().add(String.format("Game %d was played on %s using a %s board", this.model.getGameNumber(), formatter.format(this.model.getDate()), this.model.getBoard()));
+        this.view.getMoves().add(String.format("Game %d was played on %s using a %s board", this.model.getGameNumber() + 1, formatter.format(this.model.getDate()), this.model.getBoard()));
         this.view.getMoves().add(String.format("Player 1: %s, Played as %s", this.model.getPlayer1().toString(), this.model.getSort1().toString()));
         this.view.getMoves().add("Player 2: " + this.model.getPlayer2().toString() + ", Played as " + this.model.getSort2().toString());
         this.view.getMoves().add("The winner of the game was: " + this.model.getWinnerPlayer().toString());
