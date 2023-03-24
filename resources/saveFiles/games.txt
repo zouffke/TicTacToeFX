@@ -5,3 +5,6 @@
 //\\ANY CHANGE CAN CAUSE CORRUPTION OF YOUR SAVE FILE//\\
 //\\WHEN YOU EDIT THIS FILE, MAKE SURE YOU HAVE A BACKUP AND ALWAYS LEAVE ONE LINE EMPTY AT THE BOTTOM OF THIS FILE//\\
 ========================================================================================================================
+game=0;dateStamp=2023-03-23T21:27:41.079691700;player1=sfdgh;sort1=O;player2=ztrey;sort2=X;board=3x3
+X=0-0;O=1-0;X=0-1;O=1-1;X=0-2;
+GameEnd=ztrey

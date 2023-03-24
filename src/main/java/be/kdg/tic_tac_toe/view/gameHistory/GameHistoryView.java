@@ -38,6 +38,8 @@ public class GameHistoryView extends BorderPane {
         this.setCenter(this.list);
         this.list.setItems(this.moves);
         BorderPane.setMargin(this.list, new Insets(25));
+        this.list.setMouseTransparent(true);
+        this.list.setFocusTraversable(false);
 
         this.setBottom(this.back);
         BorderPane.setAlignment(this.back, Pos.CENTER);
