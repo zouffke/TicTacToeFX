@@ -51,22 +51,22 @@ public class GamePresenter {
     private void addKeyEventHandlers() {
         this.view.getScene().setOnKeyPressed(event -> {
             switch (event.getCode()) {
-                case LEFT -> {
-                    if (y > 0) {
-                        y--;
+                case LEFT, Q -> {
+                    if (this.y > 0) {
+                        this.y--;
                     }
                 }
-                case RIGHT -> {
+                case RIGHT, D -> {
                     if (y < this.view.getBoardSize() - 1) {
                         y++;
                     }
                 }
-                case UP -> {
+                case UP, Z -> {
                     if (x > 0) {
                         x--;
                     }
                 }
-                case DOWN -> {
+                case DOWN, S -> {
                     if (x < this.view.getBoardSize() - 1) {
                         x++;
                     }
